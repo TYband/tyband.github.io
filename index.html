@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的健身计划</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Noto+Sans+SC:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* GitHub 风格的 CSS 基础 */
+        :root {
+            --gh-bg-color: #ffffff;
+            --gh-text-color: #24292e;
+            --gh-border-color: #e1e4e8;
+            --gh-header-bg: #f6f8fa;
+            --gh-link-color: #0366d6;
+            --gh-accent-color: #28a745; /* 例如用于高亮 */
+            --gh-card-bg: #fdfdfd;
+            --gh-code-bg: #f6f8fa;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --gh-bg-color: #202020; /* 更深一点的暗色背景 */
+                --gh-text-color: #e1e4e8;
+                --gh-border-color: #30363d;
+                --gh-header-bg: #2a2a2a;
+                --gh-link-color: #58a6ff;
+                --gh-accent-color: #2ea043;
+                --gh-card-bg: #2c2c2c;
+                --gh-code-bg: #222222;
+            }
+        }
+
+        body {
+            font-family: 'Roboto', 'Noto Sans SC', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--gh-bg-color);
+            color: var(--gh-text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 960px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        header {
+            width: 100%;
+            background-color: var(--gh-header-bg);
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--gh-border-color);
+            border-radius: 6px 6px 0 0;
+            box-shadow: 0 1px 3px rgba(27,31,35,.04);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            margin: 0;
+            color: var(--gh-text-color);
+            font-size: 24px;
+        }
+
+        .datetime-display {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: var(--gh-link-color);
+        }
+
+        .card {
+            background-color: var(--gh-card-bg);
+            border: 1px solid var(--gh-border-color);
+            border-radius: 6px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(27,31,35,.04), 0 1px 0 rgba(27,31,35,.02);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+        }
+
+        /* 日历样式 */
+        .calendar-container {
+            /* 基础布局 */
+        }
+
+        #calendar {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            text-align: center;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .calendar-header button {
+            background-color: var(--gh-link-color);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.2s;
+        }
+
+        .calendar-header button:hover {
+            background-color: #0056b3;
+        }
+
+        .day-name {
+            font-weight: bold;
+            padding: 10px 0;
+            background-color: var(--gh-header-bg);
+            border-bottom: 1px solid var(--gh-border-color);
+            border-radius: 4px 4px 0 0;
+        }
+
+        .calendar-day {
+            padding: 10px 5px;
+            border: 1px solid var(--gh-border-color);
+            border-radius: 4px;
+            background-color: var(--gh-bg-color);
+            cursor: pointer;
+            transition: background-color 0.2s, border-color 0.2s;
+            position: relative; /* For the dot */
+        }
+
+        .calendar-day:hover {
+            background-color: var(--gh-header-bg);
+            border-color: var(--gh-link-color);
+        }
+
+        .calendar-day.today {
+            background-color: var(--gh-accent-color);
+            color: white;
+            border-color: var(--gh-accent-color);
+            font-weight: bold;
+        }
+
+        .calendar-day.selected {
+            background-color: var(--gh-link-color);
+            color: white;
+            border-color: var(--gh-link-color);
+        }
+
+        .calendar-day.has-event::after {
+            content: '';
+            position: absolute;
+            bottom: 3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 5px;
+            height: 5px;
+            background-color: white; /* Dot color */
+            border-radius: 50%;
+        }
+
+        /* 每日运动计划样式 */
+        .workout-plan-card h2 {
+            color: var(--gh-link-color);
+            margin-top: 0;
+            border-bottom: 2px solid var(--gh-border-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .workout-details p {
+            margin: 8px 0;
+        }
+
+        .workout-details strong {
+            color: var(--gh-accent-color);
+        }
+
+        .no-workout {
+            font-style: italic;
+            color: #6a737d;
+        }
+
+        code {
+            background-color: var(--gh-code-bg);
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+            font-size: 0.9em;
+        }
+
+        /* 体重记录功能样式 */
+        .weight-tracker-card h2 {
+            color: var(--gh-link-color);
+            margin-top: 0;
+            border-bottom: 2px solid var(--gh-border-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .weight-input-section {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+
+        .weight-input-section input[type="number"] {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid var(--gh-border-color);
+            border-radius: 6px;
+            font-size: 1em;
+            background-color: var(--gh-bg-color);
+            color: var(--gh-text-color);
+        }
+
+        .weight-input-section button {
+            background-color: var(--gh-accent-color);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.2s;
+        }
+
+        .weight-input-section button:hover {
+            background-color: #218838;
+        }
+
+        .weight-history ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .weight-history li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px dashed var(--gh-border-color);
+        }
+
+        .weight-history li:last-child {
+            border-bottom: none;
+        }
+
+        .weight-item-details {
+            flex-grow: 1;
+        }
+
+        .weight-item-details span {
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .weight-item-details .weight-value {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: var(--gh-link-color);
+        }
+
+        .weight-item-details .record-time {
+            font-size: 0.85em;
+            color: #6a737d;
+        }
+
+        .weight-actions button {
+            background-color: #6a737d; /* Gray for edit */
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85em;
+            margin-left: 5px;
+            transition: background-color 0.2s;
+        }
+
+        .weight-actions button.delete-btn {
+            background-color: #cb2431; /* Red for delete */
+        }
+
+        .weight-actions button:hover {
+            opacity: 0.9;
+        }
+
+        .weight-actions button.delete-btn:hover {
+            background-color: #af202b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>我的健身计划</h1>
+            <div class="datetime-display">
+                <span id="current-time"></span> 北京时间
+            </div>
+        </header>
+
+        <div class="card calendar-container">
+            <div class="calendar-header">
+                <button id="prev-month">上个月</button>
+                <span id="current-month-year"></span>
+                <button id="next-month">下个月</button>
+            </div>
+            <div id="calendar">
+                </div>
+        </div>
+
+        <div class="card workout-plan-card">
+            <h2 id="workout-day-display">今日计划：星期一</h2>
+            <div id="workout-details" class="workout-details">
+                </div>
+        </div>
+
+        <div class="card weight-tracker-card">
+            <h2>体重记录</h2>
+            <div class="weight-input-section">
+                <input type="number" id="weight-input" placeholder="输入体重 (kg)" step="0.1">
+                <button id="save-weight-btn">保存体重</button>
+            </div>
+            <div class="weight-history">
+                <h3>历史记录</h3>
+                <ul id="weight-list">
+                    </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript 将在此处添加，用于实现动态功能
+        const workoutData = {
+            "周一": {
+                "训练部位": "胸部 + 肱二头肌（少量）",
+                "主训练内容": "杠铃平板卧推 4组、上斜哑铃卧推 3组、绳索飞鸟 3组、双杠臂屈伸 3组",
+                "辅助训练": "哑铃弯举 3组、锤式弯举 3组",
+                "有氧跑步": "✅ 每天4公里七分配速"
+            },
+            "周二": {
+                "训练部位": "背部 + 手腕（少量）",
+                "主训练内容": "引体向上 4组、杠铃划船 4组、坐姿划船 3组、高位下拉 3组",
+                "辅助训练": "杠铃腕弯举 3组、反向杠铃腕弯举 3组",
+                "有氧跑步": "✅ 每天4公里七分配速"
+            },
+            "周三": {
+                "训练部位": "肩部塑形",
+                "主训练内容": "哑铃推举 4组、哑铃侧平举 4组、俯身飞鸟 3组、杠铃提拉 3组",
+                "辅助训练": "俯身哑铃飞鸟（针对后束）3组、握力球 3组（每组力竭）",
+                "有氧跑步": "✅ 每天4公里七分配速"
+            },
+            "周四": {
+                "训练部位": "休息",
+                "主训练内容": "完全休息",
+                "辅助训练": "-",
+                "有氧跑步": "✅ 每天4公里七分配速"
+            },
+            "周五": {
+                "训练部位": "腿部 + 肱二头肌（少量）",
+                "主训练内容": "杠铃深蹲 4组、腿举 3组、腿屈伸 3组、腿弯举 3组",
+                "辅助训练": "集中弯举 3组、绳索弯举 3组",
+                "有氧跑步": "✅ 每天4公里七分配速"
+            },
+            "周六": {
+                "训练部位": "手臂（肱三头肌为主） + 手腕（少量）",
+                "主训练内容": "窄距卧推 4组、绳索下压 3组、哑铃颈后臂屈伸 3组、臂屈伸 3组",
+                "辅助训练": "腕力器训练 3组、农夫行走（轻重量）3组",
+                "有氧跑步": "✅ 每天4公里七分配速"
+            },
+            "周日": {
+                "训练部位": "休息",
+                "主训练内容": "完全休息",
+                "辅助训练": "-",
+                "有氧跑步": "✅ 每天4公里七分配速"
+            }
+        };
+
+        const current_time_element = document.getElementById('current-time');
+        const workout_day_display = document.getElementById('workout-day-display');
+        const workout_details_element = document.getElementById('workout-details');
+        const calendar_element = document.getElementById('calendar');
+        const current_month_year_element = document.getElementById('current-month-year');
+        const prev_month_button = document.getElementById('prev-month');
+        const next_month_button = document.getElementById('next-month');
+
+        let current_date = new Date(); // 用于日历导航
+        let selected_date = new Date(); // 用于显示选定日的计划
+
+        // 体重记录相关元素
+        const weight_input = document.getElementById('weight-input');
+        const save_weight_btn = document.getElementById('save-weight-btn');
+        const weight_list = document.getElementById('weight-list');
+
+        let editing_weight_index = -1; // 用于标记当前是否在编辑状态，-1表示不在编辑
+
+
+        // 更新北京时间
+        function updateBeijingTime() {
+            const now = new Date();
+            // 获取北京时间，UTC+8
+            const beijing_time_str = now.toLocaleString('zh-CN', {
+                timeZone: 'Asia/Shanghai',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            });
+            current_time_element.textContent = beijing_time_str;
+        }
+
+        // 根据日期更新锻炼计划显示
+        function updateWorkoutDisplay(date) {
+            const day_of_week = date.getDay(); // 0为周日，1为周一
+            const days_map = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
+            const today_day_name = days_map[day_of_week];
+
+            workout_day_display.textContent = `计划：${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日 (${today_day_name})`;
+            const workout = workoutData[today_day_name];
+
+            if (workout) {
+                workout_details_element.innerHTML = `
+                    <p><strong>训练部位：</strong> ${workout["训练部位"]}</p>
+                    <p><strong>主训练内容：</strong> ${workout["主训练内容"]}</p>
+                    <p><strong>辅助训练：</strong> ${workout["辅助训练"]}</p>
+                    <p><strong>有氧跑步：</strong> ${workout["有氧跑步"]}</p>
+                `;
+            } else {
+                workout_details_element.innerHTML = `<p class="no-workout">暂无该日期的训练计划。</p>`;
+            }
+        }
+
+        // 渲染日历
+        function renderCalendar() {
+            calendar_element.innerHTML = ''; // 清空旧日历
+            const year = current_date.getFullYear();
+            const month = current_date.getMonth(); // 0-11
+
+            current_month_year_element.textContent = `${year}年 ${month + 1}月`;
+
+            const first_day_of_month = new Date(year, month, 1).getDay(); // 0为周日，6为周六
+            const days_in_month = new Date(year, month + 1, 0).getDate();
+
+            const day_names = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
+            day_names.forEach(day => {
+                const day_name_div = document.createElement('div');
+                day_name_div.classList.add('day-name');
+                day_name_div.textContent = day;
+                calendar_element.appendChild(day_name_div);
+            });
+
+            // 填充空白日期
+            for (let i = 0; i < first_day_of_month; i++) {
+                const empty_div = document.createElement('div');
+                calendar_element.appendChild(empty_div);
+            }
+
+            // 填充日期
+            for (let day = 1; day <= days_in_month; day++) {
+                const day_div = document.createElement('div');
+                day_div.classList.add('calendar-day');
+                day_div.textContent = day;
+                day_div.dataset.date = new Date(year, month, day).toISOString().split('T')[0]; // 存储 ISO 格式日期
+
+                // 标记今天
+                const today = new Date();
+                if (year === today.getFullYear() && month === today.getMonth() && day === today.getDate()) {
+                    day_div.classList.add('today');
+                }
+
+                // 标记选中的日期
+                if (year === selected_date.getFullYear() && month === selected_date.getMonth() && day === selected_date.getDate()) {
+                     day_div.classList.add('selected');
+                }
+
+                // 标记有训练的日期 (所有日期都有有氧，所以只要不是休息日都可标记)
+                const current_loop_date = new Date(year, month, day);
+                const day_of_week_index = current_loop_date.getDay();
+                const day_name_for_check = day_names[day_of_week_index];
+                if (workoutData[day_name_for_check] && workoutData[day_name_for_check]["训练部位"] !== "休息") {
+                    day_div.classList.add('has-event');
+                }
+
+
+                day_div.addEventListener('click', () => {
+                    // 移除之前的选中状态
+                    const previously_selected = document.querySelector('.calendar-day.selected');
+                    if (previously_selected) {
+                        previously_selected.classList.remove('selected');
+                    }
+                    // 添加新的选中状态
+                    day_div.classList.add('selected');
+                    selected_date = new Date(year, month, day); // 更新选中的日期
+                    updateWorkoutDisplay(selected_date); // 更新计划显示
+                });
+                calendar_element.appendChild(day_div);
+            }
+        }
+
+        // 月份导航
+        prev_month_button.addEventListener('click', () => {
+            current_date.setMonth(current_date.getMonth() - 1);
+            renderCalendar();
+        });
+
+        next_month_button.addEventListener('click', () => {
+            current_date.setMonth(current_date.getMonth() + 1);
+            renderCalendar();
+        });
+
+        // ===========================================
+        // 体重记录功能相关 JS
+        // ===========================================
+
+        // 从 localStorage 加载体重数据
+        function loadWeights() {
+            const weights_json = localStorage.getItem('fitnessWeights');
+            return weights_json ? JSON.parse(weights_json) : [];
+        }
+
+        // 保存体重数据到 localStorage
+        function saveWeights(weights) {
+            localStorage.setItem('fitnessWeights', JSON.stringify(weights));
+        }
+
+        // 渲染体重历史记录
+        function renderWeightHistory() {
+            weight_list.innerHTML = '';
+            const weights = loadWeights();
+            // 按时间倒序排序，最新记录在前
+            weights.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+            if (weights.length === 0) {
+                weight_list.innerHTML = '<li>暂无体重记录。</li>';
+                return;
+            }
+
+            weights.forEach((record, index) => {
+                const li = document.createElement('li');
+                li.dataset.index = index; // 存储索引以便编辑/删除
+
+                // 格式化时间，显示为北京时间
+                const record_time = new Date(record.timestamp);
+                const formatted_time = record_time.toLocaleString('zh-CN', {
+                    timeZone: 'Asia/Shanghai',
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit',
+                    hour12: false
+                });
+
+                li.innerHTML = `
+                    <div class="weight-item-details">
+                        <span class="weight-value">${record.weight} kg</span>
+                        <span class="record-time">记录于: ${formatted_time}</span>
+                    </div>
+                    <div class="weight-actions">
+                        <button class="edit-btn" data-index="${index}">编辑</button>
+                        <button class="delete-btn" data-index="${index}">删除</button>
+                    </div>
+                `;
+                weight_list.appendChild(li);
+            });
+
+            addWeightActionListeners(); // 添加事件监听器
+        }
+
+        // 添加体重记录
+        function addWeightRecord() {
+            const weight_value = parseFloat(weight_input.value);
+
+            if (isNaN(weight_value) || weight_value <= 0) {
+                alert('请输入一个有效的体重数值！');
+                return;
+            }
+
+            const weights = loadWeights();
+            const current_time_for_record = new Date(); // 获取当前时间，将以此时间戳保存
+
+            if (editing_weight_index !== -1) {
+                // 编辑现有记录
+                weights[editing_weight_index].weight = weight_value;
+                weights[editing_weight_index].timestamp = current_time_for_record.toISOString(); // 更新时间
+                editing_weight_index = -1; // 重置编辑状态
+                save_weight_btn.textContent = '保存体重'; // 恢复按钮文本
+            } else {
+                // 添加新记录
+                weights.push({
+                    weight: weight_value,
+                    timestamp: current_time_for_record.toISOString() // 使用 ISO 格式字符串保存时间戳
+                });
+            }
+
+            saveWeights(weights);
+            renderWeightHistory();
+            weight_input.value = ''; // 清空输入框
+        }
+
+        // 编辑体重记录
+        function editWeightRecord(index) {
+            const weights = loadWeights();
+            const record_to_edit = weights[index];
+            if (record_to_edit) {
+                weight_input.value = record_to_edit.weight;
+                editing_weight_index = index; // 设置编辑状态
+                save_weight_btn.textContent = '更新体重'; // 更改按钮文本
+            }
+        }
+
+        // 删除体重记录
+        function deleteWeightRecord(index) {
+            if (confirm('确定要删除这条体重记录吗？')) {
+                const weights = loadWeights();
+                weights.splice(index, 1); // 从数组中删除
+                saveWeights(weights);
+                renderWeightHistory();
+                // 如果当前正在编辑被删除的记录，重置编辑状态
+                if (editing_weight_index === index) {
+                    editing_weight_index = -1;
+                    save_weight_btn.textContent = '保存体重';
+                    weight_input.value = '';
+                }
+            }
+        }
+
+        // 为编辑和删除按钮添加事件监听器
+        function addWeightActionListeners() {
+            document.querySelectorAll('.edit-btn').forEach(button => {
+                button.onclick = (e) => {
+                    const index = parseInt(e.target.dataset.index);
+                    editWeightRecord(index);
+                };
+            });
+            document.querySelectorAll('.delete-btn').forEach(button => {
+                button.onclick = (e) => {
+                    const index = parseInt(e.target.dataset.index);
+                    deleteWeightRecord(index);
+                };
+            });
+        }
+
+
+        // 初始化
+        updateBeijingTime();
+        setInterval(updateBeijingTime, 1000); // 每秒更新时间
+        updateWorkoutDisplay(selected_date); // 初始显示今天的计划
+        renderCalendar(); // 渲染日历
+        renderWeightHistory(); // 加载并显示体重历史记录
+
+        // 绑定保存体重按钮事件
+        save_weight_btn.addEventListener('click', addWeightRecord);
+        // 允许按回车键保存体重
+        weight_input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                addWeightRecord();
+            }
+        });
+
+    </script>
+</body>
+</html>
