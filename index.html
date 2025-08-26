@@ -113,6 +113,8 @@
             <button class="nav-button bg-gray-200 text-gray-800 py-2 px-4 focus:outline-none focus:ring-2 focus:ring-gray-500" onclick="showPage('page2')">训练计划 (4-6周)</button>
             <button class="nav-button bg-gray-200 text-gray-800 py-2 px-4 focus:outline-none focus:ring-2 focus:ring-gray-500" onclick="showPage('page3')">训练计划 (第7周)</button>
             <button class="nav-button bg-gray-200 text-gray-800 py-2 px-4 focus:outline-none focus:ring-2 focus:ring-gray-500" onclick="showPage('page4')">食谱分析</button>
+            <!-- 新增的训练日志按钮 -->
+            <button class="nav-button bg-gray-200 text-gray-800 py-2 px-4 focus:outline-none focus:ring-2 focus:ring-gray-500" onclick="showPage('page5')">训练日志</button>
         </div>
 
         <!-- 页面内容容器 -->
@@ -125,7 +127,7 @@
             
             <!-- 响应式表格容器，使用 overflow-x-auto 来在小屏幕上实现水平滚动 -->
             <div class="overflow-x-auto mb-8 main-container">
-                <table class="styled-table text-sm text-gray-700 whitespace-nowrap">
+                <table id="table1" class="styled-table text-sm text-gray-700 whitespace-nowrap">
                     <thead class="text-xs uppercase">
                         <tr>
                             <th scope="col" class="py-3 px-6">日期</th>
@@ -378,12 +380,12 @@
 
             <!-- 响应式表格容器，使用 overflow-x-auto 来在小屏幕上实现水平滚动 -->
             <div class="overflow-x-auto mb-8 main-container">
-                <table class="styled-table text-sm text-gray-700 whitespace-nowrap">
+                <table id="table2" class="styled-table text-sm text-gray-700 whitespace-nowrap">
                     <thead class="text-xs uppercase">
                         <tr>
                             <th scope="col" class="py-3 px-6">日期</th>
                             <th scope="col" class="py-3 px-6">碳水日类型</th>
-                            <th scope="col" class="py-3 px-6">训练计划</th>
+                            <th scope="col" class="col" class="py-3 px-6">训练计划</th>
                             <th scope="col" class="py-3 px-6">动作</th>
                             <th scope="col" class="py-3 px-6">组数</th>
                             <th scope="col" class="py-3 px-6">次数</th>
@@ -631,7 +633,7 @@
 
             <!-- 响应式表格容器，使用 overflow-x-auto 来在小屏幕上实现水平滚动 -->
             <div class="overflow-x-auto mb-8 main-container">
-                <table class="styled-table text-sm text-gray-700 whitespace-nowrap">
+                <table id="table3" class="styled-table text-sm text-gray-700 whitespace-nowrap">
                     <thead class="text-xs uppercase">
                         <tr>
                             <th scope="col" class="py-3 px-6">日期</th>
@@ -947,31 +949,266 @@
                 </table>
             </div>
         </div>
+
+        <div id="page5" class="page-content hidden">
+            <!-- 五、训练日志记录 -->
+            <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-blue-700 border-b-2 border-blue-400 pb-2">五、训练日志</h2>
+            <p class="text-gray-600 mb-6">
+                在这里记录你的每次训练数据，方便追踪你的进步。
+            </p>
+
+            <div class="main-container p-6 mb-8">
+                <!-- 训练记录表单 -->
+                <form id="training-form" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="flex flex-col">
+                        <label for="date" class="text-sm font-semibold mb-1">日期:</label>
+                        <input type="date" id="date" name="date" class="p-2 border border-gray-300 rounded-md">
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="exercise" class="text-sm font-semibold mb-1">动作:</label>
+                        <!-- 更改为下拉列表 -->
+                        <select id="exercise" name="exercise" class="p-2 border border-gray-300 rounded-md">
+                            <option value="">请选择一个动作</option>
+                            <!-- 选项将通过 JavaScript 动态填充 -->
+                        </select>
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="sets" class="text-sm font-semibold mb-1">组数:</label>
+                        <input type="number" id="sets" name="sets" placeholder="例如: 4" class="p-2 border border-gray-300 rounded-md">
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="reps" class="text-sm font-semibold mb-1">次数:</label>
+                        <input type="number" id="reps" name="reps" placeholder="例如: 10" class="p-2 border border-gray-300 rounded-md">
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="weight" class="text-sm font-semibold mb-1">重量 (kg):</label>
+                        <input type="number" id="weight" name="weight" placeholder="例如: 60" step="0.1" class="p-2 border border-gray-300 rounded-md">
+                    </div>
+                    <div class="flex flex-col sm:col-span-2 lg:col-span-3">
+                        <label for="notes" class="text-sm font-semibold mb-1">备注:</label>
+                        <textarea id="notes" name="notes" rows="2" placeholder="感觉良好，下次可以尝试加重" class="p-2 border border-gray-300 rounded-md"></textarea>
+                    </div>
+                    <div class="flex flex-col sm:col-span-2 lg:col-span-3 items-center mt-4 space-y-2 sm:space-y-0 sm:flex-row sm:justify-center sm:space-x-4">
+                        <button type="submit" class="bg-blue-600 text-white font-bold py-2 px-6 rounded-md shadow-md hover:bg-blue-700 transition duration-300 ease-in-out w-full sm:w-auto">
+                            保存记录
+                        </button>
+                        <!-- 新增的导出按钮 -->
+                        <button type="button" onclick="exportTodayLog()" class="bg-green-600 text-white font-bold py-2 px-6 rounded-md shadow-md hover:bg-green-700 transition duration-300 ease-in-out w-full sm:w-auto">
+                            导出当天日志 (Markdown)
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- 训练记录显示表格 -->
+            <div class="overflow-x-auto mb-8 main-container">
+                <table class="styled-table text-sm text-gray-700 whitespace-nowrap">
+                    <thead class="text-xs uppercase">
+                        <tr>
+                            <th scope="col" class="py-3 px-6">日期</th>
+                            <th scope="col" class="py-3 px-6">动作</th>
+                            <th scope="col" class="py-3 px-6">组数</th>
+                            <th scope="col" class="py-3 px-6">次数</th>
+                            <th scope="col" class="py-3 px-6">重量 (kg)</th>
+                            <th scope="col" class="py-3 px-6">备注</th>
+                            <th scope="col" class="py-3 px-6">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="training-log-body">
+                        <!-- 训练记录将在这里动态生成 -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
     <script>
+        // 存储训练记录的数组
+        let trainingLog = [];
+        const localStorageKey = 'trainingLogData'; // localStorage 的键名
+
+        // ==========================================================
+        // 数据持久化功能
+        // ==========================================================
+        // 从 localStorage 加载训练记录
+        function loadTrainingLog() {
+            const storedData = localStorage.getItem(localStorageKey);
+            if (storedData) {
+                try {
+                    trainingLog = JSON.parse(storedData);
+                } catch (e) {
+                    console.error("无法解析训练日志数据", e);
+                    trainingLog = [];
+                }
+            } else {
+                trainingLog = [];
+            }
+        }
+
+        // 保存训练记录到 localStorage
+        function saveTrainingLog() {
+            localStorage.setItem(localStorageKey, JSON.stringify(trainingLog));
+        }
+
+        // ==========================================================
+        // 渲染、删除和导出功能
+        // ==========================================================
+        // 渲染训练日志表格
+        function renderTrainingLog() {
+            const tbody = document.getElementById('training-log-body');
+            tbody.innerHTML = ''; // 清空现有内容
+
+            trainingLog.forEach((log, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="py-4 px-6">${log.date}</td>
+                    <td class="py-4 px-6">${log.exercise}</td>
+                    <td class="py-4 px-6">${log.sets}</td>
+                    <td class="py-4 px-6">${log.reps}</td>
+                    <td class="py-4 px-6">${log.weight}</td>
+                    <td class="py-4 px-6">${log.notes}</td>
+                    <td class="py-4 px-6">
+                        <button onclick="deleteLog(${index})" class="bg-red-500 text-white px-3 py-1 rounded-md text-xs hover:bg-red-600 transition-colors">
+                            删除
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // 删除单条训练记录
+        function deleteLog(index) {
+            trainingLog.splice(index, 1);
+            saveTrainingLog(); // 保存更新后的数据
+            renderTrainingLog(); // 重新渲染表格
+        }
+
+        // 导出当天训练日志为 Markdown 文件
+        function exportTodayLog() {
+            // 获取今天的日期，格式为 YYYY-MM-DD
+            const today = new Date().toISOString().slice(0, 10);
+            
+            // 过滤出今天的训练记录
+            const todayLog = trainingLog.filter(log => log.date === today);
+
+            if (todayLog.length === 0) {
+                alert('今天还没有训练记录可以导出哦！');
+                return;
+            }
+
+            // 构建 Markdown 内容
+            let markdownContent = `# 训练日志 - ${today}\n\n`;
+            markdownContent += `| 日期 | 动作 | 组数 | 次数 | 重量 (kg) | 备注 |\n`;
+            markdownContent += `|---|---|---|---|---|---|\n`;
+            
+            todayLog.forEach(log => {
+                markdownContent += `| ${log.date} | ${log.exercise} | ${log.sets} | ${log.reps} | ${log.weight} | ${log.notes} |\n`;
+            });
+
+            // 创建 Blob 对象
+            const blob = new Blob([markdownContent], { type: 'text/markdown;charset=utf-8' });
+            
+            // 创建下载链接
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `training-log-${today}.md`;
+            
+            // 触发下载
+            document.body.appendChild(a);
+            a.click();
+            
+            // 清理
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // ==========================================================
+        // 页面切换和初始化功能
+        // ==========================================================
+        // 页面切换功能
         function showPage(pageId) {
-            // 隐藏所有页面
             const pages = document.querySelectorAll('.page-content');
             pages.forEach(page => {
                 page.classList.remove('active');
                 page.classList.add('hidden');
             });
-
-            // 显示选定的页面
             const activePage = document.getElementById(pageId);
             if (activePage) {
                 activePage.classList.remove('hidden');
                 activePage.classList.add('active');
             }
-
-            // 更新导航按钮的活动状态
             const buttons = document.querySelectorAll('.nav-button');
             buttons.forEach(button => {
                 button.classList.remove('active-nav');
             });
             event.target.classList.add('active-nav');
         }
+
+        // 处理表单提交
+        document.getElementById('training-form').addEventListener('submit', function(event) {
+            event.preventDefault(); 
+            const date = document.getElementById('date').value;
+            const exercise = document.getElementById('exercise').value;
+            const sets = document.getElementById('sets').value;
+            const reps = document.getElementById('reps').value;
+            const weight = document.getElementById('weight').value;
+            const notes = document.getElementById('notes').value;
+            
+            if (!exercise) {
+                console.warn("请选择一个动作");
+                return;
+            }
+
+            const newLog = {
+                date: date || new Date().toISOString().slice(0, 10),
+                exercise: exercise,
+                sets: sets || '0',
+                reps: reps || '0',
+                weight: weight || '0',
+                notes: notes || '无备注'
+            };
+
+            trainingLog.push(newLog);
+            saveTrainingLog(); // 保存新数据
+            renderTrainingLog();
+            this.reset();
+        });
+
+        // 页面加载完成后执行的初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            // 首先加载数据
+            loadTrainingLog();
+
+            // 渲染表格
+            renderTrainingLog();
+
+            // 动态填充动作下拉列表
+            const exerciseSet = new Set();
+            const tables = document.querySelectorAll('#table1, #table2, #table3');
+            
+            tables.forEach(table => {
+                const rows = table.querySelectorAll('tbody tr');
+                rows.forEach(row => {
+                    const cells = row.querySelectorAll('td');
+                    if (cells.length > 3) {
+                        const exerciseName = cells[3].textContent.trim();
+                        if (exerciseName && exerciseName !== '散步、拉伸或瑜伽' && exerciseName !== '无' && exerciseName !== '根据能完成目标次数的重量' && exerciseName !== '自身体重或负重') {
+                             exerciseSet.add(exerciseName);
+                        }
+                    }
+                });
+            });
+            const exerciseSelect = document.getElementById('exercise');
+            exerciseSet.forEach(exercise => {
+                const option = document.createElement('option');
+                option.value = exercise;
+                option.textContent = exercise;
+                exerciseSelect.appendChild(option);
+            });
+        });
+
     </script>
 
 </body>
