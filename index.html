@@ -11,82 +11,82 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* General styles */
+        /* 整体样式调整，更具 Excel 风格 */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #e5e7eb;
+            background-color: #e5e7eb; /* 浅灰色背景，类似办公软件 */
             color: #1f2937;
-            transition: background-color 0.5s ease-in-out;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
         }
 
-        /* Styles for the login screen background */
-        .gradient-bg-start {
-            background: radial-gradient(circle at top left, #a5b4fc, #e5e7eb);
-        }
-        .gradient-bg-match {
-            background: radial-gradient(circle at top left, #86efac, #e5e7eb);
-        }
-        .gradient-bg-mismatch {
-            background: radial-gradient(circle at top left, #fca5a5, #e5e7eb);
-        }
-
-        /* Fitness plan styles from the original file */
+        /* 主容器，移除圆角和阴影，增加边框 */
         .main-container {
-            border: 1px solid #9ca3af;
+            border: 1px solid #9ca3af; /* Excel 风格的边框 */
             background-color: #ffffff;
             border-radius: 0;
             box-shadow: none;
         }
+
+        /* 导航按钮样式，移除圆角和阴影 */
         .nav-button {
             transition: all 0.3s ease;
             transform: none;
             border: 1px solid #9ca3af;
             border-radius: 0;
             box-shadow: none;
-            font-weight: 400;
+            font-weight: 400; /* 调整字体粗细 */
         }
+
         .nav-button:hover {
             transform: none;
             box-shadow: none;
-            background-color: #d1d5db;
+            background-color: #d1d5db; /* 鼠标悬停时的背景色 */
         }
+        
+        /* 选中的导航按钮样式 */
         .active-nav {
             background-color: #4a5568;
             color: white;
             border-color: #4a5568;
         }
+
+        /* 表格样式，更像 Excel */
         .styled-table {
-            border-collapse: collapse;
+            border-collapse: collapse; /* 确保单元格之间没有间隙 */
             width: 100%;
         }
+
         .styled-table th,
         .styled-table td {
-            border: 1px solid #9ca3af;
+            border: 1px solid #9ca3af; /* 所有单元格都有边框 */
             padding: 12px 15px;
             text-align: left;
-            transition: background-color 0.3s ease;
-            transform: none;
+            transition: background-color 0.3s ease; /* 保留背景色变化 */
+            transform: none; /* 移除放大效果 */
         }
+        
         .styled-table thead {
-            background-color: #d1d5db;
-            font-weight: bold;
+            background-color: #d1d5db; /* Excel 风格的表头颜色 */
+            font-weight: bold; /* 加粗表头字体 */
         }
+
         .styled-table tbody tr:hover {
-            background-color: #f3f4f6;
+            background-color: #f3f4f6; /* 鼠标悬停时变色 */
         }
+
         .styled-table tbody td:hover {
-            transform: none;
+            transform: none; /* 移除放大效果 */
         }
+        
+        /* 高碳日背景色 */
         .high-carb-day {
             background-color: #fcebeb;
         }
+        /* 低碳日背景色 */
         .low-carb-day {
             background-color: #e5f5e5;
         }
+        
+        /* 隐藏和显示页面的淡入淡出效果 */
         .page-content {
             opacity: 0;
             transform: translateY(20px);
@@ -96,1017 +96,1120 @@
             opacity: 1;
             transform: translateY(0);
         }
-        /* Style for the main view toggle */
-        .page-view.hidden {
+
+        /* 模态框样式 */
+        .modal {
             display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
         
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
     </style>
 </head>
-<body class="gradient-bg-start">
+<body class="p-4 sm:p-8">
 
-    <!-- 1. Login Screen Container -->
-    <div id="login-container" class="page-view bg-white p-8 rounded-2xl shadow-xl max-w-lg w-full text-center space-y-6 transform transition-transform duration-300 scale-100">
-        <h1 class="text-3xl font-bold text-gray-800">访问您的个人数据</h1>
-        <p class="text-sm text-gray-500">
-            这是一个演示应用，用于展示如何使用一个独特的密码短语来解锁您的私人数据。
-        </p>
+    <!-- 主容器，居中并移除阴影和圆角 -->
+    <div class="max-w-7xl mx-auto main-container p-6 sm:p-10">
         
-        <!-- Input area -->
-        <div class="space-y-4">
-            <div class="text-left">
-                <label for="passphrase-input" class="block text-gray-700 font-medium mb-1">输入您的密码短语：</label>
-                <input type="password" id="passphrase-input" placeholder="请在这里输入您的个人密码短语" class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors" autocomplete="off">
-            </div>
-            
-            <button id="set-button" class="bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold shadow-md hover:bg-indigo-700 transition-colors duration-200 w-full focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                设置并记住
-            </button>
-            <button id="verify-button" class="bg-gray-400 text-white px-6 py-3 rounded-lg font-semibold shadow-md hover:bg-gray-500 transition-colors duration-200 w-full focus:outline-none focus:ring-2 focus:ring-gray-500" disabled>
-                验证密码
-            </button>
+        <!-- 标题部分 -->
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-center mb-4 text-gray-900">长期力量训练与碳循环饮食综合规划</h1>
+        <p class="text-center text-lg sm:text-xl text-gray-600 mb-8">可循环的块状周期化模型</p>
+
+        <!-- 导航按钮容器，在小屏幕上允许换行 -->
+        <div class="flex flex-wrap justify-center space-x-2 sm:space-x-4 mb-10">
+            <button class="nav-button bg-gray-200 text-gray-800 py-2 px-4 focus:outline-none focus:ring-2 focus:ring-gray-500 active-nav" onclick="showPage('page1')">训练计划 (1-3周)</button>
+            <button class="nav-button bg-gray-200 text-gray-800 py-2 px-4 focus:outline-none focus:ring-2 focus:ring-gray-500" onclick="showPage('page2')">训练计划 (4-6周)</button>
+            <button class="nav-button bg-gray-200 text-gray-800 py-2 px-4 focus:outline-none focus:ring-2 focus:ring-gray-500" onclick="showPage('page3')">训练计划 (第7周)</button>
+            <button class="nav-button bg-gray-200 text-gray-800 py-2 px-4 focus:outline-none focus:ring-2 focus:ring-gray-500" onclick="showPage('page4')">食谱分析</button>
+            <!-- 新增的训练日志按钮 -->
+            <button class="nav-button bg-gray-200 text-gray-800 py-2 px-4 focus:outline-none focus:ring-2 focus:ring-gray-500" onclick="showPasswordModal('page5')">训练日志</button>
+            <!-- 新增的体重和腰围日志按钮 -->
+            <button class="nav-button bg-gray-200 text-gray-800 py-2 px-4 focus:outline-none focus:ring-2 focus:ring-gray-500" onclick="showPasswordModal('page6')">体重和腰围日志</button>
         </div>
 
-        <!-- Result and feedback area -->
-        <div class="mt-8 space-y-4">
-            <div id="message-box" class="p-4 rounded-lg text-sm text-gray-600 bg-gray-100 transition-opacity opacity-100 duration-500">
-                您需要先设置一个密码短语。
-            </div>
+        <!-- 页面内容容器 -->
+        <div id="page1" class="page-content active">
+            <!-- 一、训练计划与饮食日历：第1-3周（蓄能块） -->
+            <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-blue-700 border-b-2 border-blue-400 pb-2">一、训练计划与饮食日历：第1-3周（蓄能块）</h2>
+            <p class="text-gray-600 mb-6">
+                该阶段的目标是增加肌肉体积和工作容量，为后续的力量提升奠定基础。训练特点是中等强度、高训练量。请将高碳水日与训练日同步，以确保肌肉糖原得到充足补充。
+            </p>
             
-            <div id="hash-display" class="bg-gray-200 p-4 rounded-lg break-words text-xs text-gray-600 font-mono hidden">
-                <!-- Hash will be displayed here -->
+            <!-- 响应式表格容器，使用 overflow-x-auto 来在小屏幕上实现水平滚动 -->
+            <div class="overflow-x-auto mb-8 main-container">
+                <table id="table1" class="styled-table text-sm text-gray-700 whitespace-nowrap">
+                    <thead class="text-xs uppercase">
+                        <tr>
+                            <th scope="col" class="py-3 px-6">日期</th>
+                            <th scope="col" class="py-3 px-6">碳水日类型</th>
+                            <th scope="col" class="py-3 px-6">训练计划</th>
+                            <th scope="col" class="py-3 px-6">动作</th>
+                            <th scope="col" class="py-3 px-6">组数</th>
+                            <th scope="col" class="py-3 px-6">次数</th>
+                            <th scope="col" class="py-3 px-6">重量范围 (kg)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="low-carb-day">
+                            <td class="py-4 px-6">周一</td>
+                            <td class="py-4 px-6">低碳日</td>
+                            <td class="py-4 px-6">休息或主动恢复</td>
+                            <td class="py-4 px-6">散步、拉伸或瑜伽</td>
+                            <td class="py-4 px-6">1-2组</td>
+                            <td class="py-4 px-6">无</td>
+                            <td class="py-4 px-6">无负重</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6">周二</td>
+                            <td class="py-4 px-6">高碳日</td>
+                            <td class="py-4 px-6">推日 (胸、肩前、三头)</td>
+                            <td class="py-4 px-6">杠铃/哑铃卧推</td>
+                            <td class="py-4 px-6">4组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">45.5-52.5</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">哑铃肩上推举</td>
+                            <td class="py-4 px-6">4组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">上斜杠铃卧推</td>
+                            <td class="py-4 px-6">3组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">26-30</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">哑铃侧平举</td>
+                            <td class="py-4 px-6">3组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">三头肌下压</td>
+                            <td class="py-4 px-6">3组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">粗握距超窄握推/臂屈伸</td>
+                            <td class="py-4 px-6">2-4组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">侧身绳索三头后伸展</td>
+                            <td class="py-4 px-6">3-4组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="low-carb-day">
+                            <td class="py-4 px-6">周三</td>
+                            <td class="py-4 px-6">低碳日</td>
+                            <td class="py-4 px-6">休息或主动恢复</td>
+                            <td class="py-4 px-6">散步、拉伸或瑜伽</td>
+                            <td class="py-4 px-6">1-2组</td>
+                            <td class="py-4 px-6">无</td>
+                            <td class="py-4 px-6">无负重</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6">周四</td>
+                            <td class="py-4 px-6">高碳日</td>
+                            <td class="py-4 px-6">拉日 (背、肩中后、二头)</td>
+                            <td class="py-4 px-6">硬拉</td>
+                            <td class="py-4 px-6">4组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">91-105</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">引体向上或高位下拉</td>
+                            <td class="py-4 px-6">4组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">自身体重或负重</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">杠铃/哑铃划船</td>
+                            <td class="py-4 px-6">3组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">哑铃反向飞鸟</td>
+                            <td class="py-4 px-6">3组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">坐姿划船</td>
+                            <td class="py-4 px-6">3组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">辅助反手引体</td>
+                            <td class="py-4 px-6">2-4组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">自身体重或负重</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">单手哑铃牧师凳弯举</td>
+                            <td class="py-4 px-6">3-4组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="low-carb-day">
+                            <td class="py-4 px-6">周五</td>
+                            <td class="py-4 px-6">低碳日</td>
+                            <td class="py-4 px-6">休息或主动恢复</td>
+                            <td class="py-4 px-6">散步、拉伸或瑜伽</td>
+                            <td class="py-4 px-6">1-2组</td>
+                            <td class="py-4 px-6">无</td>
+                            <td class="py-4 px-6">无负重</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6">周六</td>
+                            <td class="py-4 px-6">高碳日</td>
+                            <td class="py-4 px-6">腿日 (股四头、腘绳肌、臀)</td>
+                            <td class="py-4 px-6">杠铃深蹲</td>
+                            <td class="py-4 px-6">4组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">65-75</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">腿举</td>
+                            <td class="py-4 px-6">4组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">EZ杆窄颈者</td>
+                            <td class="py-4 px-6">3-5组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">EZ杆弯举</td>
+                            <td class="py-4 px-6">3-5组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">绳索颈后臂屈伸(AEL)</td>
+                            <td class="py-4 px-6">4-5组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">双手牧师凳弯举(AEL)</td>
+                            <td class="py-4 px-6">4-5组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">双手上斜哑铃弯举</td>
+                            <td class="py-4 px-6">1-2组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="low-carb-day">
+                            <td class="py-4 px-6">周日</td>
+                            <td class="py-4 px-6">低碳日</td>
+                            <td class="py-4 px-6">休息或主动恢复</td>
+                            <td class="py-4 px-6">散步、拉伸或瑜伽</td>
+                            <td class="py-4 px-6">1-2组</td>
+                            <td class="py-4 px-6">无</td>
+                            <td class="py-4 px-6">无负重</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            
-            <div id="status-message" class="font-bold text-lg text-gray-800"></div>
+            <p class="text-sm text-gray-500 mb-10">*注：此处重量范围为三大项的蓄能块训练重量，其他辅助动作请根据您能完成目标次数（8-12次）的重量进行选择。</p>
         </div>
-    </div>
 
-    <!-- 2. Fitness Plan Container (hidden by default) -->
-    <div id="fitness-plan-container" class="page-view hidden">
-        <!-- 主容器，居中并移除阴影和圆角 -->
-        <div class="max-w-7xl mx-auto main-container p-6 sm:p-10">
-            <!-- 标题部分 -->
-            <h1 class="text-3xl sm:text-4xl font-extrabold text-center mb-4 text-gray-900">长期力量训练与碳循环饮食综合规划</h1>
-            <p class="text-center text-lg sm:text-xl text-gray-600 mb-8">可循环的块状周期化模型</p>
-
-            <!-- 导航按钮容器，在小屏幕上允许换行 -->
-            <div class="flex flex-wrap justify-center space-x-2 sm:space-x-4 mb-10">
-                <button class="nav-button bg-gray-200 text-gray-800 py-2 px-4 focus:outline-none focus:ring-2 focus:ring-gray-500 active-nav" onclick="showPage('page1')">训练计划 (1-3周)</button>
-                <button class="nav-button bg-gray-200 text-gray-800 py-2 px-4 focus:outline-none focus:ring-2 focus:ring-gray-500" onclick="showPage('page2')">训练计划 (4-6周)</button>
-                <button class="nav-button bg-gray-200 text-gray-800 py-2 px-4 focus:outline-none focus:ring-2 focus:ring-gray-500" onclick="showPage('page3')">训练计划 (第7周)</button>
-                <button class="nav-button bg-gray-200 text-gray-800 py-2 px-4 focus:outline-none focus:ring-2 focus:ring-gray-500" onclick="showPage('page4')">食谱分析</button>
-                <button class="nav-button bg-gray-200 text-gray-800 py-2 px-4 focus:outline-none focus:ring-2 focus:ring-gray-500" onclick="showPage('page5')">训练日志</button>
+        <div id="page2" class="page-content hidden">
+            <!-- 二、训练计划与饮食日历：第4-6周（力量块） -->
+            <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-blue-700 border-b-2 border-blue-400 pb-2">二、训练计划与饮食日历：第4-6周（力量块）</h2>
+            <p class="text-gray-600 mb-6">
+                该阶段的目标是将肌肉体积转化为绝对力量。训练特点是高强度、中等训练量。每组的重复次数将减少，而负重将增加。
+            </p>
+            
+            <!-- 响应式表格容器，使用 overflow-x-auto 来在小屏幕上实现水平滚动 -->
+            <div class="overflow-x-auto mb-8 main-container">
+                <table id="table2" class="styled-table text-sm text-gray-700 whitespace-nowrap">
+                    <thead class="text-xs uppercase">
+                        <tr>
+                            <th scope="col" class="py-3 px-6">日期</th>
+                            <th scope="col" class="py-3 px-6">碳水日类型</th>
+                            <th scope="col" class="py-3 px-6">训练计划</th>
+                            <th scope="col" class="py-3 px-6">动作</th>
+                            <th scope="col" class="py-3 px-6">组数</th>
+                            <th scope="col" class="py-3 px-6">次数</th>
+                            <th scope="col" class="py-3 px-6">重量范围 (kg)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="low-carb-day">
+                            <td class="py-4 px-6">周一</td>
+                            <td class="py-4 px-6">低碳日</td>
+                            <td class="py-4 px-6">休息或主动恢复</td>
+                            <td class="py-4 px-6">散步、拉伸或瑜伽</td>
+                            <td class="py-4 px-6">1-2组</td>
+                            <td class="py-4 px-6">无</td>
+                            <td class="py-4 px-6">无负重</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6">周二</td>
+                            <td class="py-4 px-6">高碳日</td>
+                            <td class="py-4 px-6">推日 (胸、肩前、三头)</td>
+                            <td class="py-4 px-6">杠铃/哑铃卧推</td>
+                            <td class="py-4 px-6">4组</td>
+                            <td class="py-4 px-6">3-5次</td>
+                            <td class="py-4 px-6">56-63</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">哑铃肩上推举</td>
+                            <td class="py-4 px-6">4组</td>
+                            <td class="py-4 px-6">3-5次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">上斜杠铃卧推</td>
+                            <td class="py-4 px-6">3组</td>
+                            <td class="py-4 px-6">3-5次</td>
+                            <td class="py-4 px-6">33-38</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">哑铃侧平举</td>
+                            <td class="py-4 px-6">3组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">三头肌下压</td>
+                            <td class="py-4 px-6">3组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">粗握距超窄握推/臂屈伸</td>
+                            <td class="py-4 px-6">2-4组</td>
+                            <td class="py-4 px-6">3-5次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">侧身绳索三头后伸展</td>
+                            <td class="py-4 px-6">3-4组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="low-carb-day">
+                            <td class="py-4 px-6">周三</td>
+                            <td class="py-4 px-6">低碳日</td>
+                            <td class="py-4 px-6">休息或主动恢复</td>
+                            <td class="py-4 px-6">散步、拉伸或瑜伽</td>
+                            <td class="py-4 px-6">1-2组</td>
+                            <td class="py-4 px-6">无</td>
+                            <td class="py-4 px-6">无负重</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6">周四</td>
+                            <td class="py-4 px-6">高碳日</td>
+                            <td class="py-4 px-6">拉日 (背、肩中后、二头)</td>
+                            <td class="py-4 px-6">硬拉</td>
+                            <td class="py-4 px-6">4组</td>
+                            <td class="py-4 px-6">3-5次</td>
+                            <td class="py-4 px-6">106-120</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">引体向上或高位下拉</td>
+                            <td class="py-4 px-6">4组</td>
+                            <td class="py-4 px-6">3-5次</td>
+                            <td class="py-4 px-6">自身体重或负重</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">杠铃/哑铃划船</td>
+                            <td class="py-4 px-6">3组</td>
+                            <td class="py-4 px-6">3-5次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">哑铃反向飞鸟</td>
+                            <td class="py-4 px-6">3组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">坐姿划船</td>
+                            <td class="py-4 px-6">3组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">辅助反手引体</td>
+                            <td class="py-4 px-6">2-4组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">自身体重或负重</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">单手哑铃牧师凳弯举</td>
+                            <td class="py-4 px-6">3-4组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="low-carb-day">
+                            <td class="py-4 px-6">周五</td>
+                            <td class="py-4 px-6">低碳日</td>
+                            <td class="py-4 px-6">休息或主动恢复</td>
+                            <td class="py-4 px-6">散步、拉伸或瑜伽</td>
+                            <td class="py-4 px-6">1-2组</td>
+                            <td class="py-4 px-6">无</td>
+                            <td class="py-4 px-6">无负重</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6">周六</td>
+                            <td class="py-4 px-6">高碳日</td>
+                            <td class="py-4 px-6">腿日 (股四头、腘绳肌、臀)</td>
+                            <td class="py-4 px-6">杠铃深蹲</td>
+                            <td class="py-4 px-6">4组</td>
+                            <td class="py-4 px-6">3-5次</td>
+                            <td class="py-4 px-6">80-90</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">腿举</td>
+                            <td class="py-4 px-6">4组</td>
+                            <td class="py-4 px-6">3-5次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">EZ杆窄颈者</td>
+                            <td class="py-4 px-6">3-5组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">EZ杆弯举</td>
+                            <td class="py-4 px-6">3-5组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">绳索颈后臂屈伸(AEL)</td>
+                            <td class="py-4 px-6">4-5组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">双手牧师凳弯举(AEL)</td>
+                            <td class="py-4 px-6">4-5组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">双手上斜哑铃弯举</td>
+                            <td class="py-4 px-6">1-2组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="low-carb-day">
+                            <td class="py-4 px-6">周日</td>
+                            <td class="py-4 px-6">低碳日</td>
+                            <td class="py-4 px-6">休息或主动恢复</td>
+                            <td class="py-4 px-6">散步、拉伸或瑜伽</td>
+                            <td class="py-4 px-6">1-2组</td>
+                            <td class="py-4 px-6">无</td>
+                            <td class="py-4 px-6">无负重</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-
-            <!-- 页面内容容器 -->
-            <div id="page1" class="page-content active">
-                <!-- 一、训练计划与饮食日历：第1-3周（蓄能块） -->
-                <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-blue-700 border-b-2 border-blue-400 pb-2">一、训练计划与饮食日历：第1-3周（蓄能块）</h2>
-                <p class="text-gray-600 mb-6">
-                    该阶段的目标是增加肌肉体积和工作容量，为后续的力量提升奠定基础。训练特点是中等强度、高训练量。请将高碳水日与训练日同步，以确保肌肉糖原得到充足补充。
-                </p>
-                <div class="overflow-x-auto mb-8 main-container">
-                    <table id="table1" class="styled-table text-sm text-gray-700 whitespace-nowrap">
-                        <thead class="text-xs uppercase">
-                            <tr>
-                                <th scope="col" class="py-3 px-6">日期</th>
-                                <th scope="col" class="py-3 px-6">碳水日类型</th>
-                                <th scope="col" class="py-3 px-6">训练计划</th>
-                                <th scope="col" class="py-3 px-6">动作</th>
-                                <th scope="col" class="py-3 px-6">组数</th>
-                                <th scope="col" class="py-3 px-6">次数</th>
-                                <th scope="col" class="py-3 px-6">重量范围 (kg)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="low-carb-day">
-                                <td class="py-4 px-6">周一</td>
-                                <td class="py-4 px-6">低碳日</td>
-                                <td class="py-4 px-6">休息或主动恢复</td>
-                                <td class="py-4 px-6">散步、拉伸或瑜伽</td>
-                                <td class="py-4 px-6">1-2组</td>
-                                <td class="py-4 px-6">无</td>
-                                <td class="py-4 px-6">无负重</td>
-                            </tr>
-                            <tr class="high-carb-day">
-                                <td class="py-4 px-6">周二</td>
-                                <td class="py-4 px-6">高碳日</td>
-                                <td class="py-4 px-6">推日 (胸、肩前、三头)</td>
-                                <td class="py-4 px-6">杠铃/哑铃卧推</td>
-                                <td class="py-4 px-6">4组</td>
-                                <td class="py-4 px-6">8-12次</td>
-                                <td class="py-4 px-6">45.5-52.5</td>
-                            </tr>
-                            <tr class="high-carb-day">
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6">哑铃肩上推举</td>
-                                <td class="py-4 px-6">4组</td>
-                                <td class="py-4 px-6">8-12次</td>
-                                <td class="py-4 px-6">根据能完成目标次数的重量</td>
-                            </tr>
-                            <tr class="high-carb-day">
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6">上斜杠铃卧推</td>
-                                <td class="py-4 px-6">3组</td>
-                                <td class="py-4 px-6">8-12次</td>
-                                <td class="py-4 px-6">26-30</td>
-                            </tr>
-                            <tr class="high-carb-day">
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6">哑铃侧平举</td>
-                                <td class="py-4 px-6">3组</td>
-                                <td class="py-4 px-6">8-12次</td>
-                                <td class="py-4 px-6">根据能完成目标次数的重量</td>
-                            </tr>
-                            <tr class="high-carb-day">
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6">三头肌下压</td>
-                                <td class="py-4 px-6">3组</td>
-                                <td class="py-4 px-6">8-12次</td>
-                                <td class="py-4 px-6">根据能完成目标次数的重量</td>
-                            </tr>
-                            <tr class="high-carb-day">
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6">粗握距超窄握推/臂屈伸</td>
-                                <td class="py-4 px-6">2-4组</td>
-                                <td class="py-4 px-6">8-12次</td>
-                                <td class="py-4 px-6">根据能完成目标次数的重量</td>
-                            </tr>
-                            <tr class="high-carb-day">
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6">侧身绳索三头后伸展</td>
-                                <td class="py-4 px-6">3-4组</td>
-                                <td class="py-4 px-6">8-12次</td>
-                                <td class="py-4 px-6">根据能完成目标次数的重量</td>
-                            </tr>
-                            <tr class="low-carb-day">
-                                <td class="py-4 px-6">周三</td>
-                                <td class="py-4 px-6">低碳日</td>
-                                <td class="py-4 px-6">休息或主动恢复</td>
-                                <td class="py-4 px-6">散步、拉伸或瑜伽</td>
-                                <td class="py-4 px-6">1-2组</td>
-                                <td class="py-4 px-6">无</td>
-                                <td class="py-4 px-6">无负重</td>
-                            </tr>
-                            <tr class="high-carb-day">
-                                <td class="py-4 px-6">周四</td>
-                                <td class="py-4 px-6">高碳日</td>
-                                <td class="py-4 px-6">拉日 (背、肩中后、二头)</td>
-                                <td class="py-4 px-6">硬拉</td>
-                                <td class="py-4 px-6">4组</td>
-                                <td class="py-4 px-6">8-12次</td>
-                                <td class="py-4 px-6">91-105</td>
-                            </tr>
-                            <tr class="high-carb-day">
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6">引体向上或高位下拉</td>
-                                <td class="py-4 px-6">4组</td>
-                                <td class="py-4 px-6">8-12次</td>
-                                <td class="py-4 px-6">自身体重或负重</td>
-                            </tr>
-                            <tr class="high-carb-day">
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6">杠铃/哑铃划船</td>
-                                <td class="py-4 px-6">3组</td>
-                                <td class="py-4 px-6">8-12次</td>
-                                <td class="py-4 px-6">根据能完成目标次数的重量</td>
-                            </tr>
-                            <tr class="high-carb-day">
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6">哑铃反向飞鸟</td>
-                                <td class="py-4 px-6">3组</td>
-                                <td class="py-4 px-6">8-12次</td>
-                                <td class="py-4 px-6">根据能完成目标次数的重量</td>
-                            </tr>
-                            <tr class="high-carb-day">
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6">坐姿划船</td>
-                                <td class="py-4 px-6">3组</td>
-                                <td class="py-4 px-6">8-12次</td>
-                                <td class="py-4 px-6">根据能完成目标次数的重量</td>
-                            </tr>
-                            <tr class="high-carb-day">
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6">辅助反手引体</td>
-                                <td class="py-4 px-6">2-4组</td>
-                                <td class="py-4 px-6">8-12次</td>
-                                <td class="py-4 px-6">自身体重或负重</td>
-                            </tr>
-                            <tr class="high-carb-day">
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6">单手哑铃牧师凳弯举</td>
-                                <td class="py-4 px-6">3-4组</td>
-                                <td class="py-4 px-6">8-12次</td>
-                                <td class="py-4 px-6">根据能完成目标次数的重量</td>
-                            </tr>
-                            <tr class="low-carb-day">
-                                <td class="py-4 px-6">周五</td>
-                                <td class="py-4 px-6">低碳日</td>
-                                <td class="py-4 px-6">休息或主动恢复</td>
-                                <td class="py-4 px-6">散步、拉伸或瑜伽</td>
-                                <td class="py-4 px-6">1-2组</td>
-                                <td class="py-4 px-6">无</td>
-                                <td class="py-4 px-6">无负重</td>
-                            </tr>
-                            <tr class="high-carb-day">
-                                <td class="py-4 px-6">周六</td>
-                                <td class="py-4 px-6">高碳日</td>
-                                <td class="py-4 px-6">腿日 (股四头、腘绳肌、臀)</td>
-                                <td class="py-4 px-6">杠铃深蹲</td>
-                                <td class="py-4 px-6">4组</td>
-                                <td class="py-4 px-6">8-12次</td>
-                                <td class="py-4 px-6">65-75</td>
-                            </tr>
-                            <tr class="high-carb-day">
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6">腿举</td>
-                                <td class="py-4 px-6">4组</td>
-                                <td class="py-4 px-6">8-12次</td>
-                                <td class="py-4 px-6">根据能完成目标次数的重量</td>
-                            </tr>
-                            <tr class="high-carb-day">
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6">EZ杆窄颈者</td>
-                                <td class="py-4 px-6">3-5组</td>
-                                <td class="py-4 px-6">8-12次</td>
-                                <td class="py-4 px-6">根据能完成目标次数的重量</td>
-                            </tr>
-                            <tr class="high-carb-day">
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6">EZ杆弯举</td>
-                                <td class="py-4 px-6">3-5组</td>
-                                <td class="py-4 px-6">8-12次</td>
-                                <td class="py-4 px-6">根据能完成目标次数的重量</td>
-                            </tr>
-                            <tr class="high-carb-day">
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6">绳索颈后臂屈伸(AEL)</td>
-                                <td class="py-4 px-6">3-5组</td>
-                                <td class="py-4 px-6">8-12次</td>
-                                <td class="py-4 px-6">根据能完成目标次数的重量</td>
-                            </tr>
-                            <tr class="low-carb-day">
-                                <td class="py-4 px-6">周日</td>
-                                <td class="py-4 px-6">低碳日</td>
-                                <td class="py-4 px-6">休息或主动恢复</td>
-                                <td class="py-4 px-6">无</td>
-                                <td class="py-4 px-6">1-2组</td>
-                                <td class="py-4 px-6">无</td>
-                                <td class="py-4 px-6">无负重</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div id="page2" class="page-content hidden">
-                <!-- 二、训练计划与饮食日历：第4-6周（力量块） -->
-                <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-orange-700 border-b-2 border-orange-400 pb-2">二、训练计划与饮食日历：第4-6周（力量块）</h2>
-                <p class="text-gray-600 mb-6">
-                    该阶段的目标是提升绝对力量，训练特点是高强度、低训练量。此阶段请将高碳水日与训练日同步，并增加碳水摄入，以确保力量输出。
-                </p>
-                <div class="overflow-x-auto mb-8 main-container">
-                    <table id="table2" class="styled-table text-sm text-gray-700 whitespace-nowrap">
-                        <thead class="text-xs uppercase">
-                            <tr>
-                                <th scope="col" class="py-3 px-6">日期</th>
-                                <th scope="col" class="py-3 px-6">碳水日类型</th>
-                                <th scope="col" class="py-3 px-6">训练计划</th>
-                                <th scope="col" class="py-3 px-6">动作</th>
-                                <th scope="col" class="py-3 px-6">组数</th>
-                                <th scope="col" class="py-3 px-6">次数</th>
-                                <th scope="col" class="py-3 px-6">重量范围 (kg)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="high-carb-day">
-                                <td class="py-4 px-6">周一</td>
-                                <td class="py-4 px-6">高碳日</td>
-                                <td class="py-4 px-6">推日 (胸、肩前、三头)</td>
-                                <td class="py-4 px-6">杠铃/哑铃卧推</td>
-                                <td class="py-4 px-6">5组</td>
-                                <td class="py-4 px-6">5次</td>
-                                <td class="py-4 px-6">60-68</td>
-                            </tr>
-                            <tr class="high-carb-day">
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6">哑铃肩上推举</td>
-                                <td class="py-4 px-6">4组</td>
-                                <td class="py-4 px-6">5次</td>
-                                <td class="py-4 px-6">根据能完成目标次数的重量</td>
-                            </tr>
-                            <tr class="high-carb-day">
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6">上斜杠铃卧推</td>
-                                <td class="py-4 px-6">3组</td>
-                                <td class="py-4 px-6">5次</td>
-                                <td class="py-4 px-6">33-38</td>
-                            </tr>
-                            <tr class="high-carb-day">
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6">哑铃侧平举</td>
-                                <td class="py-4 px-6">3组</td>
-                                <td class="py-4 px-6">8-12次</td>
-                                <td class="py-4 px-6">根据能完成目标次数的重量</td>
-                            </tr>
-                            <tr class="high-carb-day">
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6">三头肌下压</td>
-                                <td class="py-4 px-6">3组</td>
-                                <td class="py-4 px-6">8-12次</td>
-                                <td class="py-4 px-6">根据能完成目标次数的重量</td>
-                            </tr>
-                            <tr class="low-carb-day">
-                                <td class="py-4 px-6">周二</td>
-                                <td class="py-4 px-6">低碳日</td>
-                                <td class="py-4 px-6">休息或主动恢复</td>
-                                <td class="py-4 px-6">无</td>
-                                <td class="py-4 px-6">1-2组</td>
-                                <td class="py-4 px-6">无</td>
-                                <td class="py-4 px-6">无负重</td>
-                            </tr>
-                            <tr class="high-carb-day">
-                                <td class="py-4 px-6">周三</td>
-                                <td class="py-4 px-6">高碳日</td>
-                                <td class="py-4 px-6">拉日 (背、肩中后、二头)</td>
-                                <td class="py-4 px-6">硬拉</td>
-                                <td class="py-4 px-6">5组</td>
-                                <td class="py-4 px-6">5次</td>
-                                <td class="py-4 px-6">110-120</td>
-                            </tr>
-                            <tr class="high-carb-day">
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6">引体向上或高位下拉</td>
-                                <td class="py-4 px-6">4组</td>
-                                <td class="py-4 px-6">5次</td>
-                                <td class="py-4 px-6">自身体重或负重</td>
-                            </tr>
-                            <tr class="high-carb-day">
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6">杠铃/哑铃划船</td>
-                                <td class="py-4 px-6">3组</td>
-                                <td class="py-4 px-6">5次</td>
-                                <td class="py-4 px-6">根据能完成目标次数的重量</td>
-                            </tr>
-                            <tr class="high-carb-day">
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6">哑铃反向飞鸟</td>
-                                <td class="py-4 px-6">3组</td>
-                                <td class="py-4 px-6">8-12次</td>
-                                <td class="py-4 px-6">根据能完成目标次数的重量</td>
-                            </tr>
-                            <tr class="high-carb-day">
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6">坐姿划船</td>
-                                <td class="py-4 px-6">3组</td>
-                                <td class="py-4 px-6">8-12次</td>
-                                <td class="py-4 px-6">根据能完成目标次数的重量</td>
-                            </tr>
-                            <tr class="low-carb-day">
-                                <td class="py-4 px-6">周四</td>
-                                <td class="py-4 px-6">低碳日</td>
-                                <td class="py-4 px-6">休息或主动恢复</td>
-                                <td class="py-4 px-6">无</td>
-                                <td class="py-4 px-6">1-2组</td>
-                                <td class="py-4 px-6">无</td>
-                                <td class="py-4 px-6">无负重</td>
-                            </tr>
-                            <tr class="high-carb-day">
-                                <td class="py-4 px-6">周五</td>
-                                <td class="py-4 px-6">高碳日</td>
-                                <td class="py-4 px-6">腿日 (股四头、腘绳肌、臀)</td>
-                                <td class="py-4 px-6">杠铃深蹲</td>
-                                <td class="py-4 px-6">5组</td>
-                                <td class="py-4 px-6">5次</td>
-                                <td class="py-4 px-6">75-85</td>
-                            </tr>
-                            <tr class="high-carb-day">
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6">腿举</td>
-                                <td class="py-4 px-6">4组</td>
-                                <td class="py-4 px-6">5次</td>
-                                <td class="py-4 px-6">根据能完成目标次数的重量</td>
-                            </tr>
-                            <tr class="high-carb-day">
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6">EZ杆窄颈者</td>
-                                <td class="py-4 px-6">3-5组</td>
-                                <td class="py-4 px-6">8-12次</td>
-                                <td class="py-4 px-6">根据能完成目标次数的重量</td>
-                            </tr>
-                            <tr class="high-carb-day">
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6">EZ杆弯举</td>
-                                <td class="py-4 px-6">3-5组</td>
-                                <td class="py-4 px-6">8-12次</td>
-                                <td class="py-4 px-6">根据能完成目标次数的重量</td>
-                            </tr>
-                            <tr class="high-carb-day">
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6">绳索颈后臂屈伸(AEL)</td>
-                                <td class="py-4 px-6">3-5组</td>
-                                <td class="py-4 px-6">8-12次</td>
-                                <td class="py-4 px-6">根据能完成目标次数的重量</td>
-                            </tr>
-                            <tr class="low-carb-day">
-                                <td class="py-4 px-6">周六</td>
-                                <td class="py-4 px-6">低碳日</td>
-                                <td class="py-4 px-6">休息或主动恢复</td>
-                                <td class="py-4 px-6">无</td>
-                                <td class="py-4 px-6">1-2组</td>
-                                <td class="py-4 px-6">无</td>
-                                <td class="py-4 px-6">无负重</td>
-                            </tr>
-                            <tr class="low-carb-day">
-                                <td class="py-4 px-6">周日</td>
-                                <td class="py-4 px-6">低碳日</td>
-                                <td class="py-4 px-6">休息或主动恢复</td>
-                                <td class="py-4 px-6">无</td>
-                                <td class="py-4 px-6">1-2组</td>
-                                <td class="py-4 px-6">无</td>
-                                <td class="py-4 px-6">无负重</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div id="page3" class="page-content hidden">
-                <!-- 三、训练计划与饮食日历：第7周（减载块） -->
-                <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-purple-700 border-b-2 border-purple-400 pb-2">三、训练计划与饮食日历：第7周（减载块）</h2>
-                <p class="text-gray-600 mb-6">
-                    该阶段的目标是让身体和中枢神经系统得到充分恢复，为下一个训练周期做准备。训练强度和量均大幅降低。
-                </p>
-                <div class="overflow-x-auto mb-8 main-container">
-                    <table id="table3" class="styled-table text-sm text-gray-700 whitespace-nowrap">
-                        <thead class="text-xs uppercase">
-                            <tr>
-                                <th scope="col" class="py-3 px-6">日期</th>
-                                <th scope="col" class="py-3 px-6">碳水日类型</th>
-                                <th scope="col" class="py-3 px-6">训练计划</th>
-                                <th scope="col" class="py-3 px-6">动作</th>
-                                <th scope="col" class="py-3 px-6">组数</th>
-                                <th scope="col" class="py-3 px-6">次数</th>
-                                <th scope="col" class="py-3 px-6">重量范围 (kg)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="low-carb-day">
-                                <td class="py-4 px-6">周一</td>
-                                <td class="py-4 px-6">低碳日</td>
-                                <td class="py-4 px-6">休息或主动恢复</td>
-                                <td class="py-4 px-6">散步、拉伸或瑜伽</td>
-                                <td class="py-4 px-6">1-2组</td>
-                                <td class="py-4 px-6">无</td>
-                                <td class="py-4 px-6">无负重</td>
-                            </tr>
-                            <tr class="low-carb-day">
-                                <td class="py-4 px-6">周二</td>
-                                <td class="py-4 px-6">低碳日</td>
-                                <td class="py-4 px-6">推日</td>
-                                <td class="py-4 px-6">杠铃/哑铃卧推</td>
-                                <td class="py-4 px-6">3组</td>
-                                <td class="py-4 px-6">5-8次</td>
-                                <td class="py-4 px-6">25-30</td>
-                            </tr>
-                            <tr class="low-carb-day">
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6">三头肌下压</td>
-                                <td class="py-4 px-6">3组</td>
-                                <td class="py-4 px-6">5-8次</td>
-                                <td class="py-4 px-6">根据能完成目标次数的重量</td>
-                            </tr>
-                            <tr class="low-carb-day">
-                                <td class="py-4 px-6">周三</td>
-                                <td class="py-4 px-6">低碳日</td>
-                                <td class="py-4 px-6">休息或主动恢复</td>
-                                <td class="py-4 px-6">无</td>
-                                <td class="py-4 px-6">1-2组</td>
-                                <td class="py-4 px-6">无</td>
-                                <td class="py-4 px-6">无负重</td>
-                            </tr>
-                            <tr class="low-carb-day">
-                                <td class="py-4 px-6">周四</td>
-                                <td class="py-4 px-6">低碳日</td>
-                                <td class="py-4 px-6">拉日</td>
-                                <td class="py-4 px-6">硬拉</td>
-                                <td class="py-4 px-6">3组</td>
-                                <td class="py-4 px-6">5-8次</td>
-                                <td class="py-4 px-6">50-60</td>
-                            </tr>
-                            <tr class="low-carb-day">
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6">坐姿划船</td>
-                                <td class="py-4 px-6">3组</td>
-                                <td class="py-4 px-6">5-8次</td>
-                                <td class="py-4 px-6">根据能完成目标次数的重量</td>
-                            </tr>
-                            <tr class="low-carb-day">
-                                <td class="py-4 px-6">周五</td>
-                                <td class="py-4 px-6">低碳日</td>
-                                <td class="py-4 px-6">休息或主动恢复</td>
-                                <td class="py-4 px-6">无</td>
-                                <td class="py-4 px-6">1-2组</td>
-                                <td class="py-4 px-6">无</td>
-                                <td class="py-4 px-6">无负重</td>
-                            </tr>
-                            <tr class="low-carb-day">
-                                <td class="py-4 px-6">周六</td>
-                                <td class="py-4 px-6">低碳日</td>
-                                <td class="py-4 px-6">腿日</td>
-                                <td class="py-4 px-6">杠铃深蹲</td>
-                                <td class="py-4 px-6">3组</td>
-                                <td class="py-4 px-6">5-8次</td>
-                                <td class="py-4 px-6">35-40</td>
-                            </tr>
-                            <tr class="low-carb-day">
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6"></td>
-                                <td class="py-4 px-6">腿举</td>
-                                <td class="py-4 px-6">3组</td>
-                                <td class="py-4 px-6">5-8次</td>
-                                <td class="py-4 px-6">根据能完成目标次数的重量</td>
-                            </tr>
-                            <tr class="low-carb-day">
-                                <td class="py-4 px-6">周日</td>
-                                <td class="py-4 px-6">低碳日</td>
-                                <td class="py-4 px-6">休息或主动恢复</td>
-                                <td class="py-4 px-6">无</td>
-                                <td class="py-4 px-6">1-2组</td>
-                                <td class="py-4 px-6">无</td>
-                                <td class="py-4 px-6">无负重</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div id="page4" class="page-content hidden">
-                <!-- 四、食谱分析 -->
-                <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-green-700 border-b-2 border-green-400 pb-2">四、食谱分析</h2>
-                <p class="text-gray-600 mb-6">
-                    在碳循环饮食中，根据训练日调整碳水化合物摄入是关键。以下是高碳日和低碳日的建议食谱分析。
-                </p>
-                <div class="overflow-x-auto mb-8 main-container p-6 rounded-lg shadow-md">
-                    <h3 class="text-lg font-bold mb-2 text-gray-800">1. 训练日（高碳日）食谱分析</h3>
-                    <p class="mb-4">
-                        <strong>早餐：</strong>欣善怡麦片（高纤维、低脂、含蛋白质），搭配鸡肉和鸡蛋，提供了优质的碳水、蛋白质和健康脂肪。这部分很好。
-                    </p>
-                    <p class="mb-4">
-                        <strong>午餐：</strong>只吃肉类和蔬菜，不吃主食。这一点与高碳日的原则相悖。高碳日的主要目的就是通过摄入碳水化合物来补充肌肉糖原，为下午的训练提供能量，并促进训练后的恢复。食堂的肉菜可能难以精确计算营养成分，但缺乏主食会严重影响当日的碳水摄入总量。
-                    </p>
-                    <p class="mb-4">
-                        <strong>训前加餐：</strong>半个红薯或少量燕麦片。这是很好的训前补给，能为训练提供快速的碳水能量。
-                    </p>
-                    <p class="mb-4">
-                        <strong>训后餐/晚餐：</strong>蛋白粉加牛奶立即补充蛋白质，接着吃米饭、牛肉和生菜，这符合训练后补充糖原和蛋白质的原则。
-                    </p>
-                    <p class="mb-4">
-                        <strong>结论：</strong> 您的高碳日食谱在午餐部分存在明显缺陷。这导致您在训练日没有获得足够的碳水来支持高强度训练和肌肉恢复。建议您在午餐中加入一碗米饭或其它主食，以确保碳水摄入量达到高碳日的要求。
-                    </p>
-                    <h3 class="text-lg font-bold mt-8 mb-2 text-gray-800">2. 休息日（低碳日）食谱分析</h3>
-                    <p class="mb-4">
-                        <strong>早餐：</strong>与高碳日相同，包含麦片。这与严格的低碳日原则稍有出入，因为即使是欣善怡这种低脂麦片，也含有约66%的碳水化合物。这会增加您的碳水摄入，影响身体进入以脂肪供能的状态。
-                    </p>
-                    <p class="mb-4">
-                        <strong>午餐：</strong>只吃肉类和蔬菜或“纯肉”汉堡。这是一个很好的低碳选择，能有效控制碳水摄入。一个典型的纯肉汉堡（如麦当劳的普通汉堡）碳水化合物约为29克。一个纯牛肉饼的碳水含量会更低。
-                    </p>
-                    <p class="mb-4">
-                        <strong>有氧训练后：</strong>蛋白粉加牛奶。这是一个很好的蛋白质补充，有助于保持肌肉量。
-                    </p>
-                    <p class="mb-4">
-                        <strong>晚餐：</strong>牛肉和生菜。符合低碳日的原则。
-                    </p>
-                    <p class="mb-4">
-                        <strong>结论：</strong> 您的低碳日食谱基本可行，但在早餐部分可以进行优化。为了更有效地进入脂肪供能模式，建议将早餐中的麦片替换为全蛋、牛油果或坚果等低碳高脂或高蛋白的食物。
-                    </p>
-                </div>
-            </div>
-
-            <div id="page5" class="page-content hidden">
-                <!-- 五、训练日志 -->
-                <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-gray-700 border-b-2 border-gray-400 pb-2">五、训练日志</h2>
-                <p class="text-gray-600 mb-6">记录你的训练数据，追踪你的进步。</p>
-                <div class="main-container p-6 rounded-lg shadow-md mb-8">
-                    <!-- 表单用于添加新的训练记录 -->
-                    <form id="add-log-form" class="space-y-4">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                            <div>
-                                <label for="date" class="block text-sm font-medium text-gray-700">日期</label>
-                                <input type="date" id="date" name="date" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                            </div>
-                            <div>
-                                <label for="exercise" class="block text-sm font-medium text-gray-700">动作</label>
-                                <select id="exercise" name="exercise" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="">-- 请选择动作 --</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label for="sets" class="block text-sm font-medium text-gray-700">组数</label>
-                                <input type="number" id="sets" name="sets" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                            </div>
-                            <div>
-                                <label for="reps" class="block text-sm font-medium text-gray-700">次数</label>
-                                <input type="number" id="reps" name="reps" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                            </div>
-                            <div>
-                                <label for="weight" class="block text-sm font-medium text-gray-700">重量 (kg)</label>
-                                <input type="number" id="weight" name="weight" step="0.1" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                            </div>
-                            <div class="sm:col-span-2 lg:col-span-3">
-                                <label for="notes" class="block text-sm font-medium text-gray-700">备注</label>
-                                <input type="text" id="notes" name="notes" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                            </div>
-                        </div>
-                        <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
-                            <button type="submit" class="bg-blue-600 text-white py-2 px-6 rounded-md shadow-md hover:bg-blue-700 transition duration-300 ease-in-out w-full sm:w-auto">
-                                保存记录
-                            </button>
-                            <button type="button" id="export-button" class="bg-green-600 text-white py-2 px-6 rounded-md shadow-md hover:bg-green-700 transition duration-300 ease-in-out w-full sm:w-auto">
-                                导出当天日志 (Markdown)
-                            </button>
-                        </div>
-                    </form>
-                </div>
-
-                <!-- 体重和腰围记录表单 -->
-                <div class="main-container p-6 rounded-lg shadow-md mb-8">
-                    <h3 class="text-lg font-bold mb-4">记录你的身体数据</h3>
-                    <form id="add-body-form" class="space-y-4">
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                            <div>
-                                <label for="body-date" class="block text-sm font-medium text-gray-700">日期</label>
-                                <input type="date" id="body-date" name="body-date" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                            </div>
-                            <div>
-                                <label for="weight" class="block text-sm font-medium text-gray-700">体重 (kg)</label>
-                                <input type="number" id="body-weight" name="weight" step="0.1" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                            </div>
-                            <div>
-                                <label for="waist" class="block text-sm font-medium text-gray-700">腰围 (cm)</label>
-                                <input type="number" id="body-waist" name="waist" step="0.1" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                            </div>
-                        </div>
-                        <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
-                            <button type="submit" class="bg-blue-600 text-white py-2 px-6 rounded-md shadow-md hover:bg-blue-700 transition duration-300 ease-in-out w-full sm:w-auto">
-                                保存身体数据
-                            </button>
-                        </div>
-                    </form>
-                </div>
-                <!-- 训练记录显示表格 -->
-                <div class="overflow-x-auto mb-8 main-container">
-                    <!-- 加载指示器 -->
-                    <div id="loading-indicator" class="text-center p-4 text-gray-500">
-                        正在加载训练日志...
-                    </div>
-                    <table class="styled-table text-sm text-gray-700 whitespace-nowrap">
-                        <thead class="text-xs uppercase">
-                            <tr>
-                                <th scope="col" class="py-3 px-6">日期</th>
-                                <th scope="col" class="py-3 px-6">动作</th>
-                                <th scope="col" class="py-3 px-6">组数</th>
-                                <th scope="col" class="py-3 px-6">次数</th>
-                                <th scope="col" class="py-3 px-6">重量 (kg)</th>
-                                <th scope="col" class="py-3 px-6">备注</th>
-                                <th scope="col" class="py-3 px-6">操作</th>
-                            </tr>
-                        </thead>
-                        <tbody id="training-log-body" class="hidden">
-                            <!-- 训练记录将在这里动态生成 -->
-                        </tbody>
-                    </table>
-                </div>
-
-                 <!-- 体重和腰围记录表格 -->
-                <div class="overflow-x-auto mb-8 main-container">
-                    <div id="body-loading-indicator" class="text-center p-4 text-gray-500">
-                        正在加载身体数据...
-                    </div>
-                    <table class="styled-table text-sm text-gray-700 whitespace-nowrap">
-                        <thead class="text-xs uppercase">
-                            <tr>
-                                <th scope="col" class="py-3 px-6">日期</th>
-                                <th scope="col" class="py-3 px-6">体重 (kg)</th>
-                                <th scope="col" class="py-3 px-6">腰围 (cm)</th>
-                                <th scope="col" class="py-3 px-6">操作</th>
-                            </tr>
-                        </thead>
-                        <tbody id="body-log-body" class="hidden">
-                            <!-- 身体数据将在这里动态生成 -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
+            <p class="text-sm text-gray-500 mb-10">*注：此处重量范围为三大项的蓄能块训练重量，其他辅助动作请根据您能完成目标次数（8-12次）的重量进行选择。</p>
         </div>
-    </div>
-    
-    <script>
-        // Data and Logic
-        let storedHash = null; // This will store the 'digital signature' of the passphrase
-        let trainingLog = []; // This will store the user's training data
-        let bodyData = []; // This will store the user's body data
 
-        // UI elements
-        const loginContainer = document.getElementById('login-container');
-        const fitnessPlanContainer = document.getElementById('fitness-plan-container');
-        const input = document.getElementById('passphrase-input');
-        const setButton = document.getElementById('set-button');
-        const verifyButton = document.getElementById('verify-button');
-        const messageBox = document.getElementById('message-box');
-        const hashDisplay = document.getElementById('hash-display');
-        const statusMessage = document.getElementById('status-message');
-        const body = document.body;
-
-        const trainingLogForm = document.getElementById('add-log-form');
-        const trainingLogBody = document.getElementById('training-log-body');
-        const exportButton = document.getElementById('export-button');
-        const loadingIndicator = document.getElementById('loading-indicator');
-        const bodyDataForm = document.getElementById('add-body-form');
-        const bodyLogBody = document.getElementById('body-log-body');
-        const bodyLoadingIndicator = document.getElementById('body-loading-indicator');
-
-        // Function to simulate a hash, for demonstration only
-        function hashString(str) {
-            let hash = 0;
-            if (str.length === 0) return hash.toString();
-            for (let i = 0; i < str.length; i++) {
-                const char = str.charCodeAt(i);
-                hash = ((hash << 5) - hash) + char;
-                hash |= 0;
-            }
-            return Math.abs(hash).toString(16);
-        }
-
-        // Helper function to get the current date in Beijing Time (UTC+8)
-        function getBeijingDate() {
-            const now = new Date();
-            const utcOffset = now.getTimezoneOffset() * 60000;
-            const beijingOffset = 8 * 60 * 60000;
-            const beijingTime = new Date(now.getTime() + utcOffset + beijingOffset);
-            return beijingTime.toISOString().slice(0, 10);
-        }
-
-        // Set default date for input fields
-        document.getElementById('date').value = getBeijingDate();
-        document.getElementById('body-date').value = getBeijingDate();
-
-
-        // Logic for the login screen
-        setButton.addEventListener('click', () => {
-            const passphrase = input.value;
-            if (passphrase.length < 8) {
-                messageBox.textContent = '短语太短了，为了安全请至少输入8个字符！';
-                messageBox.classList.remove('bg-gray-100', 'bg-red-100', 'bg-green-100');
-                messageBox.classList.add('bg-red-100', 'text-red-700');
-                statusMessage.textContent = '设置失败';
-                statusMessage.classList.remove('text-green-700', 'text-red-700');
-                statusMessage.classList.add('text-red-700');
-                body.classList.remove('gradient-bg-match', 'gradient-bg-mismatch');
-                body.classList.add('gradient-bg-start');
-                return;
-            }
+        <div id="page3" class="page-content hidden">
+            <!-- 三、训练计划与饮食日历：第7周（减载块） -->
+            <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-blue-700 border-b-2 border-blue-400 pb-2">三、训练计划与饮食日历：第7周（减载块）</h2>
+            <p class="text-gray-600 mb-6">
+                本周是减载期，旨在让身体从长期高强度训练中恢复。训练强度和训练量都将大幅降低。这周的目标是主动恢复，准备进入下一个训练周期。
+            </p>
             
-            // Generate a hash of the personal passphrase
-            storedHash = hashString(passphrase);
+            <!-- 响应式表格容器，使用 overflow-x-auto 来在小屏幕上实现水平滚动 -->
+            <div class="overflow-x-auto mb-8 main-container">
+                <table id="table3" class="styled-table text-sm text-gray-700 whitespace-nowrap">
+                    <thead class="text-xs uppercase">
+                        <tr>
+                            <th scope="col" class="py-3 px-6">日期</th>
+                            <th scope="col" class="py-3 px-6">碳水日类型</th>
+                            <th scope="col" class="py-3 px-6">训练计划</th>
+                            <th scope="col" class="py-3 px-6">动作</th>
+                            <th scope="col" class="py-3 px-6">组数</th>
+                            <th scope="col" class="py-3 px-6">次数</th>
+                            <th scope="col" class="py-3 px-6">重量范围 (kg)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="low-carb-day">
+                            <td class="py-4 px-6">周一</td>
+                            <td class="py-4 px-6">低碳日</td>
+                            <td class="py-4 px-6">休息或主动恢复</td>
+                            <td class="py-4 px-6">散步、拉伸或瑜伽</td>
+                            <td class="py-4 px-6">1-2组</td>
+                            <td class="py-4 px-6">无</td>
+                            <td class="py-4 px-6">无负重</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6">周二</td>
+                            <td class="py-4 px-6">高碳日</td>
+                            <td class="py-4 px-6">推日 (胸、肩前、三头)</td>
+                            <td class="py-4 px-6">杠铃/哑铃卧推</td>
+                            <td class="py-4 px-6">2-3组</td>
+                            <td class="py-4 px-6">6-8次</td>
+                            <td class="py-4 px-6">45.5-52.5</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">哑铃肩上推举</td>
+                            <td class="py-4 px-6">2-3组</td>
+                            <td class="py-4 px-6">6-8次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">上斜杠铃卧推</td>
+                            <td class="py-4 px-6">2-3组</td>
+                            <td class="py-4 px-6">6-8次</td>
+                            <td class="py-4 px-6">26-30</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">三头肌下压</td>
+                            <td class="py-4 px-6">2-3组</td>
+                            <td class="py-4 px-6">6-8次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="low-carb-day">
+                            <td class="py-4 px-6">周三</td>
+                            <td class="py-4 px-6">低碳日</td>
+                            <td class="py-4 px-6">休息或主动恢复</td>
+                            <td class="py-4 px-6">散步、拉伸或瑜伽</td>
+                            <td class="py-4 px-6">1-2组</td>
+                            <td class="py-4 px-6">无</td>
+                            <td class="py-4 px-6">无负重</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6">周四</td>
+                            <td class="py-4 px-6">高碳日</td>
+                            <td class="py-4 px-6">拉日 (背、肩中后、二头)</td>
+                            <td class="py-4 px-6">硬拉</td>
+                            <td class="py-4 px-6">2-3组</td>
+                            <td class="py-4 px-6">6-8次</td>
+                            <td class="py-4 px-6">91-105</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">引体向上或高位下拉</td>
+                            <td class="py-4 px-6">2-3组</td>
+                            <td class="py-4 px-6">6-8次</td>
+                            <td class="py-4 px-6">自身体重或负重</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">杠铃/哑铃划船</td>
+                            <td class="py-4 px-6">2-3组</td>
+                            <td class="py-4 px-6">6-8次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">坐姿划船</td>
+                            <td class="py-4 px-6">2-3组</td>
+                            <td class="py-4 px-6">6-8次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="low-carb-day">
+                            <td class="py-4 px-6">周五</td>
+                            <td class="py-4 px-6">低碳日</td>
+                            <td class="py-4 px-6">休息或主动恢复</td>
+                            <td class="py-4 px-6">散步、拉伸或瑜伽</td>
+                            <td class="py-4 px-6">1-2组</td>
+                            <td class="py-4 px-6">无</td>
+                            <td class="py-4 px-6">无负重</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6">周六</td>
+                            <td class="py-4 px-6">高碳日</td>
+                            <td class="py-4 px-6">腿日 (股四头、腘绳肌、臀)</td>
+                            <td class="py-4 px-6">杠铃深蹲</td>
+                            <td class="py-4 px-6">2-3组</td>
+                            <td class="py-4 px-6">6-8次</td>
+                            <td class="py-4 px-6">65-75</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">腿举</td>
+                            <td class="py-4 px-6">2-3组</td>
+                            <td class="py-4 px-6">6-8次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">EZ杆窄颈者</td>
+                            <td class="py-4 px-6">2-3组</td>
+                            <td class="py-4 px-6">6-8次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">绳索颈后臂屈伸(AEL)</td>
+                            <td class="py-4 px-6">2-3组</td>
+                            <td class="py-4 px-6">6-8次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">双手牧师凳弯举(AEL)</td>
+                            <td class="py-4 px-6">2-3组</td>
+                            <td class="py-4 px-6">6-8次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="low-carb-day">
+                            <td class="py-4 px-6">周日</td>
+                            <td class="py-4 px-6">低碳日</td>
+                            <td class="py-4 px-6">休息或主动恢复</td>
+                            <td class="py-4 px-6">散步、拉伸或瑜伽</td>
+                            <td class="py-4 px-6">1-2组</td>
+                            <td class="py-4 px-6">无</td>
+                            <td class="py-4 px-6">无负重</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="text-sm text-gray-500 mb-10">*注：此处重量范围为三大项的减载训练重量，其他辅助动作请根据您能完成目标次数（6-8次）的重量进行选择。</p>
+        </div>
+
+        <div id="page4" class="page-content hidden">
+            <!-- 四、食谱分析 -->
+            <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-blue-700 border-b-2 border-blue-400 pb-2">四、食谱分析</h2>
+            <p class="text-gray-600 mb-6">
+                碳循环饮食是一种有效的策略，可以帮助你最大化训练效果和减少体脂。高碳日旨在为高强度训练提供燃料，并补充糖原；低碳日则有助于提高身体燃烧脂肪的效率。
+            </p>
             
-            // For this demo, we'll use a placeholder data structure
-            trainingLog = [
-                { date: '2023-10-25', exercise: '杠铃卧推', sets: 4, reps: 10, weight: 60, notes: '感觉良好，可以加重' },
-                { date: '2023-10-26', exercise: '硬拉', sets: 5, reps: 5, weight: 110, notes: '核心收紧，动作标准' },
-                { date: '2023-10-28', exercise: '杠铃深蹲', sets: 4, reps: 8, weight: 70, notes: '下肢力量进步明显' }
-            ];
-            bodyData = [
-                { date: '2023-10-25', weight: 75.5, waist: 85 },
-                { date: '2023-11-01', weight: 75.0, waist: 84.5 },
-                { date: '2023-11-08', weight: 74.8, waist: 84.0 }
-            ];
-
-            // Update UI for verification step
-            hashDisplay.textContent = `存储的“数字签名” (哈希值): ${storedHash}`;
-            hashDisplay.classList.remove('hidden');
-
-            setButton.disabled = true;
-            setButton.classList.remove('bg-indigo-600', 'hover:bg-indigo-700');
-            setButton.classList.add('bg-gray-400', 'cursor-not-allowed');
-
-            verifyButton.disabled = false;
-            verifyButton.classList.remove('bg-gray-400', 'hover:bg-gray-500');
-            verifyButton.classList.add('bg-green-600', 'hover:bg-green-700');
-
-            input.value = '';
-            messageBox.textContent = '“数字签名”已存储。请再次输入你的短语以进行验证。';
-            messageBox.classList.remove('bg-gray-100', 'bg-red-100');
-            messageBox.classList.add('bg-green-100', 'text-green-700');
-            statusMessage.textContent = '签名已创建';
-            statusMessage.classList.remove('text-red-700');
-            statusMessage.classList.add('text-green-700');
-            body.classList.remove('gradient-bg-start');
-            body.classList.add('gradient-bg-match');
-        });
-
-        verifyButton.addEventListener('click', () => {
-            const passphrase = input.value;
-            const enteredHash = hashString(passphrase);
-
-            if (enteredHash === storedHash) {
-                // Success: Hide login, show fitness plan
-                loginContainer.classList.add('hidden');
-                fitnessPlanContainer.classList.remove('hidden');
-                body.classList.remove('gradient-bg-start', 'gradient-bg-mismatch');
-                body.style.backgroundColor = '#e5e7eb';
+            <div class="space-y-6">
+                <!-- 高碳水日 -->
+                <div class="bg-red-50 p-6 rounded-lg border border-red-200">
+                    <h3 class="text-xl font-semibold mb-2 text-red-700">高碳水日（训练日）</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2">
+                        <li><strong>饮食目标：</strong>高碳水化合物、中等蛋白质、低脂肪。</li>
+                        <li><strong>碳水化合物：</strong>主要来源于米饭、面条、燕麦、土豆等复合碳水，以提供持久能量。训练前后可选择香蕉、葡萄干等快速吸收的碳水。</li>
+                        <li><strong>蛋白质：</strong>鸡胸肉、鱼肉、瘦牛肉、鸡蛋、乳清蛋白等，确保每餐都有充足摄入以支持肌肉修复和生长。</li>
+                        <li><strong>脂肪：</strong>保持低摄入，主要来自天然食物中的少量脂肪。</li>
+                        <li><strong>建议：</strong>全天碳水摄入量约占总热量的50-60%，蛋白质30%，脂肪10-20%。</li>
+                    </ul>
+                </div>
                 
-                // Immediately render the loaded data
-                renderTrainingLog();
-                renderBodyData();
-            } else {
-                // Failure: Show error
-                messageBox.textContent = '验证失败。输入的短语与签名不匹配。';
-                messageBox.classList.remove('bg-green-100', 'bg-gray-100');
-                messageBox.classList.add('bg-red-100', 'text-red-700');
-                statusMessage.textContent = '验证失败';
-                statusMessage.classList.remove('text-green-700');
-                statusMessage.classList.add('text-red-700');
-                body.classList.remove('gradient-bg-match');
-                body.classList.add('gradient-bg-mismatch');
-            }
-        });
+                <!-- 低碳水日 -->
+                <div class="bg-green-50 p-6 rounded-lg border border-green-200">
+                    <h3 class="text-xl font-semibold mb-2 text-green-700">低碳水日（休息日）</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2">
+                        <li><strong>饮食目标：</strong>低碳水化合物、高蛋白质、中等脂肪。</li>
+                        <li><strong>碳水化合物：</strong>主要来自蔬菜、少量水果和坚果，避免高糖分和精制谷物。</li>
+                        <li><strong>蛋白质：</strong>与高碳日类似，保持高摄入以保护肌肉。</li>
+                        <li><strong>脂肪：</strong>适度增加健康脂肪的摄入，如牛油果、坚果、橄榄油等，作为主要能量来源。</li>
+                        <li><strong>建议：</strong>全天碳水摄入量约占总热量的10-20%，蛋白质40-50%，脂肪30-40%。</li>
+                    </ul>
+                </div>
 
-        // Functions from the original file (for the fitness plan UI)
-        function showPage(pageId) {
+                <!-- 碳水循环原理 -->
+                <div class="p-6 bg-gray-100 rounded-lg border border-gray-300">
+                    <h3 class="text-xl font-semibold mb-2 text-gray-800">碳水循环核心原理</h3>
+                    <p class="text-gray-700">
+                        碳水循环通过智能地调控碳水化合物摄入，使身体在训练日拥有足够的燃料，同时在休息日迫使身体切换到以脂肪为主要能量来源的模式，从而实现增肌和减脂的双重目标。
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 训练日志页面，初始隐藏 -->
+        <div id="page5" class="page-content hidden">
+            <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-blue-700 border-b-2 border-blue-400 pb-2">训练日志</h2>
+            <div class="mb-6 main-container p-4">
+                <form id="training-log-form" class="space-y-4">
+                    <div>
+                        <label for="password_training" class="block text-sm font-medium text-gray-700">密码</label>
+                        <input type="password" id="password_training" name="password_training" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-3 py-2">
+                    </div>
+                    <div>
+                        <label for="date_training" class="block text-sm font-medium text-gray-700">日期</label>
+                        <input type="text" id="date_training" name="date_training" readonly class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100 px-3 py-2">
+                    </div>
+                    <div>
+                        <label for="exercise" class="block text-sm font-medium text-gray-700">动作</label>
+                        <select id="exercise" name="exercise" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-3 py-2">
+                            <option value="">请选择一个动作</option>
+                        </select>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div>
+                            <label for="sets" class="block text-sm font-medium text-gray-700">组数</label>
+                            <input type="number" id="sets" name="sets" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-3 py-2">
+                        </div>
+                        <div>
+                            <label for="reps" class="block text-sm font-medium text-gray-700">次数</label>
+                            <input type="number" id="reps" name="reps" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-3 py-2">
+                        </div>
+                        <div>
+                            <label for="weight" class="block text-sm font-medium text-gray-700">重量 (kg)</label>
+                            <input type="number" step="0.1" id="weight" name="weight" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-3 py-2">
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">添加记录</button>
+                </form>
+            </div>
+            <div class="overflow-x-auto main-container p-4">
+                <table id="training-log-table" class="styled-table text-sm text-gray-700">
+                    <thead class="bg-gray-200">
+                        <tr>
+                            <th class="py-3 px-6">日期</th>
+                            <th class="py-3 px-6">动作</th>
+                            <th class="py-3 px-6">组数</th>
+                            <th class="py-3 px-6">次数</th>
+                            <th class="py-3 px-6">重量 (kg)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 日志数据将动态插入到这里 -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 体重和腰围日志页面，初始隐藏 -->
+        <div id="page6" class="page-content hidden">
+            <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-blue-700 border-b-2 border-blue-400 pb-2">体重和腰围日志</h2>
+            <div class="mb-6 main-container p-4">
+                <form id="body-log-form" class="space-y-4">
+                    <div>
+                        <label for="password_body" class="block text-sm font-medium text-gray-700">密码</label>
+                        <input type="password" id="password_body" name="password_body" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-3 py-2">
+                    </div>
+                    <div>
+                        <label for="date_body" class="block text-sm font-medium text-gray-700">日期</label>
+                        <input type="text" id="date_body" name="date_body" readonly class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100 px-3 py-2">
+                    </div>
+                    <div>
+                        <label for="weight_body" class="block text-sm font-medium text-gray-700">体重 (kg)</label>
+                        <input type="number" step="0.1" id="weight_body" name="weight_body" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-3 py-2">
+                    </div>
+                    <div>
+                        <label for="waist_body" class="block text-sm font-medium text-gray-700">腰围 (cm)</label>
+                        <input type="number" step="0.1" id="waist_body" name="waist_body" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-3 py-2">
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">添加记录</button>
+                </form>
+            </div>
+            <div class="overflow-x-auto main-container p-4">
+                <table id="body-log-table" class="styled-table text-sm text-gray-700">
+                    <thead class="bg-gray-200">
+                        <tr>
+                            <th class="py-3 px-6">日期</th>
+                            <th class="py-3 px-6">体重 (kg)</th>
+                            <th class="py-3 px-6">腰围 (cm)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 日志数据将动态插入到这里 -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 密码验证模态框 -->
+        <div id="passwordModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h3 class="text-xl font-bold mb-4 text-gray-800">请输入密码</h3>
+                <input type="password" id="passwordInput" class="w-full px-3 py-2 mb-4 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                <p id="passwordError" class="text-red-500 mb-4 hidden">密码错误！</p>
+                <button id="passwordSubmit" class="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">确认</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 全局变量，用于存储当前尝试打开的页面
+        let currentPageToOpen = '';
+        
+        // 获取模态框元素
+        const passwordModal = document.getElementById("passwordModal");
+        const passwordInput = document.getElementById("passwordInput");
+        const passwordSubmit = document.getElementById("passwordSubmit");
+        const passwordError = document.getElementById("passwordError");
+        const span = document.getElementsByClassName("close")[0];
+        
+        // 当用户点击 <span> (x) 按钮时，关闭模态框
+        span.onclick = function() {
+            passwordModal.style.display = "none";
+            passwordError.classList.add('hidden');
+            passwordInput.value = '';
+        }
+        
+        // 当用户点击模态框外部时，关闭模态框
+        window.onclick = function(event) {
+            if (event.target == passwordModal) {
+                passwordModal.style.display = "none";
+                passwordError.classList.add('hidden');
+                passwordInput.value = '';
+            }
+        }
+        
+        // 显示密码模态框，并设置要打开的页面
+        function showPasswordModal(pageId) {
+            currentPageToOpen = pageId;
+            passwordModal.style.display = "block";
+            passwordInput.focus();
+        }
+        
+        // 处理密码提交
+        passwordSubmit.onclick = function() {
+            const password = passwordInput.value;
+            // 获取对应页面的密码输入框ID
+            const passwordFieldId = currentPageToOpen === 'page5' ? 'password_training' : 'password_body';
+            const passwordField = document.getElementById(passwordFieldId);
+            
+            // 验证密码，这里使用简单的本地存储作为密码绑定
+            if (localStorage.getItem(`password_${currentPageToOpen}`) === password) {
+                // 密码正确
+                passwordModal.style.display = "none";
+                passwordError.classList.add('hidden');
+                showPage(currentPageToOpen, password);
+                passwordInput.value = '';
+            } else {
+                // 密码错误
+                passwordError.classList.remove('hidden');
+            }
+        }
+        
+        // 显示页面函数，现在接受一个可选的密码参数
+        function showPage(pageId, password = null) {
             const pages = document.querySelectorAll('.page-content');
             pages.forEach(page => {
-                page.classList.remove('active');
                 page.classList.add('hidden');
+                page.classList.remove('active');
             });
-            const activePage = document.getElementById(pageId);
-            if (activePage) {
-                activePage.classList.remove('hidden');
-                activePage.classList.add('active');
+            const selectedPage = document.getElementById(pageId);
+            if (selectedPage) {
+                selectedPage.classList.remove('hidden');
+                // 使用setTimeout添加淡入效果，而不是立即显示
+                setTimeout(() => {
+                    selectedPage.classList.add('active');
+                }, 10);
             }
-            const buttons = document.querySelectorAll('.nav-button');
-            buttons.forEach(button => {
+            const navButtons = document.querySelectorAll('.nav-button');
+            navButtons.forEach(button => {
                 button.classList.remove('active-nav');
             });
-            event.target.classList.add('active-nav');
+            const selectedButton = document.querySelector(`[onclick*="${pageId}"]`);
+            if (selectedButton) {
+                selectedButton.classList.add('active-nav');
+            }
+
+            // 如果页面是日志页面，并且有密码，则加载数据
+            if (pageId === 'page5' && password) {
+                loadTrainingLog(password);
+                renderTrainingLog();
+            } else if (pageId === 'page6' && password) {
+                loadBodyLog(password);
+                renderBodyLog();
+            }
+            
+            // 如果页面是日志页面，并且没有密码，弹出模态框
+            if ((pageId === 'page5' || pageId === 'page6') && !password) {
+                showPasswordModal(pageId);
+            } else {
+                // 更新日期
+                updateBeijingTime();
+            }
         }
 
-        // Training log related functions
+        // 获取并显示北京时间
+        function updateBeijingTime() {
+            const now = new Date();
+            const beijingTime = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Shanghai"}));
+            const year = beijingTime.getFullYear();
+            const month = (beijingTime.getMonth() + 1).toString().padStart(2, '0');
+            const day = beijingTime.getDate().toString().padStart(2, '0');
+            const hours = beijingTime.getHours().toString().padStart(2, '0');
+            const minutes = beijingTime.getMinutes().toString().padStart(2, '0');
+            const seconds = beijingTime.getSeconds().toString().padStart(2, '0');
+            const dateString = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+
+            const dateTrainingInput = document.getElementById('date_training');
+            const dateBodyInput = document.getElementById('date_body');
+            if (dateTrainingInput) dateTrainingInput.value = dateString;
+            if (dateBodyInput) dateBodyInput.value = dateString;
+        }
+
+        // --- 训练日志功能 ---
+        const TRAINING_LOG_KEY_PREFIX = 'trainingLog_';
+        let trainingLogData = [];
+
+        function saveTrainingLog(password) {
+            localStorage.setItem(TRAINING_LOG_KEY_PREFIX + password, JSON.stringify(trainingLogData));
+        }
+
+        function loadTrainingLog(password) {
+            const storedData = localStorage.getItem(TRAINING_LOG_KEY_PREFIX + password);
+            trainingLogData = storedData ? JSON.parse(storedData) : [];
+        }
+
         function renderTrainingLog() {
-            const tbody = document.getElementById('training-log-body');
-            tbody.innerHTML = '';
-            if (trainingLog.length > 0) {
-                loadingIndicator.classList.add('hidden');
-                tbody.classList.remove('hidden');
-                trainingLog.forEach((log, index) => {
-                    const row = document.createElement('tr');
-                    row.className = 'bg-white border-b hover:bg-gray-50';
-                    row.innerHTML = `
-                        <td class="py-4 px-6">${log.date}</td>
-                        <td class="py-4 px-6">${log.exercise}</td>
-                        <td class="py-4 px-6">${log.sets}</td>
-                        <td class="py-4 px-6">${log.reps}</td>
-                        <td class="py-4 px-6">${log.weight}</td>
-                        <td class="py-4 px-6">${log.notes}</td>
-                        <td class="py-4 px-6">
-                            <button class="font-medium text-red-600 hover:underline" onclick="deleteLog(${index})">删除</button>
-                        </td>
-                    `;
-                    tbody.appendChild(row);
-                });
-            } else {
-                loadingIndicator.textContent = '尚无训练记录。';
-            }
-        }
-        
-        function deleteLog(index) {
-            trainingLog.splice(index, 1);
-            renderTrainingLog();
+            const tableBody = document.getElementById('training-log-table').querySelector('tbody');
+            tableBody.innerHTML = ''; // 清空现有数据
+            trainingLogData.forEach(entry => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-gray-100 transition-colors duration-200';
+                row.innerHTML = `
+                    <td class="py-4 px-6">${entry.date}</td>
+                    <td class="py-4 px-6">${entry.exercise}</td>
+                    <td class="py-4 px-6">${entry.sets}</td>
+                    <td class="py-4 px-6">${entry.reps}</td>
+                    <td class="py-4 px-6">${entry.weight}</td>
+                `;
+                tableBody.prepend(row); // 插入到表格最前面
+            });
         }
 
-        trainingLogForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-            const newLog = {
-                date: trainingLogForm.date.value,
-                exercise: trainingLogForm.exercise.value,
-                sets: trainingLogForm.sets.value,
-                reps: trainingLogForm.reps.value,
-                weight: trainingLogForm.weight.value,
-                notes: trainingLogForm.notes.value
+        // --- 体重和腰围日志功能 ---
+        const BODY_LOG_KEY_PREFIX = 'bodyLog_';
+        let bodyLogData = [];
+
+        function saveBodyLog(password) {
+            localStorage.setItem(BODY_LOG_KEY_PREFIX + password, JSON.stringify(bodyLogData));
+        }
+
+        function loadBodyLog(password) {
+            const storedData = localStorage.getItem(BODY_LOG_KEY_PREFIX + password);
+            bodyLogData = storedData ? JSON.parse(storedData) : [];
+        }
+
+        function renderBodyLog() {
+            const tableBody = document.getElementById('body-log-table').querySelector('tbody');
+            tableBody.innerHTML = ''; // 清空现有数据
+            bodyLogData.forEach(entry => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-gray-100 transition-colors duration-200';
+                row.innerHTML = `
+                    <td class="py-4 px-6">${entry.date}</td>
+                    <td class="py-4 px-6">${entry.weight}</td>
+                    <td class="py-4 px-6">${entry.waist}</td>
+                `;
+                tableBody.prepend(row); // 插入到表格最前面
+            });
+        }
+
+        // 训练日志表单提交事件
+        document.getElementById('training-log-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const form = e.target;
+            const password = form.password_training.value;
+            const newEntry = {
+                date: form.date_training.value,
+                exercise: form.exercise.value,
+                sets: form.sets.value,
+                reps: form.reps.value,
+                weight: form.weight.value
             };
-            trainingLog.push(newLog);
+            trainingLogData.push(newEntry);
+            saveTrainingLog(password);
             renderTrainingLog();
-            trainingLogForm.reset();
+            this.reset();
+            // 重新设置日期
+            updateBeijingTime();
         });
 
-        // Body data related functions
-        function renderBodyData() {
-            const tbody = document.getElementById('body-log-body');
-            tbody.innerHTML = '';
-            if (bodyData.length > 0) {
-                bodyLoadingIndicator.classList.add('hidden');
-                tbody.classList.remove('hidden');
-                bodyData.forEach((data, index) => {
-                    const row = document.createElement('tr');
-                    row.className = 'bg-white border-b hover:bg-gray-50';
-                    row.innerHTML = `
-                        <td class="py-4 px-6">${data.date}</td>
-                        <td class="py-4 px-6">${data.weight} kg</td>
-                        <td class="py-4 px-6">${data.waist} cm</td>
-                        <td class="py-4 px-6">
-                            <button class="font-medium text-red-600 hover:underline" onclick="deleteBodyData(${index})">删除</button>
-                        </td>
-                    `;
-                    tbody.appendChild(row);
-                });
-            } else {
-                bodyLoadingIndicator.textContent = '尚无身体数据记录。';
-            }
-        }
-
-        function deleteBodyData(index) {
-            bodyData.splice(index, 1);
-            renderBodyData();
-        }
-
-        bodyDataForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-            const newBodyData = {
-                date: bodyDataForm.date.value,
-                weight: bodyDataForm['body-weight'].value,
-                waist: bodyDataForm['body-waist'].value
+        // 体重和腰围日志表单提交事件
+        document.getElementById('body-log-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const form = e.target;
+            const password = form.password_body.value;
+            const newEntry = {
+                date: form.date_body.value,
+                weight: form.weight_body.value,
+                waist: form.waist_body.value
             };
-            bodyData.push(newBodyData);
-            renderBodyData();
-            bodyDataForm.reset();
+            bodyLogData.push(newEntry);
+            saveBodyLog(password);
+            renderBodyLog();
+            this.reset();
+            // 重新设置日期
+            updateBeijingTime();
         });
 
-        // Dynamic population of exercise select box
+        // 页面加载完成后执行的初始化
         document.addEventListener('DOMContentLoaded', () => {
+            // 动态填充动作下拉列表
             const exerciseSet = new Set();
             const tables = document.querySelectorAll('#table1, #table2, #table3');
+            
             tables.forEach(table => {
                 const rows = table.querySelectorAll('tbody tr');
                 rows.forEach(row => {
@@ -1126,7 +1229,11 @@
                 option.textContent = exercise;
                 exerciseSelect.appendChild(option);
             });
+            
+            // 初始化显示第一个页面
+            showPage('page1');
         });
+
     </script>
 
 </body>
