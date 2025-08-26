@@ -107,7 +107,7 @@
         <h1 class="text-3xl sm:text-4xl font-extrabold text-center mb-4 text-gray-900">长期力量训练与碳循环饮食综合规划</h1>
         <p class="text-center text-lg sm:text-xl text-gray-600 mb-8">可循环的块状周期化模型</p>
 
-        <!-- 导航按钮容器 -->
+        <!-- 导航按钮容器，在小屏幕上允许换行 -->
         <div class="flex flex-wrap justify-center space-x-2 sm:space-x-4 mb-10">
             <button class="nav-button bg-gray-200 text-gray-800 py-2 px-4 focus:outline-none focus:ring-2 focus:ring-gray-500 active-nav" onclick="showPage('page1')">训练计划 (1-3周)</button>
             <button class="nav-button bg-gray-200 text-gray-800 py-2 px-4 focus:outline-none focus:ring-2 focus:ring-gray-500" onclick="showPage('page2')">训练计划 (4-6周)</button>
@@ -123,9 +123,9 @@
                 该阶段的目标是增加肌肉体积和工作容量，为后续的力量提升奠定基础。训练特点是中等强度、高训练量。请将高碳水日与训练日同步，以确保肌肉糖原得到充足补充。
             </p>
             
-            <!-- 响应式表格容器 -->
+            <!-- 响应式表格容器，使用 overflow-x-auto 来在小屏幕上实现水平滚动 -->
             <div class="overflow-x-auto mb-8 main-container">
-                <table class="styled-table text-sm text-gray-700">
+                <table class="styled-table text-sm text-gray-700 whitespace-nowrap">
                     <thead class="text-xs uppercase">
                         <tr>
                             <th scope="col" class="py-3 px-6">日期</th>
@@ -376,9 +376,9 @@
                 该阶段的目标是将肌肉体积转化为绝对力量。训练特点是高强度、中等训练量。每组的重复次数将减少，而负重将增加。
             </p>
 
-            <!-- 响应式表格容器 -->
+            <!-- 响应式表格容器，使用 overflow-x-auto 来在小屏幕上实现水平滚动 -->
             <div class="overflow-x-auto mb-8 main-container">
-                <table class="styled-table text-sm text-gray-700">
+                <table class="styled-table text-sm text-gray-700 whitespace-nowrap">
                     <thead class="text-xs uppercase">
                         <tr>
                             <th scope="col" class="py-3 px-6">日期</th>
@@ -629,9 +629,9 @@
                 该阶段旨在让身体从前6周的训练积累中恢复，并为下一个训练循环做准备。训练特点是极低强度、极低训练量。
             </p>
 
-            <!-- 响应式表格容器 -->
+            <!-- 响应式表格容器，使用 overflow-x-auto 来在小屏幕上实现水平滚动 -->
             <div class="overflow-x-auto mb-8 main-container">
-                <table class="styled-table text-sm text-gray-700">
+                <table class="styled-table text-sm text-gray-700 whitespace-nowrap">
                     <thead class="text-xs uppercase">
                         <tr>
                             <th scope="col" class="py-3 px-6">日期</th>
@@ -883,7 +883,7 @@
             </p>
             
             <div class="overflow-x-auto mb-8 main-container">
-                <table class="styled-table text-sm text-gray-700">
+                <table class="styled-table text-sm text-gray-700 whitespace-nowrap">
                     <thead class="text-xs uppercase">
                         <tr>
                             <th scope="col" class="py-3 px-6">日期</th>
