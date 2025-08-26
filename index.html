@@ -96,45 +96,6 @@
             opacity: 1;
             transform: translateY(0);
         }
-
-        /* 模态框样式 */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgb(0,0,0);
-            background-color: rgba(0,0,0,0.4);
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 400px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
-        
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
     </style>
 </head>
 <body class="p-4 sm:p-8">
@@ -153,9 +114,7 @@
             <button class="nav-button bg-gray-200 text-gray-800 py-2 px-4 focus:outline-none focus:ring-2 focus:ring-gray-500" onclick="showPage('page3')">训练计划 (第7周)</button>
             <button class="nav-button bg-gray-200 text-gray-800 py-2 px-4 focus:outline-none focus:ring-2 focus:ring-gray-500" onclick="showPage('page4')">食谱分析</button>
             <!-- 新增的训练日志按钮 -->
-            <button class="nav-button bg-gray-200 text-gray-800 py-2 px-4 focus:outline-none focus:ring-2 focus:ring-gray-500" onclick="showPasswordModal('page5')">训练日志</button>
-            <!-- 新增的体重和腰围日志按钮 -->
-            <button class="nav-button bg-gray-200 text-gray-800 py-2 px-4 focus:outline-none focus:ring-2 focus:ring-gray-500" onclick="showPasswordModal('page6')">体重和腰围日志</button>
+            <button class="nav-button bg-gray-200 text-gray-800 py-2 px-4 focus:outline-none focus:ring-2 focus:ring-gray-500" onclick="showPage('page5')">训练日志</button>
         </div>
 
         <!-- 页面内容容器 -->
@@ -418,7 +377,7 @@
             <p class="text-gray-600 mb-6">
                 该阶段的目标是将肌肉体积转化为绝对力量。训练特点是高强度、中等训练量。每组的重复次数将减少，而负重将增加。
             </p>
-            
+
             <!-- 响应式表格容器，使用 overflow-x-auto 来在小屏幕上实现水平滚动 -->
             <div class="overflow-x-auto mb-8 main-container">
                 <table id="table2" class="styled-table text-sm text-gray-700 whitespace-nowrap">
@@ -426,7 +385,7 @@
                         <tr>
                             <th scope="col" class="py-3 px-6">日期</th>
                             <th scope="col" class="py-3 px-6">碳水日类型</th>
-                            <th scope="col" class="py-3 px-6">训练计划</th>
+                            <th scope="col" class="col" class="py-3 px-6">训练计划</th>
                             <th scope="col" class="py-3 px-6">动作</th>
                             <th scope="col" class="py-3 px-6">组数</th>
                             <th scope="col" class="py-3 px-6">次数</th>
@@ -468,7 +427,7 @@
                             <td class="py-4 px-6">上斜杠铃卧推</td>
                             <td class="py-4 px-6">3组</td>
                             <td class="py-4 px-6">3-5次</td>
-                            <td class="py-4 px-6">33-38</td>
+                            <td class="py-4 px-6">32-36</td>
                         </tr>
                         <tr class="high-carb-day">
                             <td class="py-4 px-6"></td>
@@ -494,7 +453,7 @@
                             <td class="py-4 px-6"></td>
                             <td class="py-4 px-6">粗握距超窄握推/臂屈伸</td>
                             <td class="py-4 px-6">2-4组</td>
-                            <td class="py-4 px-6">3-5次</td>
+                            <td class="py-4 px-6">8-12次</td>
                             <td class="py-4 px-6">根据能完成目标次数的重量</td>
                         </tr>
                         <tr class="high-carb-day">
@@ -522,7 +481,7 @@
                             <td class="py-4 px-6">硬拉</td>
                             <td class="py-4 px-6">4组</td>
                             <td class="py-4 px-6">3-5次</td>
-                            <td class="py-4 px-6">106-120</td>
+                            <td class="py-4 px-6">112-126</td>
                         </tr>
                         <tr class="high-carb-day">
                             <td class="py-4 px-6"></td>
@@ -594,7 +553,7 @@
                             <td class="py-4 px-6">杠铃深蹲</td>
                             <td class="py-4 px-6">4组</td>
                             <td class="py-4 px-6">3-5次</td>
-                            <td class="py-4 px-6">80-90</td>
+                            <td class="py-4 px-6">72-84</td>
                         </tr>
                         <tr class="high-carb-day">
                             <td class="py-4 px-6"></td>
@@ -662,16 +621,16 @@
                     </tbody>
                 </table>
             </div>
-            <p class="text-sm text-gray-500 mb-10">*注：此处重量范围为三大项的蓄能块训练重量，其他辅助动作请根据您能完成目标次数（8-12次）的重量进行选择。</p>
+            <p class="text-sm text-gray-500 mb-10">*注：此处重量范围为三大项的力量块训练重量，其他辅助动作请根据您能完成目标次数（3-5次）的重量进行选择。</p>
         </div>
 
         <div id="page3" class="page-content hidden">
-            <!-- 三、训练计划与饮食日历：第7周（减载块） -->
-            <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-blue-700 border-b-2 border-blue-400 pb-2">三、训练计划与饮食日历：第7周（减载块）</h2>
+            <!-- 三、训练计划与饮食日历：第7周（减载周） -->
+            <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-blue-700 border-b-2 border-blue-400 pb-2">三、训练计划与饮食日历：第7周（减载周）</h2>
             <p class="text-gray-600 mb-6">
-                本周是减载期，旨在让身体从长期高强度训练中恢复。训练强度和训练量都将大幅降低。这周的目标是主动恢复，准备进入下一个训练周期。
+                该阶段旨在让身体从前6周的训练积累中恢复，并为下一个训练循环做准备。训练特点是极低强度、极低训练量。
             </p>
-            
+
             <!-- 响应式表格容器，使用 overflow-x-auto 来在小屏幕上实现水平滚动 -->
             <div class="overflow-x-auto mb-8 main-container">
                 <table id="table3" class="styled-table text-sm text-gray-700 whitespace-nowrap">
@@ -701,17 +660,17 @@
                             <td class="py-4 px-6">高碳日</td>
                             <td class="py-4 px-6">推日 (胸、肩前、三头)</td>
                             <td class="py-4 px-6">杠铃/哑铃卧推</td>
-                            <td class="py-4 px-6">2-3组</td>
-                            <td class="py-4 px-6">6-8次</td>
-                            <td class="py-4 px-6">45.5-52.5</td>
+                            <td class="py-4 px-6">2组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">26-36</td>
                         </tr>
                         <tr class="high-carb-day">
                             <td class="py-4 px-6"></td>
                             <td class="py-4 px-6"></td>
                             <td class="py-4 px-6"></td>
                             <td class="py-4 px-6">哑铃肩上推举</td>
-                            <td class="py-4 px-6">2-3组</td>
-                            <td class="py-4 px-6">6-8次</td>
+                            <td class="py-4 px-6">2组</td>
+                            <td class="py-4 px-6">8-12次</td>
                             <td class="py-4 px-6">根据能完成目标次数的重量</td>
                         </tr>
                         <tr class="high-carb-day">
@@ -719,17 +678,44 @@
                             <td class="py-4 px-6"></td>
                             <td class="py-4 px-6"></td>
                             <td class="py-4 px-6">上斜杠铃卧推</td>
-                            <td class="py-4 px-6">2-3组</td>
-                            <td class="py-4 px-6">6-8次</td>
-                            <td class="py-4 px-6">26-30</td>
+                            <td class="py-4 px-6">2组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">13-18</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">哑铃侧平举</td>
+                            <td class="py-4 px-6">2组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
                         </tr>
                         <tr class="high-carb-day">
                             <td class="py-4 px-6"></td>
                             <td class="py-4 px-6"></td>
                             <td class="py-4 px-6"></td>
                             <td class="py-4 px-6">三头肌下压</td>
-                            <td class="py-4 px-6">2-3组</td>
-                            <td class="py-4 px-6">6-8次</td>
+                            <td class="py-4 px-6">2组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">粗握距超窄握推/臂屈伸</td>
+                            <td class="py-4 px-6">2组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">侧身绳索三头后伸展</td>
+                            <td class="py-4 px-6">2组</td>
+                            <td class="py-4 px-6">8-12次</td>
                             <td class="py-4 px-6">根据能完成目标次数的重量</td>
                         </tr>
                         <tr class="low-carb-day">
@@ -746,17 +732,17 @@
                             <td class="py-4 px-6">高碳日</td>
                             <td class="py-4 px-6">拉日 (背、肩中后、二头)</td>
                             <td class="py-4 px-6">硬拉</td>
-                            <td class="py-4 px-6">2-3组</td>
-                            <td class="py-4 px-6">6-8次</td>
-                            <td class="py-4 px-6">91-105</td>
+                            <td class="py-4 px-6">2组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">56-63</td>
                         </tr>
                         <tr class="high-carb-day">
                             <td class="py-4 px-6"></td>
                             <td class="py-4 px-6"></td>
                             <td class="py-4 px-6"></td>
                             <td class="py-4 px-6">引体向上或高位下拉</td>
-                            <td class="py-4 px-6">2-3组</td>
-                            <td class="py-4 px-6">6-8次</td>
+                            <td class="py-4 px-6">2组</td>
+                            <td class="py-4 px-6">8-12次</td>
                             <td class="py-4 px-6">自身体重或负重</td>
                         </tr>
                         <tr class="high-carb-day">
@@ -764,8 +750,17 @@
                             <td class="py-4 px-6"></td>
                             <td class="py-4 px-6"></td>
                             <td class="py-4 px-6">杠铃/哑铃划船</td>
-                            <td class="py-4 px-6">2-3组</td>
-                            <td class="py-4 px-6">6-8次</td>
+                            <td class="py-4 px-6">2组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">哑铃反向飞鸟</td>
+                            <td class="py-4 px-6">2组</td>
+                            <td class="py-4 px-6">8-12次</td>
                             <td class="py-4 px-6">根据能完成目标次数的重量</td>
                         </tr>
                         <tr class="high-carb-day">
@@ -773,8 +768,26 @@
                             <td class="py-4 px-6"></td>
                             <td class="py-4 px-6"></td>
                             <td class="py-4 px-6">坐姿划船</td>
-                            <td class="py-4 px-6">2-3组</td>
-                            <td class="py-4 px-6">6-8次</td>
+                            <td class="py-4 px-6">2组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">辅助反手引体</td>
+                            <td class="py-4 px-6">2组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">自身体重或负重</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">单手哑铃牧师凳弯举</td>
+                            <td class="py-4 px-6">2组</td>
+                            <td class="py-4 px-6">8-12次</td>
                             <td class="py-4 px-6">根据能完成目标次数的重量</td>
                         </tr>
                         <tr class="low-carb-day">
@@ -791,17 +804,17 @@
                             <td class="py-4 px-6">高碳日</td>
                             <td class="py-4 px-6">腿日 (股四头、腘绳肌、臀)</td>
                             <td class="py-4 px-6">杠铃深蹲</td>
-                            <td class="py-4 px-6">2-3组</td>
-                            <td class="py-4 px-6">6-8次</td>
-                            <td class="py-4 px-6">65-75</td>
+                            <td class="py-4 px-6">2组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">36-42</td>
                         </tr>
                         <tr class="high-carb-day">
                             <td class="py-4 px-6"></td>
                             <td class="py-4 px-6"></td>
                             <td class="py-4 px-6"></td>
                             <td class="py-4 px-6">腿举</td>
-                            <td class="py-4 px-6">2-3组</td>
-                            <td class="py-4 px-6">6-8次</td>
+                            <td class="py-4 px-6">2组</td>
+                            <td class="py-4 px-6">8-12次</td>
                             <td class="py-4 px-6">根据能完成目标次数的重量</td>
                         </tr>
                         <tr class="high-carb-day">
@@ -809,8 +822,17 @@
                             <td class="py-4 px-6"></td>
                             <td class="py-4 px-6"></td>
                             <td class="py-4 px-6">EZ杆窄颈者</td>
-                            <td class="py-4 px-6">2-3组</td>
-                            <td class="py-4 px-6">6-8次</td>
+                            <td class="py-4 px-6">2组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">EZ杆弯举</td>
+                            <td class="py-4 px-6">2组</td>
+                            <td class="py-4 px-6">8-12次</td>
                             <td class="py-4 px-6">根据能完成目标次数的重量</td>
                         </tr>
                         <tr class="high-carb-day">
@@ -818,8 +840,8 @@
                             <td class="py-4 px-6"></td>
                             <td class="py-4 px-6"></td>
                             <td class="py-4 px-6">绳索颈后臂屈伸(AEL)</td>
-                            <td class="py-4 px-6">2-3组</td>
-                            <td class="py-4 px-6">6-8次</td>
+                            <td class="py-4 px-6">2组</td>
+                            <td class="py-4 px-6">8-12次</td>
                             <td class="py-4 px-6">根据能完成目标次数的重量</td>
                         </tr>
                         <tr class="high-carb-day">
@@ -827,8 +849,17 @@
                             <td class="py-4 px-6"></td>
                             <td class="py-4 px-6"></td>
                             <td class="py-4 px-6">双手牧师凳弯举(AEL)</td>
-                            <td class="py-4 px-6">2-3组</td>
-                            <td class="py-4 px-6">6-8次</td>
+                            <td class="py-4 px-6">2组</td>
+                            <td class="py-4 px-6">8-12次</td>
+                            <td class="py-4 px-6">根据能完成目标次数的重量</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">双手上斜哑铃弯举</td>
+                            <td class="py-4 px-6">1-2组</td>
+                            <td class="py-4 px-6">8-12次</td>
                             <td class="py-4 px-6">根据能完成目标次数的重量</td>
                         </tr>
                         <tr class="low-carb-day">
@@ -843,369 +874,316 @@
                     </tbody>
                 </table>
             </div>
-            <p class="text-sm text-gray-500 mb-10">*注：此处重量范围为三大项的减载训练重量，其他辅助动作请根据您能完成目标次数（6-8次）的重量进行选择。</p>
+            <p class="text-sm text-gray-500 mb-10">*注：此处重量范围为三大项的减载训练重量，其他辅助动作请根据您能完成目标次数（8-12次）的重量进行选择。</p>
         </div>
 
         <div id="page4" class="page-content hidden">
-            <!-- 四、食谱分析 -->
-            <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-blue-700 border-b-2 border-blue-400 pb-2">四、食谱分析</h2>
+            <!-- 四、碳循环饮食分析 -->
+            <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-blue-700 border-b-2 border-blue-400 pb-2">四、碳循环饮食分析</h2>
             <p class="text-gray-600 mb-6">
-                碳循环饮食是一种有效的策略，可以帮助你最大化训练效果和减少体脂。高碳日旨在为高强度训练提供燃料，并补充糖原；低碳日则有助于提高身体燃烧脂肪的效率。
+                我已将你的食谱整合进碳循环饮食计划中。整体来看，你的食谱思路非常清晰，注重蛋白质和脂肪，并且在训练日适当补充碳水。以下是详细分析和一些微调建议：
             </p>
             
-            <div class="space-y-6">
-                <!-- 高碳水日 -->
-                <div class="bg-red-50 p-6 rounded-lg border border-red-200">
-                    <h3 class="text-xl font-semibold mb-2 text-red-700">高碳水日（训练日）</h3>
-                    <ul class="list-disc list-inside text-gray-700 space-y-2">
-                        <li><strong>饮食目标：</strong>高碳水化合物、中等蛋白质、低脂肪。</li>
-                        <li><strong>碳水化合物：</strong>主要来源于米饭、面条、燕麦、土豆等复合碳水，以提供持久能量。训练前后可选择香蕉、葡萄干等快速吸收的碳水。</li>
-                        <li><strong>蛋白质：</strong>鸡胸肉、鱼肉、瘦牛肉、鸡蛋、乳清蛋白等，确保每餐都有充足摄入以支持肌肉修复和生长。</li>
-                        <li><strong>脂肪：</strong>保持低摄入，主要来自天然食物中的少量脂肪。</li>
-                        <li><strong>建议：</strong>全天碳水摄入量约占总热量的50-60%，蛋白质30%，脂肪10-20%。</li>
-                    </ul>
-                </div>
-                
-                <!-- 低碳水日 -->
-                <div class="bg-green-50 p-6 rounded-lg border border-green-200">
-                    <h3 class="text-xl font-semibold mb-2 text-green-700">低碳水日（休息日）</h3>
-                    <ul class="list-disc list-inside text-gray-700 space-y-2">
-                        <li><strong>饮食目标：</strong>低碳水化合物、高蛋白质、中等脂肪。</li>
-                        <li><strong>碳水化合物：</strong>主要来自蔬菜、少量水果和坚果，避免高糖分和精制谷物。</li>
-                        <li><strong>蛋白质：</strong>与高碳日类似，保持高摄入以保护肌肉。</li>
-                        <li><strong>脂肪：</strong>适度增加健康脂肪的摄入，如牛油果、坚果、橄榄油等，作为主要能量来源。</li>
-                        <li><strong>建议：</strong>全天碳水摄入量约占总热量的10-20%，蛋白质40-50%，脂肪30-40%。</li>
-                    </ul>
-                </div>
-
-                <!-- 碳水循环原理 -->
-                <div class="p-6 bg-gray-100 rounded-lg border border-gray-300">
-                    <h3 class="text-xl font-semibold mb-2 text-gray-800">碳水循环核心原理</h3>
-                    <p class="text-gray-700">
-                        碳水循环通过智能地调控碳水化合物摄入，使身体在训练日拥有足够的燃料，同时在休息日迫使身体切换到以脂肪为主要能量来源的模式，从而实现增肌和减脂的双重目标。
-                    </p>
-                </div>
+            <div class="overflow-x-auto mb-8 main-container">
+                <table class="styled-table text-sm text-gray-700 whitespace-nowrap">
+                    <thead class="text-xs uppercase">
+                        <tr>
+                            <th scope="col" class="py-3 px-6">日期</th>
+                            <th scope="col" class="py-3 px-6">时间</th>
+                            <th scope="col" class="py-3 px-6">食物搭配</th>
+                            <th scope="col" class="py-3 px-6">分析与建议</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 高碳日食谱 -->
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6">高碳日</td>
+                            <td class="py-4 px-6">早餐</td>
+                            <td class="py-4 px-6">欣善怡麦片、水煮鸡胸肉/鸡腿肉、两个水煮鸡蛋</td>
+                            <td class="py-4 px-6">这是一种非常均衡的早餐，麦片提供优质碳水，鸡肉和鸡蛋提供充足的蛋白质，为一天的高强度训练提供能量基础。</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">午餐</td>
+                            <td class="py-4 px-6">食堂肉类、大量蔬菜，不吃主食</td>
+                            <td class="py-4 px-6">你当前的午餐选择蛋白质和纤维摄入充足，但作为高碳日，为了确保训练时有足够的糖原储备，建议在午餐中加入适量米饭、面条或土豆等主食。</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">训前加餐</td>
+                            <td class="py-4 px-6">半个红薯或少量燕麦片</td>
+                            <td class="py-4 px-6">非常棒的训前补充，为训练提供稳定且持久的能量，能有效防止训练中血糖过低。</td>
+                        </tr>
+                        <tr class="high-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">训后餐/晚餐</td>
+                            <td class="py-4 px-6">蛋白粉（牛奶冲服）、白米饭、牛肉、生菜</td>
+                            <td class="py-4 px-6">完美的训后搭配。蛋白粉快速补充蛋白质，米饭迅速补充糖原，两者共同作用最大化肌肉恢复和生长。</td>
+                        </tr>
+                        <!-- 低碳日食谱 -->
+                        <tr class="low-carb-day">
+                            <td class="py-4 px-6">低碳日</td>
+                            <td class="py-4 px-6">早餐</td>
+                            <td class="py-4 px-6">欣善怡麦片、水煮鸡胸肉/鸡腿肉、两个水煮鸡蛋</td>
+                            <td class="py-4 px-6">与高碳日早餐相同。在低碳日，如果你的目标是减脂，可以考虑将麦片替换为更低碳的食物，如鳄梨或坚果，以进一步减少碳水化合物摄入。</td>
+                        </tr>
+                        <tr class="low-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">午餐</td>
+                            <td class="py-4 px-6">食堂肉类、蔬菜；或纯肉汉堡</td>
+                            <td class="py-4 px-6">这两种选择都非常符合低碳日原则，能提供充足的蛋白质和脂肪，保持饱腹感并维持肌肉量。</td>
+                        </tr>
+                        <tr class="low-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">有氧训练后</td>
+                            <td class="py-4 px-6">蛋白粉（牛奶冲服）</td>
+                            <td class="py-4 px-6">在低碳日进行有氧训练后，及时补充蛋白质有助于防止肌肉分解，是非常明智的做法。</td>
+                        </tr>
+                        <tr class="low-carb-day">
+                            <td class="py-4 px-6"></td>
+                            <td class="py-4 px-6">晚餐</td>
+                            <td class="py-4 px-6">牛肉和生菜</td>
+                            <td class="py-4 px-6">经典的低碳晚餐，高蛋白、低碳水、高纤维，完美。</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
-        <!-- 训练日志页面，初始隐藏 -->
         <div id="page5" class="page-content hidden">
-            <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-blue-700 border-b-2 border-blue-400 pb-2">训练日志</h2>
-            <div class="mb-6 main-container p-4">
-                <form id="training-log-form" class="space-y-4">
-                    <div>
-                        <label for="password_training" class="block text-sm font-medium text-gray-700">密码</label>
-                        <input type="password" id="password_training" name="password_training" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-3 py-2">
+            <!-- 五、训练日志记录 -->
+            <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-blue-700 border-b-2 border-blue-400 pb-2">五、训练日志</h2>
+            <p class="text-gray-600 mb-6">
+                在这里记录你的每次训练数据，方便追踪你的进步。
+            </p>
+
+            <div class="main-container p-6 mb-8">
+                <!-- 训练记录表单 -->
+                <form id="training-form" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="flex flex-col">
+                        <label for="date" class="text-sm font-semibold mb-1">日期:</label>
+                        <input type="date" id="date" name="date" class="p-2 border border-gray-300 rounded-md">
                     </div>
-                    <div>
-                        <label for="date_training" class="block text-sm font-medium text-gray-700">日期</label>
-                        <input type="text" id="date_training" name="date_training" readonly class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100 px-3 py-2">
-                    </div>
-                    <div>
-                        <label for="exercise" class="block text-sm font-medium text-gray-700">动作</label>
-                        <select id="exercise" name="exercise" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-3 py-2">
+                    <div class="flex flex-col">
+                        <label for="exercise" class="text-sm font-semibold mb-1">动作:</label>
+                        <!-- 更改为下拉列表 -->
+                        <select id="exercise" name="exercise" class="p-2 border border-gray-300 rounded-md">
                             <option value="">请选择一个动作</option>
+                            <!-- 选项将通过 JavaScript 动态填充 -->
                         </select>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                        <div>
-                            <label for="sets" class="block text-sm font-medium text-gray-700">组数</label>
-                            <input type="number" id="sets" name="sets" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-3 py-2">
-                        </div>
-                        <div>
-                            <label for="reps" class="block text-sm font-medium text-gray-700">次数</label>
-                            <input type="number" id="reps" name="reps" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-3 py-2">
-                        </div>
-                        <div>
-                            <label for="weight" class="block text-sm font-medium text-gray-700">重量 (kg)</label>
-                            <input type="number" step="0.1" id="weight" name="weight" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-3 py-2">
-                        </div>
+                    <div class="flex flex-col">
+                        <label for="sets" class="text-sm font-semibold mb-1">组数:</label>
+                        <input type="number" id="sets" name="sets" placeholder="例如: 4" class="p-2 border border-gray-300 rounded-md">
                     </div>
-                    <button type="submit" class="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">添加记录</button>
+                    <div class="flex flex-col">
+                        <label for="reps" class="text-sm font-semibold mb-1">次数:</label>
+                        <input type="number" id="reps" name="reps" placeholder="例如: 10" class="p-2 border border-gray-300 rounded-md">
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="weight" class="text-sm font-semibold mb-1">重量 (kg):</label>
+                        <input type="number" id="weight" name="weight" placeholder="例如: 60" step="0.1" class="p-2 border border-gray-300 rounded-md">
+                    </div>
+                    <div class="flex flex-col sm:col-span-2 lg:col-span-3">
+                        <label for="notes" class="text-sm font-semibold mb-1">备注:</label>
+                        <textarea id="notes" name="notes" rows="2" placeholder="感觉良好，下次可以尝试加重" class="p-2 border border-gray-300 rounded-md"></textarea>
+                    </div>
+                    <div class="flex flex-col sm:col-span-2 lg:col-span-3 items-center mt-4 space-y-2 sm:space-y-0 sm:flex-row sm:justify-center sm:space-x-4">
+                        <button type="submit" class="bg-blue-600 text-white font-bold py-2 px-6 rounded-md shadow-md hover:bg-blue-700 transition duration-300 ease-in-out w-full sm:w-auto">
+                            保存记录
+                        </button>
+                        <!-- 新增的导出按钮 -->
+                        <button type="button" onclick="exportTodayLog()" class="bg-green-600 text-white font-bold py-2 px-6 rounded-md shadow-md hover:bg-green-700 transition duration-300 ease-in-out w-full sm:w-auto">
+                            导出当天日志 (Markdown)
+                        </button>
+                    </div>
                 </form>
             </div>
-            <div class="overflow-x-auto main-container p-4">
-                <table id="training-log-table" class="styled-table text-sm text-gray-700">
-                    <thead class="bg-gray-200">
+
+            <!-- 训练记录显示表格 -->
+            <div class="overflow-x-auto mb-8 main-container">
+                <table class="styled-table text-sm text-gray-700 whitespace-nowrap">
+                    <thead class="text-xs uppercase">
                         <tr>
-                            <th class="py-3 px-6">日期</th>
-                            <th class="py-3 px-6">动作</th>
-                            <th class="py-3 px-6">组数</th>
-                            <th class="py-3 px-6">次数</th>
-                            <th class="py-3 px-6">重量 (kg)</th>
+                            <th scope="col" class="py-3 px-6">日期</th>
+                            <th scope="col" class="py-3 px-6">动作</th>
+                            <th scope="col" class="py-3 px-6">组数</th>
+                            <th scope="col" class="py-3 px-6">次数</th>
+                            <th scope="col" class="py-3 px-6">重量 (kg)</th>
+                            <th scope="col" class="py-3 px-6">备注</th>
+                            <th scope="col" class="py-3 px-6">操作</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <!-- 日志数据将动态插入到这里 -->
+                    <tbody id="training-log-body">
+                        <!-- 训练记录将在这里动态生成 -->
                     </tbody>
                 </table>
-            </div>
-        </div>
-
-        <!-- 体重和腰围日志页面，初始隐藏 -->
-        <div id="page6" class="page-content hidden">
-            <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-blue-700 border-b-2 border-blue-400 pb-2">体重和腰围日志</h2>
-            <div class="mb-6 main-container p-4">
-                <form id="body-log-form" class="space-y-4">
-                    <div>
-                        <label for="password_body" class="block text-sm font-medium text-gray-700">密码</label>
-                        <input type="password" id="password_body" name="password_body" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-3 py-2">
-                    </div>
-                    <div>
-                        <label for="date_body" class="block text-sm font-medium text-gray-700">日期</label>
-                        <input type="text" id="date_body" name="date_body" readonly class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100 px-3 py-2">
-                    </div>
-                    <div>
-                        <label for="weight_body" class="block text-sm font-medium text-gray-700">体重 (kg)</label>
-                        <input type="number" step="0.1" id="weight_body" name="weight_body" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-3 py-2">
-                    </div>
-                    <div>
-                        <label for="waist_body" class="block text-sm font-medium text-gray-700">腰围 (cm)</label>
-                        <input type="number" step="0.1" id="waist_body" name="waist_body" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-3 py-2">
-                    </div>
-                    <button type="submit" class="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">添加记录</button>
-                </form>
-            </div>
-            <div class="overflow-x-auto main-container p-4">
-                <table id="body-log-table" class="styled-table text-sm text-gray-700">
-                    <thead class="bg-gray-200">
-                        <tr>
-                            <th class="py-3 px-6">日期</th>
-                            <th class="py-3 px-6">体重 (kg)</th>
-                            <th class="py-3 px-6">腰围 (cm)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- 日志数据将动态插入到这里 -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- 密码验证模态框 -->
-        <div id="passwordModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h3 class="text-xl font-bold mb-4 text-gray-800">请输入密码</h3>
-                <input type="password" id="passwordInput" class="w-full px-3 py-2 mb-4 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                <p id="passwordError" class="text-red-500 mb-4 hidden">密码错误！</p>
-                <button id="passwordSubmit" class="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">确认</button>
             </div>
         </div>
     </div>
 
     <script>
-        // 全局变量，用于存储当前尝试打开的页面
-        let currentPageToOpen = '';
-        
-        // 获取模态框元素
-        const passwordModal = document.getElementById("passwordModal");
-        const passwordInput = document.getElementById("passwordInput");
-        const passwordSubmit = document.getElementById("passwordSubmit");
-        const passwordError = document.getElementById("passwordError");
-        const span = document.getElementsByClassName("close")[0];
-        
-        // 当用户点击 <span> (x) 按钮时，关闭模态框
-        span.onclick = function() {
-            passwordModal.style.display = "none";
-            passwordError.classList.add('hidden');
-            passwordInput.value = '';
-        }
-        
-        // 当用户点击模态框外部时，关闭模态框
-        window.onclick = function(event) {
-            if (event.target == passwordModal) {
-                passwordModal.style.display = "none";
-                passwordError.classList.add('hidden');
-                passwordInput.value = '';
-            }
-        }
-        
-        // 显示密码模态框，并设置要打开的页面
-        function showPasswordModal(pageId) {
-            currentPageToOpen = pageId;
-            passwordModal.style.display = "block";
-            passwordInput.focus();
-        }
-        
-        // 处理密码提交
-        passwordSubmit.onclick = function() {
-            const password = passwordInput.value;
-            // 获取对应页面的密码输入框ID
-            const passwordFieldId = currentPageToOpen === 'page5' ? 'password_training' : 'password_body';
-            const passwordField = document.getElementById(passwordFieldId);
-            
-            // 验证密码，这里使用简单的本地存储作为密码绑定
-            if (localStorage.getItem(`password_${currentPageToOpen}`) === password) {
-                // 密码正确
-                passwordModal.style.display = "none";
-                passwordError.classList.add('hidden');
-                showPage(currentPageToOpen, password);
-                passwordInput.value = '';
+        // 存储训练记录的数组
+        let trainingLog = [];
+        const localStorageKey = 'trainingLogData'; // localStorage 的键名
+
+        // ==========================================================
+        // 数据持久化功能
+        // ==========================================================
+        // 从 localStorage 加载训练记录
+        function loadTrainingLog() {
+            const storedData = localStorage.getItem(localStorageKey);
+            if (storedData) {
+                try {
+                    trainingLog = JSON.parse(storedData);
+                } catch (e) {
+                    console.error("无法解析训练日志数据", e);
+                    trainingLog = [];
+                }
             } else {
-                // 密码错误
-                passwordError.classList.remove('hidden');
+                trainingLog = [];
             }
         }
-        
-        // 显示页面函数，现在接受一个可选的密码参数
-        function showPage(pageId, password = null) {
+
+        // 保存训练记录到 localStorage
+        function saveTrainingLog() {
+            localStorage.setItem(localStorageKey, JSON.stringify(trainingLog));
+        }
+
+        // ==========================================================
+        // 渲染、删除和导出功能
+        // ==========================================================
+        // 渲染训练日志表格
+        function renderTrainingLog() {
+            const tbody = document.getElementById('training-log-body');
+            tbody.innerHTML = ''; // 清空现有内容
+
+            trainingLog.forEach((log, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="py-4 px-6">${log.date}</td>
+                    <td class="py-4 px-6">${log.exercise}</td>
+                    <td class="py-4 px-6">${log.sets}</td>
+                    <td class="py-4 px-6">${log.reps}</td>
+                    <td class="py-4 px-6">${log.weight}</td>
+                    <td class="py-4 px-6">${log.notes}</td>
+                    <td class="py-4 px-6">
+                        <button onclick="deleteLog(${index})" class="bg-red-500 text-white px-3 py-1 rounded-md text-xs hover:bg-red-600 transition-colors">
+                            删除
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // 删除单条训练记录
+        function deleteLog(index) {
+            trainingLog.splice(index, 1);
+            saveTrainingLog(); // 保存更新后的数据
+            renderTrainingLog(); // 重新渲染表格
+        }
+
+        // 导出当天训练日志为 Markdown 文件
+        function exportTodayLog() {
+            // 获取今天的日期，格式为 YYYY-MM-DD
+            const today = new Date().toISOString().slice(0, 10);
+            
+            // 过滤出今天的训练记录
+            const todayLog = trainingLog.filter(log => log.date === today);
+
+            if (todayLog.length === 0) {
+                alert('今天还没有训练记录可以导出哦！');
+                return;
+            }
+
+            // 构建 Markdown 内容
+            let markdownContent = `# 训练日志 - ${today}\n\n`;
+            markdownContent += `| 日期 | 动作 | 组数 | 次数 | 重量 (kg) | 备注 |\n`;
+            markdownContent += `|---|---|---|---|---|---|\n`;
+            
+            todayLog.forEach(log => {
+                markdownContent += `| ${log.date} | ${log.exercise} | ${log.sets} | ${log.reps} | ${log.weight} | ${log.notes} |\n`;
+            });
+
+            // 创建 Blob 对象
+            const blob = new Blob([markdownContent], { type: 'text/markdown;charset=utf-8' });
+            
+            // 创建下载链接
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `training-log-${today}.md`;
+            
+            // 触发下载
+            document.body.appendChild(a);
+            a.click();
+            
+            // 清理
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // ==========================================================
+        // 页面切换和初始化功能
+        // ==========================================================
+        // 页面切换功能
+        function showPage(pageId) {
             const pages = document.querySelectorAll('.page-content');
             pages.forEach(page => {
-                page.classList.add('hidden');
                 page.classList.remove('active');
+                page.classList.add('hidden');
             });
-            const selectedPage = document.getElementById(pageId);
-            if (selectedPage) {
-                selectedPage.classList.remove('hidden');
-                // 使用setTimeout添加淡入效果，而不是立即显示
-                setTimeout(() => {
-                    selectedPage.classList.add('active');
-                }, 10);
+            const activePage = document.getElementById(pageId);
+            if (activePage) {
+                activePage.classList.remove('hidden');
+                activePage.classList.add('active');
             }
-            const navButtons = document.querySelectorAll('.nav-button');
-            navButtons.forEach(button => {
+            const buttons = document.querySelectorAll('.nav-button');
+            buttons.forEach(button => {
                 button.classList.remove('active-nav');
             });
-            const selectedButton = document.querySelector(`[onclick*="${pageId}"]`);
-            if (selectedButton) {
-                selectedButton.classList.add('active-nav');
-            }
+            event.target.classList.add('active-nav');
+        }
 
-            // 如果页面是日志页面，并且有密码，则加载数据
-            if (pageId === 'page5' && password) {
-                loadTrainingLog(password);
-                renderTrainingLog();
-            } else if (pageId === 'page6' && password) {
-                loadBodyLog(password);
-                renderBodyLog();
-            }
+        // 处理表单提交
+        document.getElementById('training-form').addEventListener('submit', function(event) {
+            event.preventDefault(); 
+            const date = document.getElementById('date').value;
+            const exercise = document.getElementById('exercise').value;
+            const sets = document.getElementById('sets').value;
+            const reps = document.getElementById('reps').value;
+            const weight = document.getElementById('weight').value;
+            const notes = document.getElementById('notes').value;
             
-            // 如果页面是日志页面，并且没有密码，弹出模态框
-            if ((pageId === 'page5' || pageId === 'page6') && !password) {
-                showPasswordModal(pageId);
-            } else {
-                // 更新日期
-                updateBeijingTime();
+            if (!exercise) {
+                console.warn("请选择一个动作");
+                return;
             }
-        }
 
-        // 获取并显示北京时间
-        function updateBeijingTime() {
-            const now = new Date();
-            const beijingTime = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Shanghai"}));
-            const year = beijingTime.getFullYear();
-            const month = (beijingTime.getMonth() + 1).toString().padStart(2, '0');
-            const day = beijingTime.getDate().toString().padStart(2, '0');
-            const hours = beijingTime.getHours().toString().padStart(2, '0');
-            const minutes = beijingTime.getMinutes().toString().padStart(2, '0');
-            const seconds = beijingTime.getSeconds().toString().padStart(2, '0');
-            const dateString = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-
-            const dateTrainingInput = document.getElementById('date_training');
-            const dateBodyInput = document.getElementById('date_body');
-            if (dateTrainingInput) dateTrainingInput.value = dateString;
-            if (dateBodyInput) dateBodyInput.value = dateString;
-        }
-
-        // --- 训练日志功能 ---
-        const TRAINING_LOG_KEY_PREFIX = 'trainingLog_';
-        let trainingLogData = [];
-
-        function saveTrainingLog(password) {
-            localStorage.setItem(TRAINING_LOG_KEY_PREFIX + password, JSON.stringify(trainingLogData));
-        }
-
-        function loadTrainingLog(password) {
-            const storedData = localStorage.getItem(TRAINING_LOG_KEY_PREFIX + password);
-            trainingLogData = storedData ? JSON.parse(storedData) : [];
-        }
-
-        function renderTrainingLog() {
-            const tableBody = document.getElementById('training-log-table').querySelector('tbody');
-            tableBody.innerHTML = ''; // 清空现有数据
-            trainingLogData.forEach(entry => {
-                const row = document.createElement('tr');
-                row.className = 'hover:bg-gray-100 transition-colors duration-200';
-                row.innerHTML = `
-                    <td class="py-4 px-6">${entry.date}</td>
-                    <td class="py-4 px-6">${entry.exercise}</td>
-                    <td class="py-4 px-6">${entry.sets}</td>
-                    <td class="py-4 px-6">${entry.reps}</td>
-                    <td class="py-4 px-6">${entry.weight}</td>
-                `;
-                tableBody.prepend(row); // 插入到表格最前面
-            });
-        }
-
-        // --- 体重和腰围日志功能 ---
-        const BODY_LOG_KEY_PREFIX = 'bodyLog_';
-        let bodyLogData = [];
-
-        function saveBodyLog(password) {
-            localStorage.setItem(BODY_LOG_KEY_PREFIX + password, JSON.stringify(bodyLogData));
-        }
-
-        function loadBodyLog(password) {
-            const storedData = localStorage.getItem(BODY_LOG_KEY_PREFIX + password);
-            bodyLogData = storedData ? JSON.parse(storedData) : [];
-        }
-
-        function renderBodyLog() {
-            const tableBody = document.getElementById('body-log-table').querySelector('tbody');
-            tableBody.innerHTML = ''; // 清空现有数据
-            bodyLogData.forEach(entry => {
-                const row = document.createElement('tr');
-                row.className = 'hover:bg-gray-100 transition-colors duration-200';
-                row.innerHTML = `
-                    <td class="py-4 px-6">${entry.date}</td>
-                    <td class="py-4 px-6">${entry.weight}</td>
-                    <td class="py-4 px-6">${entry.waist}</td>
-                `;
-                tableBody.prepend(row); // 插入到表格最前面
-            });
-        }
-
-        // 训练日志表单提交事件
-        document.getElementById('training-log-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const form = e.target;
-            const password = form.password_training.value;
-            const newEntry = {
-                date: form.date_training.value,
-                exercise: form.exercise.value,
-                sets: form.sets.value,
-                reps: form.reps.value,
-                weight: form.weight.value
+            const newLog = {
+                date: date || new Date().toISOString().slice(0, 10),
+                exercise: exercise,
+                sets: sets || '0',
+                reps: reps || '0',
+                weight: weight || '0',
+                notes: notes || '无备注'
             };
-            trainingLogData.push(newEntry);
-            saveTrainingLog(password);
+
+            trainingLog.push(newLog);
+            saveTrainingLog(); // 保存新数据
             renderTrainingLog();
             this.reset();
-            // 重新设置日期
-            updateBeijingTime();
-        });
-
-        // 体重和腰围日志表单提交事件
-        document.getElementById('body-log-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const form = e.target;
-            const password = form.password_body.value;
-            const newEntry = {
-                date: form.date_body.value,
-                weight: form.weight_body.value,
-                waist: form.waist_body.value
-            };
-            bodyLogData.push(newEntry);
-            saveBodyLog(password);
-            renderBodyLog();
-            this.reset();
-            // 重新设置日期
-            updateBeijingTime();
         });
 
         // 页面加载完成后执行的初始化
         document.addEventListener('DOMContentLoaded', () => {
+            // 首先加载数据
+            loadTrainingLog();
+
+            // 渲染表格
+            renderTrainingLog();
+
             // 动态填充动作下拉列表
             const exerciseSet = new Set();
             const tables = document.querySelectorAll('#table1, #table2, #table3');
@@ -1229,9 +1207,6 @@
                 option.textContent = exercise;
                 exerciseSelect.appendChild(option);
             });
-            
-            // 初始化显示第一个页面
-            showPage('page1');
         });
 
     </script>
