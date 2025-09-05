@@ -55,7 +55,9 @@
         <h1 id="main-title" class="text-2xl font-bold text-center mb-8">我的完整训练计划与饮食指南</h1>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- 左侧列 -->
             <div>
+                <!-- 训练日历 -->
                 <div class="bg-white rounded-lg shadow p-4 mb-6">
                     <h2 class="text-xl font-bold mb-4">训练日历</h2>
                     <div class="grid grid-cols-7 gap-1 text-center text-sm">
@@ -67,6 +69,7 @@
                         <div class="font-bold text-gray-500">周六</div>
                         <div class="font-bold text-gray-500">周日</div>
                         
+                        <!-- Week 1 -->
                         <div id="date-1" class="calendar-cell bg-green-200 text-green-800">1</div>
                         <div id="date-2" class="calendar-cell bg-yellow-200 text-yellow-800 font-bold">2</div>
                         <div id="date-3" class="calendar-cell bg-green-200 text-green-800">3</div>
@@ -75,6 +78,7 @@
                         <div id="date-6" class="calendar-cell bg-yellow-200 text-yellow-800 font-bold">6</div>
                         <div id="date-7" class="calendar-cell bg-green-200 text-green-800">7</div>
         
+                        <!-- Week 2 -->
                         <div id="date-8" class="calendar-cell bg-green-200 text-green-800">8</div>
                         <div id="date-9" class="calendar-cell bg-yellow-200 text-yellow-800 font-bold">9</div>
                         <div id="date-10" class="calendar-cell bg-green-200 text-green-800">10</div>
@@ -83,6 +87,7 @@
                         <div id="date-13" class="calendar-cell bg-yellow-200 text-yellow-800 font-bold">13</div>
                         <div id="date-14" class="calendar-cell bg-green-200 text-green-800">14</div>
         
+                        <!-- Week 3 -->
                         <div id="date-15" class="calendar-cell bg-green-200 text-green-800">15</div>
                         <div id="date-16" class="calendar-cell bg-yellow-200 text-yellow-800 font-bold">16</div>
                         <div id="date-17" class="calendar-cell bg-green-200 text-green-800">17</div>
@@ -91,6 +96,7 @@
                         <div id="date-20" class="calendar-cell bg-yellow-200 text-yellow-800 font-bold">20</div>
                         <div id="date-21" class="calendar-cell bg-green-200 text-green-800">21</div>
         
+                        <!-- Week 4 -->
                         <div id="date-22" class="calendar-cell bg-green-200 text-green-800">22</div>
                         <div id="date-23" class="calendar-cell bg-yellow-200 text-yellow-800 font-bold">23</div>
                         <div id="date-24" class="calendar-cell bg-green-200 text-green-800">24</div>
@@ -99,6 +105,7 @@
                         <div id="date-27" class="calendar-cell bg-yellow-200 text-yellow-800 font-bold">27</div>
                         <div id="date-28" class="calendar-cell bg-green-200 text-green-800">28</div>
         
+                        <!-- Week 5 -->
                         <div id="date-29" class="calendar-cell bg-green-200 text-green-800">29</div>
                         <div id="date-30" class="calendar-cell bg-yellow-200 text-yellow-800 font-bold">30</div>
                         <div id="date-31" class="calendar-cell bg-green-200 text-green-800">31</div>
@@ -120,11 +127,13 @@
                     </div>
                 </div>
                 
+                <!-- 三大项计算器 -->
                 <div class="bg-white rounded-lg shadow p-4 mb-6">
                     <h2 class="text-xl font-bold mb-4">三大项训练重量计算</h2>
                     <p id="progressive-overload-tip" class="mt-4 text-sm text-center text-gray-600">
                         请填写你的训练数据，我们将为你计算训练重量。
                     </p>
+                    <!-- 深蹲计算器 -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
                         <div class="flex flex-col">
                             <label for="squatWeightForCalc" class="text-sm mb-1">深蹲完成重量 (W)</label>
@@ -144,6 +153,7 @@
                         </div>
                     </div>
         
+                    <!-- 卧推计算器 -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
                         <div class="flex flex-col">
                             <label for="benchWeightForCalc" class="text-sm mb-1">卧推完成重量 (W)</label>
@@ -163,6 +173,7 @@
                         </div>
                     </div>
         
+                    <!-- 硬拉计算器 -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
                         <div class="flex flex-col">
                             <label for="deadliftWeightForCalc" class="text-sm mb-1">硬拉完成重量 (W)</label>
@@ -183,6 +194,7 @@
                     </div>
                 </div>
         
+                <!-- 推肩计算器 -->
                 <div class="bg-white rounded-lg shadow p-4 mb-6">
                     <h2 class="text-xl font-bold mb-4">坐姿哑铃推肩训练重量计算</h2>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -205,6 +217,7 @@
                     </div>
                 </div>
         
+                <!-- TDEE和宏量营养素计算器 -->
                 <div class="bg-white rounded-lg shadow p-4 mb-6">
                     <h2 class="text-xl font-bold mb-4">TDEE和宏量营养素计算器</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -259,7 +272,9 @@
                 </div>
             </div>
 
+            <!-- 右侧列 -->
             <div>
+                <!-- 周二：上半身推日 -->
                 <div class="bg-white rounded-lg overflow-hidden shadow mb-6">
                     <div class="table-row table-header">
                         <div class="table-cell">周二：上半身推日 (胸、肩、三头)</div>
@@ -300,6 +315,7 @@
                     </div>
                 </div>
         
+                <!-- 周四：上半身拉日 -->
                 <div class="bg-white rounded-lg overflow-hidden shadow mt-6 mb-6">
                     <div class="table-row table-header">
                         <div class="table-cell">周四：上半身拉日 (背、二头、后肩)</div>
@@ -344,6 +360,7 @@
                     </div>
                 </div>
         
+                <!-- 周六：腿日 + 手臂训练 -->
                 <div class="bg-white rounded-lg overflow-hidden shadow mt-6 mb-6">
                     <div class="table-row table-header">
                         <div class="table-cell">周六：腿日 + 手臂训练</div>
@@ -385,15 +402,20 @@
                             <div class="table-cell">绳索颈后臂屈伸</div>
                             <div class="table-cell text-right">4-5组 x 8-12次</div>
                         </div>
+                        <div class="table-row">
+                            <div class="table-cell">双手上斜哑铃弯举</div>
+                            <div class="table-cell text-right">1-2组 x 8-12次</div>
                         </div>
                     </div>
                 </div>
         
+                <!-- 饮食计划 -->
                 <div class="bg-white rounded-lg overflow-hidden shadow mt-6">
                     <div class="table-row table-header">
                         <div class="table-cell">我的饮食计划</div>
                     </div>
                     <div>
+                        <!-- 训练日（高碳日） -->
                         <div class="table-row table-header">
                             <div class="table-cell">高碳日（训练日）</div>
                         </div>
@@ -410,6 +432,7 @@
                             </div>
                         </div>
         
+                        <!-- 休息日（低碳日） -->
                         <div class="table-row table-header mt-4">
                             <div class="table-cell">低碳日（休息日）</div>
                         </div>
@@ -419,7 +442,7 @@
                                 <p class="text-sm text-gray-600 mt-2">建议比例：<strong>1.5g碳水 / 2g蛋白质 / 剩余热量由脂肪补充</strong> (每公斤体重)</p>
                                 <ul class="list-disc list-inside mt-2">
                                     <li><strong>早餐、午餐、晚餐：</strong> 蛋白质、碳水和脂肪平均分配到三餐。</li>
-                                    <li><strong>有氧训练后：</strong> 蛋白粉用特仑苏牛奶冲服。</li>
+                                    <li><strong>有氧训练后：</strong> 喝两勺蛋白粉用特仑苏牛奶冲服。</li>
                                 </ul>
                             </div>
                         </div>
@@ -430,8 +453,6 @@
     </div>
     
     <script>
-        // Old toggle functions are no longer needed
-        
         window.onload = function() {
             const beijingTime = new Date().toLocaleString('en-US', { timeZone: 'Asia/Shanghai' });
             const now = new Date(beijingTime);
@@ -616,5 +637,3 @@
     </script>
 </body>
 </html>
-
-
