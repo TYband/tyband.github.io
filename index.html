@@ -16,7 +16,7 @@
             line-height: 1.6;
         }
         .container {
-            max-width: 900px;
+            max-width: 1400px;
         }
         .table-row {
             display: flex;
@@ -27,19 +27,12 @@
         .table-header {
             background-color: #e9ecef;
             font-weight: 600;
-            cursor: pointer;
             user-select: none;
             transition: background-color 0.2s;
-        }
-        .table-header:hover {
-            background-color: #e2e6ea;
         }
         .table-cell {
             flex: 1;
             min-width: 0;
-        }
-        .btn-toggle {
-            transition: transform 0.3s ease;
         }
         .calendar-cell {
             padding: 8px 0;
@@ -51,7 +44,7 @@
         }
         .highlight-today,
         .today-train {
-            background-color: #3b82f6; /* 蓝色 */
+            background-color: #3b82f6;
             color: white;
             font-weight: bold;
         }
@@ -61,422 +54,386 @@
     <div class="container mx-auto mt-8 p-4 md:p-8">
         <h1 id="main-title" class="text-2xl font-bold text-center mb-8">我的完整训练计划与饮食指南</h1>
 
-        <!-- 训练日历 -->
-        <div class="bg-white rounded-lg shadow p-4 mb-6">
-            <h2 class="text-xl font-bold mb-4">训练日历</h2>
-            <div class="grid grid-cols-7 gap-1 text-center text-sm">
-                <div class="font-bold text-gray-500">周一</div>
-                <div class="font-bold text-gray-500">周二</div>
-                <div class="font-bold text-gray-500">周三</div>
-                <div class="font-bold text-gray-500">周四</div>
-                <div class="font-bold text-gray-500">周五</div>
-                <div class="font-bold text-gray-500">周六</div>
-                <div class="font-bold text-gray-500">周日</div>
-                
-                <!-- Week 1 -->
-                <div id="date-1" class="calendar-cell bg-green-200 text-green-800">1</div>
-                <div id="date-2" class="calendar-cell bg-yellow-200 text-yellow-800 font-bold">2</div>
-                <div id="date-3" class="calendar-cell bg-green-200 text-green-800">3</div>
-                <div id="date-4" class="calendar-cell bg-yellow-200 text-yellow-800 font-bold">4</div>
-                <div id="date-5" class="calendar-cell bg-green-200 text-green-800">5</div>
-                <div id="date-6" class="calendar-cell bg-yellow-200 text-yellow-800 font-bold">6</div>
-                <div id="date-7" class="calendar-cell bg-green-200 text-green-800">7</div>
-
-                <!-- Week 2 -->
-                <div id="date-8" class="calendar-cell bg-green-200 text-green-800">8</div>
-                <div id="date-9" class="calendar-cell bg-yellow-200 text-yellow-800 font-bold">9</div>
-                <div id="date-10" class="calendar-cell bg-green-200 text-green-800">10</div>
-                <div id="date-11" class="calendar-cell bg-yellow-200 text-yellow-800 font-bold">11</div>
-                <div id="date-12" class="calendar-cell bg-green-200 text-green-800">12</div>
-                <div id="date-13" class="calendar-cell bg-yellow-200 text-yellow-800 font-bold">13</div>
-                <div id="date-14" class="calendar-cell bg-green-200 text-green-800">14</div>
-
-                <!-- Week 3 -->
-                <div id="date-15" class="calendar-cell bg-green-200 text-green-800">15</div>
-                <div id="date-16" class="calendar-cell bg-yellow-200 text-yellow-800 font-bold">16</div>
-                <div id="date-17" class="calendar-cell bg-green-200 text-green-800">17</div>
-                <div id="date-18" class="calendar-cell bg-yellow-200 text-yellow-800 font-bold">18</div>
-                <div id="date-19" class="calendar-cell bg-green-200 text-green-800">19</div>
-                <div id="date-20" class="calendar-cell bg-yellow-200 text-yellow-800 font-bold">20</div>
-                <div id="date-21" class="calendar-cell bg-green-200 text-green-800">21</div>
-
-                <!-- Week 4 -->
-                <div id="date-22" class="calendar-cell bg-green-200 text-green-800">22</div>
-                <div id="date-23" class="calendar-cell bg-yellow-200 text-yellow-800 font-bold">23</div>
-                <div id="date-24" class="calendar-cell bg-green-200 text-green-800">24</div>
-                <div id="date-25" class="calendar-cell bg-yellow-200 text-yellow-800 font-bold">25</div>
-                <div id="date-26" class="calendar-cell bg-green-200 text-green-800">26</div>
-                <div id="date-27" class="calendar-cell bg-yellow-200 text-yellow-800 font-bold">27</div>
-                <div id="date-28" class="calendar-cell bg-green-200 text-green-800">28</div>
-
-                <!-- Week 5 -->
-                <div id="date-29" class="calendar-cell bg-green-200 text-green-800">29</div>
-                <div id="date-30" class="calendar-cell bg-yellow-200 text-yellow-800 font-bold">30</div>
-                <div id="date-31" class="calendar-cell bg-green-200 text-green-800">31</div>
-            </div>
-            
-            <div class="flex justify-center items-center gap-4 mt-4 text-xs">
-                <div class="flex items-center gap-1">
-                    <div class="w-3 h-3 rounded-full bg-yellow-200"></div>
-                    <span>高碳日</span>
-                </div>
-                <div class="flex items-center gap-1">
-                    <div class="w-3 h-3 rounded-full bg-green-200"></div>
-                    <span>低碳日</span>
-                </div>
-                <div class="flex items-center gap-1">
-                    <div class="w-3 h-3 rounded-full bg-blue-200"></div>
-                    <span>今天</span>
-                </div>
-            </div>
-        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+                <div class="bg-white rounded-lg shadow p-4 mb-6">
+                    <h2 class="text-xl font-bold mb-4">训练日历</h2>
+                    <div class="grid grid-cols-7 gap-1 text-center text-sm">
+                        <div class="font-bold text-gray-500">周一</div>
+                        <div class="font-bold text-gray-500">周二</div>
+                        <div class="font-bold text-gray-500">周三</div>
+                        <div class="font-bold text-gray-500">周四</div>
+                        <div class="font-bold text-gray-500">周五</div>
+                        <div class="font-bold text-gray-500">周六</div>
+                        <div class="font-bold text-gray-500">周日</div>
+                        
+                        <div id="date-1" class="calendar-cell bg-green-200 text-green-800">1</div>
+                        <div id="date-2" class="calendar-cell bg-yellow-200 text-yellow-800 font-bold">2</div>
+                        <div id="date-3" class="calendar-cell bg-green-200 text-green-800">3</div>
+                        <div id="date-4" class="calendar-cell bg-yellow-200 text-yellow-800 font-bold">4</div>
+                        <div id="date-5" class="calendar-cell bg-green-200 text-green-800">5</div>
+                        <div id="date-6" class="calendar-cell bg-yellow-200 text-yellow-800 font-bold">6</div>
+                        <div id="date-7" class="calendar-cell bg-green-200 text-green-800">7</div>
         
-        <!-- 三大项计算器 -->
-        <div class="bg-white rounded-lg shadow p-4 mb-6">
-            <h2 class="text-xl font-bold mb-4">三大项训练重量计算</h2>
-            <p id="progressive-overload-tip" class="mt-4 text-sm text-center text-gray-600">
-                请填写你的训练数据，我们将为你计算训练重量。
-            </p>
-            <!-- 深蹲计算器 -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-                <div class="flex flex-col">
-                    <label for="squatWeightForCalc" class="text-sm mb-1">深蹲完成重量 (W)</label>
-                    <input type="number" id="squatWeightForCalc" class="p-2 border rounded-md" placeholder="例如：90" oninput="generateWeights()">
-                </div>
-                <div class="flex flex-col">
-                    <label for="squatRepsForCalc" class="text-sm mb-1">深蹲重复次数 (R)</label>
-                    <input type="number" id="squatRepsForCalc" class="p-2 border rounded-md" placeholder="例如：8" oninput="generateWeights()">
-                </div>
-                <div class="flex flex-col">
-                    <label for="squatGoal" class="text-sm mb-1">训练目标</label>
-                    <select id="squatGoal" class="p-2 border rounded-md" onchange="generateWeights()">
-                        <option value="hypertrophy">肌肥大 (65%~85% 1RM)</option>
-                        <option value="strength">力量 (85%+ 1RM)</option>
-                        <option value="endurance">耐力 (65%以下 1RM)</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- 卧推计算器 -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-                <div class="flex flex-col">
-                    <label for="benchWeightForCalc" class="text-sm mb-1">卧推完成重量 (W)</label>
-                    <input type="number" id="benchWeightForCalc" class="p-2 border rounded-md" placeholder="例如：70" oninput="generateWeights()">
-                </div>
-                <div class="flex flex-col">
-                    <label for="benchRepsForCalc" class="text-sm mb-1">卧推重复次数 (R)</label>
-                    <input type="number" id="benchRepsForCalc" class="p-2 border rounded-md" placeholder="例如：8" oninput="generateWeights()">
-                </div>
-                <div class="flex flex-col">
-                    <label for="benchGoal" class="text-sm mb-1">训练目标</label>
-                    <select id="benchGoal" class="p-2 border rounded-md" onchange="generateWeights()">
-                        <option value="hypertrophy">肌肥大 (65%~85% 1RM)</option>
-                        <option value="strength">力量 (85%+ 1RM)</option>
-                        <option value="endurance">耐力 (65%以下 1RM)</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- 硬拉计算器 -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-                <div class="flex flex-col">
-                    <label for="deadliftWeightForCalc" class="text-sm mb-1">硬拉完成重量 (W)</label>
-                    <input type="number" id="deadliftWeightForCalc" class="p-2 border rounded-md" placeholder="例如：110" oninput="generateWeights()">
-                </div>
-                <div class="flex flex-col">
-                    <label for="deadliftRepsForCalc" class="text-sm mb-1">硬拉重复次数 (R)</label>
-                    <input type="number" id="deadliftRepsForCalc" class="p-2 border rounded-md" placeholder="例如：5" oninput="generateWeights()">
-                </div>
-                <div class="flex flex-col">
-                    <label for="deadliftGoal" class="text-sm mb-1">训练目标</label>
-                    <select id="deadliftGoal" class="p-2 border rounded-md" onchange="generateWeights()">
-                        <option value="hypertrophy">肌肥大 (65%~85% 1RM)</option>
-                        <option value="strength">力量 (85%+ 1RM)</option>
-                        <option value="endurance">耐力 (65%以下 1RM)</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <!-- 推肩计算器 -->
-        <div class="bg-white rounded-lg shadow p-4 mb-6">
-            <h2 class="text-xl font-bold mb-4">坐姿哑铃推肩训练重量计算</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="flex flex-col">
-                    <label for="ohpWeightForCalc" class="text-sm mb-1">完成重量 (W, 每只哑铃)</label>
-                    <input type="number" id="ohpWeightForCalc" class="p-2 border rounded-md" placeholder="例如：20" oninput="generateWeights()">
-                </div>
-                <div class="flex flex-col">
-                    <label for="ohpRepsForCalc" class="text-sm mb-1">重复次数 (R)</label>
-                    <input type="number" id="ohpRepsForCalc" class="p-2 border rounded-md" placeholder="例如：5" oninput="generateWeights()">
-                </div>
-                <div class="flex flex-col">
-                    <label for="ohpGoal" class="text-sm mb-1">训练目标</label>
-                    <select id="ohpGoal" class="p-2 border rounded-md" onchange="generateWeights()">
-                        <option value="hypertrophy">肌肥大 (65%~85% 1RM)</option>
-                        <option value="strength">力量 (85%+ 1RM)</option>
-                        <option value="endurance">耐力 (65%以下 1RM)</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <!-- 新增: TDEE和宏量营养素计算器 -->
-        <div class="bg-white rounded-lg shadow p-4 mb-6">
-            <h2 class="text-xl font-bold mb-4">TDEE和宏量营养素计算器</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="flex flex-col">
-                    <label for="gender" class="text-sm mb-1">性别</label>
-                    <select id="gender" class="p-2 border rounded-md">
-                        <option value="male">男</option>
-                        <option value="female">女</option>
-                    </select>
-                </div>
-                <div class="flex flex-col">
-                    <label for="age" class="text-sm mb-1">年龄 (岁)</label>
-                    <input type="number" id="age" class="p-2 border rounded-md" placeholder="例如：25">
-                </div>
-                <div class="flex flex-col">
-                    <label for="weight" class="text-sm mb-1">体重 (公斤)</label>
-                    <input type="number" id="weight" class="p-2 border rounded-md" placeholder="例如：75">
-                </div>
-                <div class="flex flex-col">
-                    <label for="height" class="text-sm mb-1">身高 (厘米)</label>
-                    <input type="number" id="height" class="p-2 border rounded-md" placeholder="例如：175">
-                </div>
-                <div class="flex flex-col md:col-span-2">
-                    <label for="activity" class="text-sm mb-1">活动水平</label>
-                    <select id="activity" class="p-2 border rounded-md">
-                        <option value="1.2">久坐不动 (办公室工作)</option>
-                        <option value="1.375">轻度活跃 (每周1-3次轻度运动)</option>
-                        <option value="1.55">中度活跃 (每周3-5次中度运动)</option>
-                        <option value="1.725">非常活跃 (每周6-7次高强度运动)</option>
-                        <option value="1.9">极度活跃 (每日两次高强度训练)</option>
-                    </select>
-                </div>
-            </div>
-            <button onclick="calculateTDEEAndMacros()" class="w-full mt-4 bg-blue-500 text-white p-3 rounded-md font-bold hover:bg-blue-600 transition-colors">
-                开始计算
-            </button>
-            <div id="macro-results" class="mt-4 p-4 bg-gray-100 rounded-lg hidden">
-                <div class="text-center font-bold mb-2">计算结果</div>
-                <div id="tdee-info" class="mb-4"></div>
-                <div class="mb-4">
-                    <h3 class="font-bold">训练日 (高碳日) 宏量营养素</h3>
-                    <div id="high-carb-macros" class="text-sm mt-1"></div>
-                </div>
-                <div class="mb-4">
-                    <h3 class="font-bold">休息日 (低碳日) 宏量营养素</h3>
-                    <div id="low-carb-macros" class="text-sm mt-1"></div>
-                </div>
-                <div class="mt-4 text-xs text-gray-500">
-                    <p>碳水和蛋白质每克约4大卡，脂肪每克约9大卡。以上为估算值，具体需根据食物种类调整。</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- 周二：上半身推日 -->
-        <div class="bg-white rounded-lg overflow-hidden shadow">
-            <div class="table-row table-header" onclick="togglePlan('tuesday')">
-                <div class="table-cell">周二：上半身推日 (胸、肩、三头)</div>
-                <svg id="tuesday-icon" class="w-5 h-5 btn-toggle text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="transform: rotate(0deg);">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
-            </div>
-            <div id="tuesday-plan" class="overflow-hidden max-h-0 transition-all duration-500">
-                <div class="table-row">
-                    <div class="table-cell">热身</div>
-                    <div class="table-cell text-right">5-10分钟，有氧和动态拉伸</div>
-                </div>
-                <div class="table-row">
-                    <div class="table-cell">杠铃/哑铃卧推</div>
-                    <div class="table-cell text-right"><span id="bench-weight">4组 x 8-12次</span></div>
-                </div>
-                <div class="table-row">
-                    <div class="table-cell">坐姿哑铃推肩</div>
-                    <div class="table-cell text-right"><span id="ohp-weight">4组 x 8-12次</span></div>
-                </div>
-                <div class="table-row">
-                    <div class="table-cell">上斜杠铃卧推</div>
-                    <div class="table-cell text-right"><span id="incline-bench-weight">3组 x 8-12次</span></div>
-                </div>
-                <div class="table-row">
-                    <div class="table-cell">哑铃侧平举</div>
-                    <div class="table-cell text-right">3组 x 12-15次</div>
-                </div>
-                <div class="table-row">
-                    <div class="table-cell">窄距杠铃卧推</div>
-                    <div class="table-cell text-right">2-4组 x 8-12次</div>
-                </div>
-                <div class="table-row">
-                    <div class="table-cell">绳索三头肌下压</div>
-                    <div class="table-cell text-right">3组 x 10-15次</div>
-                </div>
-                <div class="table-row">
-                    <div class="table-cell">侧身绳索三头后伸展</div>
-                    <div class="table-cell text-right">3-4组 x 8-12次</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 周四：上半身拉日 -->
-        <div class="bg-white rounded-lg overflow-hidden shadow mt-6">
-            <div class="table-row table-header" onclick="togglePlan('thursday')">
-                <div class="table-cell">周四：上半身拉日 (背、二头、后肩)</div>
-                <svg id="thursday-icon" class="w-5 h-5 btn-toggle text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="transform: rotate(0deg);">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
-            </div>
-            <div id="thursday-plan" class="overflow-hidden max-h-0 transition-all duration-500">
-                <div class="table-row">
-                    <div class="table-cell">热身</div>
-                    <div class="table-cell text-right">5-10分钟，有氧和动态拉伸</div>
-                </div>
-                <div class="table-row">
-                    <div class="table-cell">硬拉</div>
-                    <div class="table-cell text-right"><span id="deadlift-weight">4组 x 5次</span></div>
-                </div>
-                <div class="table-row">
-                    <div class="table-cell">引体向上或高位下拉</div>
-                    <div class="table-cell text-right">4组 x 8-12次</div>
-                </div>
-                <div class="table-row">
-                    <div class="table-cell">杠铃/哑铃划船</div>
-                    <div class="table-cell text-right">3组 x 8-12次</div>
-                </div>
-                <div class="table-row">
-                    <div class="table-cell">坐姿划船</div>
-                    <div class="table-cell text-right">3组 x 8-12次</div>
-                </div>
-                <div class="table-row">
-                    <div class="table-cell">哑铃反向飞鸟</div>
-                    <div class="table-cell text-right">3组 x 12-15次</div>
-                </div>
-                <div class="table-row">
-                    <div class="table-cell">牧师凳弯举</div>
-                    <div class="table-cell text-right">3-4组 x 8-12次</div>
-                </div>
-                <div class="table-row">
-                    <div class="table-cell">单手哑铃牧师凳弯举</div>
-                    <div class="table-cell text-right">3-4组 x 8-12次</div>
-                </div>
-                <div class="table-row">
-                    <div class="table-cell">辅助反手引体</div>
-                    <div class="table-cell text-right">2-4组 x 8-12次</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 周六：腿日 + 手臂训练 -->
-        <div class="bg-white rounded-lg overflow-hidden shadow mt-6">
-            <div class="table-row table-header" onclick="togglePlan('saturday')">
-                <div class="table-cell">周六：腿日 + 手臂训练</div>
-                <svg id="saturday-icon" class="w-5 h-5 btn-toggle text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="transform: rotate(0deg);">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
-            </div>
-            <div id="saturday-plan" class="overflow-hidden max-h-0 transition-all duration-500">
-                <div class="table-row">
-                    <div class="table-cell">热身</div>
-                    <div class="table-cell text-right">5-10分钟，有氧和动态拉伸</div>
-                </div>
-                <div class="table-row">
-                    <div class="table-cell">杠铃深蹲</div>
-                    <div class="table-cell text-right"><span id="squat-weight">4组 x 8-12次</span></div>
-                </div>
-                <div class="table-row">
-                    <div class="table-cell">腿举</div>
-                    <div class="table-cell text-right">4组 x 10-15次</div>
-                </div>
-                <div class="table-row">
-                    <div class="table-cell">腿屈伸</div>
-                    <div class="table-cell text-right">3组 x 12-15次</div>
-                </div>
-                <div class="table-row">
-                    <div class="table-cell">EZ杆弯举</div>
-                    <div class="table-cell text-right">3-5组 x 8-12次</div>
-                </div>
-                <div class="table-row">
-                    <div class="table-cell">双手牧师凳弯举</div>
-                    <div class="table-cell text-right">4-5组 x 10-15次</div>
-                </div>
-                <div class="table-row">
-                    <div class="table-cell">双手上斜哑铃弯举</div>
-                    <div class="table-cell text-right">1-2组 x 15-20次</div>
-                </div>
-                <div class="table-row">
-                    <div class="table-cell">EZ杆窄颈者</div>
-                    <div class="table-cell text-right">3-5组 x 8-12次</div>
-                </div>
-                <div class="table-row">
-                    <div class="table-cell">绳索颈后臂屈伸</div>
-                    <div class="table-cell text-right">4-5组 x 8-12次</div>
-                </div>
-                <div class="table-row">
-                    <div class="table-cell">双手上斜哑铃弯举</div>
-                    <div class="table-cell text-right">1-2组 x 8-12次</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 饮食计划 -->
-        <div class="bg-white rounded-lg overflow-hidden shadow mt-6">
-            <div class="table-row table-header" onclick="togglePlan('diet-plan')">
-                <div class="table-cell">我的饮食计划</div>
-                <svg id="diet-plan-icon" class="w-5 h-5 btn-toggle text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="transform: rotate(0deg);">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
-            </div>
-            <div id="diet-plan-plan" class="overflow-hidden max-h-0 transition-all duration-500">
-                <!-- 训练日（高碳日） -->
-                <div class="table-row table-header">
-                    <div class="table-cell">高碳日（训练日）</div>
-                </div>
-                <div class="table-row">
-                    <div class="table-cell">
-                        <p class="text-sm text-gray-600">利用提高的胰岛素敏感性，将能量优先填入肌肉糖原而非脂肪细胞，同时“欺骗”身体，避免长期低碳导致的新陈代谢适应性下降，并满足训练能量需求。</p>
-                        <p class="text-sm text-gray-600 mt-2"><strong>热量缺口10-20%。</strong> 建议比例：<strong>3g碳水 / 2g蛋白质 / 0.8g脂肪</strong> (每公斤体重)</p>
-                        <ul class="list-disc list-inside mt-2">
-                            <li><strong>早餐：</strong> 全天30%的碳水 + 30g的蛋白质 + 适量的脂肪。</li>
-                            <li><strong>午餐：</strong> 不吃碳水，只摄入蛋白质和脂肪。</li>
-                            <li><strong>训前加餐（训练前2-3小时）：</strong> 全天20%的碳水。</li>
-                            <li><strong>训后餐/晚餐：</strong> 全天50%的高分解速度碳水 + 30-50g蛋白质 + 20g低脂。</li>
-                        </ul>
+                        <div id="date-8" class="calendar-cell bg-green-200 text-green-800">8</div>
+                        <div id="date-9" class="calendar-cell bg-yellow-200 text-yellow-800 font-bold">9</div>
+                        <div id="date-10" class="calendar-cell bg-green-200 text-green-800">10</div>
+                        <div id="date-11" class="calendar-cell bg-yellow-200 text-yellow-800 font-bold">11</div>
+                        <div id="date-12" class="calendar-cell bg-green-200 text-green-800">12</div>
+                        <div id="date-13" class="calendar-cell bg-yellow-200 text-yellow-800 font-bold">13</div>
+                        <div id="date-14" class="calendar-cell bg-green-200 text-green-800">14</div>
+        
+                        <div id="date-15" class="calendar-cell bg-green-200 text-green-800">15</div>
+                        <div id="date-16" class="calendar-cell bg-yellow-200 text-yellow-800 font-bold">16</div>
+                        <div id="date-17" class="calendar-cell bg-green-200 text-green-800">17</div>
+                        <div id="date-18" class="calendar-cell bg-yellow-200 text-yellow-800 font-bold">18</div>
+                        <div id="date-19" class="calendar-cell bg-green-200 text-green-800">19</div>
+                        <div id="date-20" class="calendar-cell bg-yellow-200 text-yellow-800 font-bold">20</div>
+                        <div id="date-21" class="calendar-cell bg-green-200 text-green-800">21</div>
+        
+                        <div id="date-22" class="calendar-cell bg-green-200 text-green-800">22</div>
+                        <div id="date-23" class="calendar-cell bg-yellow-200 text-yellow-800 font-bold">23</div>
+                        <div id="date-24" class="calendar-cell bg-green-200 text-green-800">24</div>
+                        <div id="date-25" class="calendar-cell bg-yellow-200 text-yellow-800 font-bold">25</div>
+                        <div id="date-26" class="calendar-cell bg-green-200 text-green-800">26</div>
+                        <div id="date-27" class="calendar-cell bg-yellow-200 text-yellow-800 font-bold">27</div>
+                        <div id="date-28" class="calendar-cell bg-green-200 text-green-800">28</div>
+        
+                        <div id="date-29" class="calendar-cell bg-green-200 text-green-800">29</div>
+                        <div id="date-30" class="calendar-cell bg-yellow-200 text-yellow-800 font-bold">30</div>
+                        <div id="date-31" class="calendar-cell bg-green-200 text-green-800">31</div>
+                    </div>
+                    
+                    <div class="flex justify-center items-center gap-4 mt-4 text-xs">
+                        <div class="flex items-center gap-1">
+                            <div class="w-3 h-3 rounded-full bg-yellow-200"></div>
+                            <span>高碳日</span>
+                        </div>
+                        <div class="flex items-center gap-1">
+                            <div class="w-3 h-3 rounded-full bg-green-200"></div>
+                            <span>低碳日</span>
+                        </div>
+                        <div class="flex items-center gap-1">
+                            <div class="w-3 h-3 rounded-full bg-blue-200"></div>
+                            <span>今天</span>
+                        </div>
                     </div>
                 </div>
-
-                <!-- 休息日（低碳日） -->
-                <div class="table-row table-header mt-4">
-                    <div class="table-cell">低碳日（休息日）</div>
+                
+                <div class="bg-white rounded-lg shadow p-4 mb-6">
+                    <h2 class="text-xl font-bold mb-4">三大项训练重量计算</h2>
+                    <p id="progressive-overload-tip" class="mt-4 text-sm text-center text-gray-600">
+                        请填写你的训练数据，我们将为你计算训练重量。
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                        <div class="flex flex-col">
+                            <label for="squatWeightForCalc" class="text-sm mb-1">深蹲完成重量 (W)</label>
+                            <input type="number" id="squatWeightForCalc" class="p-2 border rounded-md" placeholder="例如：90" oninput="generateWeights()">
+                        </div>
+                        <div class="flex flex-col">
+                            <label for="squatRepsForCalc" class="text-sm mb-1">深蹲重复次数 (R)</label>
+                            <input type="number" id="squatRepsForCalc" class="p-2 border rounded-md" placeholder="例如：8" oninput="generateWeights()">
+                        </div>
+                        <div class="flex flex-col">
+                            <label for="squatGoal" class="text-sm mb-1">训练目标</label>
+                            <select id="squatGoal" class="p-2 border rounded-md" onchange="generateWeights()">
+                                <option value="hypertrophy">肌肥大 (65%~85% 1RM)</option>
+                                <option value="strength">力量 (85%+ 1RM)</option>
+                                <option value="endurance">耐力 (65%以下 1RM)</option>
+                            </select>
+                        </div>
+                    </div>
+        
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                        <div class="flex flex-col">
+                            <label for="benchWeightForCalc" class="text-sm mb-1">卧推完成重量 (W)</label>
+                            <input type="number" id="benchWeightForCalc" class="p-2 border rounded-md" placeholder="例如：70" oninput="generateWeights()">
+                        </div>
+                        <div class="flex flex-col">
+                            <label for="benchRepsForCalc" class="text-sm mb-1">卧推重复次数 (R)</label>
+                            <input type="number" id="benchRepsForCalc" class="p-2 border rounded-md" placeholder="例如：8" oninput="generateWeights()">
+                        </div>
+                        <div class="flex flex-col">
+                            <label for="benchGoal" class="text-sm mb-1">训练目标</label>
+                            <select id="benchGoal" class="p-2 border rounded-md" onchange="generateWeights()">
+                                <option value="hypertrophy">肌肥大 (65%~85% 1RM)</option>
+                                <option value="strength">力量 (85%+ 1RM)</option>
+                                <option value="endurance">耐力 (65%以下 1RM)</option>
+                            </select>
+                        </div>
+                    </div>
+        
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                        <div class="flex flex-col">
+                            <label for="deadliftWeightForCalc" class="text-sm mb-1">硬拉完成重量 (W)</label>
+                            <input type="number" id="deadliftWeightForCalc" class="p-2 border rounded-md" placeholder="例如：110" oninput="generateWeights()">
+                        </div>
+                        <div class="flex flex-col">
+                            <label for="deadliftRepsForCalc" class="text-sm mb-1">硬拉重复次数 (R)</label>
+                            <input type="number" id="deadliftRepsForCalc" class="p-2 border rounded-md" placeholder="例如：5" oninput="generateWeights()">
+                        </div>
+                        <div class="flex flex-col">
+                            <label for="deadliftGoal" class="text-sm mb-1">训练目标</label>
+                            <select id="deadliftGoal" class="p-2 border rounded-md" onchange="generateWeights()">
+                                <option value="hypertrophy">肌肥大 (65%~85% 1RM)</option>
+                                <option value="strength">力量 (85%+ 1RM)</option>
+                                <option value="endurance">耐力 (65%以下 1RM)</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
-                <div class="table-row">
-                    <div class="table-cell">
-                        <p class="text-sm text-gray-600">目的：让身体进入周期性营养性酮症，身体察觉没有碳水后，会进行糖异生，也就是用蛋白质转换葡萄糖。均摊碳水，稳定胰岛素水平。</p>
-                        <p class="text-sm text-gray-600 mt-2">建议比例：<strong>1.5g碳水 / 2g蛋白质 / 剩余热量由脂肪补充</strong> (每公斤体重)</p>
-                        <ul class="list-disc list-inside mt-2">
-                            <li><strong>早餐、午餐、晚餐：</strong> 蛋白质、碳水和脂肪平均分配到三餐。</li>
-                            <li><strong>有氧训练后：</strong> 喝两勺蛋白粉用特仑苏牛奶冲服。</li>
-                        </ul>
+        
+                <div class="bg-white rounded-lg shadow p-4 mb-6">
+                    <h2 class="text-xl font-bold mb-4">坐姿哑铃推肩训练重量计算</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="flex flex-col">
+                            <label for="ohpWeightForCalc" class="text-sm mb-1">完成重量 (W, 每只哑铃)</label>
+                            <input type="number" id="ohpWeightForCalc" class="p-2 border rounded-md" placeholder="例如：20" oninput="generateWeights()">
+                        </div>
+                        <div class="flex flex-col">
+                            <label for="ohpRepsForCalc" class="text-sm mb-1">重复次数 (R)</label>
+                            <input type="number" id="ohpRepsForCalc" class="p-2 border rounded-md" placeholder="例如：5" oninput="generateWeights()">
+                        </div>
+                        <div class="flex flex-col">
+                            <label for="ohpGoal" class="text-sm mb-1">训练目标</label>
+                            <select id="ohpGoal" class="p-2 border rounded-md" onchange="generateWeights()">
+                                <option value="hypertrophy">肌肥大 (65%~85% 1RM)</option>
+                                <option value="strength">力量 (85%+ 1RM)</option>
+                                <option value="endurance">耐力 (65%以下 1RM)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="bg-white rounded-lg shadow p-4 mb-6">
+                    <h2 class="text-xl font-bold mb-4">TDEE和宏量营养素计算器</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="flex flex-col">
+                            <label for="gender" class="text-sm mb-1">性别</label>
+                            <select id="gender" class="p-2 border rounded-md">
+                                <option value="male">男</option>
+                                <option value="female">女</option>
+                            </select>
+                        </div>
+                        <div class="flex flex-col">
+                            <label for="age" class="text-sm mb-1">年龄 (岁)</label>
+                            <input type="number" id="age" class="p-2 border rounded-md" placeholder="例如：25">
+                        </div>
+                        <div class="flex flex-col">
+                            <label for="weight" class="text-sm mb-1">体重 (公斤)</label>
+                            <input type="number" id="weight" class="p-2 border rounded-md" placeholder="例如：75">
+                        </div>
+                        <div class="flex flex-col">
+                            <label for="height" class="text-sm mb-1">身高 (厘米)</label>
+                            <input type="number" id="height" class="p-2 border rounded-md" placeholder="例如：175">
+                        </div>
+                        <div class="flex flex-col md:col-span-2">
+                            <label for="activity" class="text-sm mb-1">活动水平</label>
+                            <select id="activity" class="p-2 border rounded-md">
+                                <option value="1.2">久坐不动 (办公室工作)</option>
+                                <option value="1.375">轻度活跃 (每周1-3次轻度运动)</option>
+                                <option value="1.55">中度活跃 (每周3-5次中度运动)</option>
+                                <option value="1.725">非常活跃 (每周6-7次高强度运动)</option>
+                                <option value="1.9">极度活跃 (每日两次高强度训练)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button onclick="calculateTDEEAndMacros()" class="w-full mt-4 bg-blue-500 text-white p-3 rounded-md font-bold hover:bg-blue-600 transition-colors">
+                        开始计算
+                    </button>
+                    <div id="macro-results" class="mt-4 p-4 bg-gray-100 rounded-lg hidden">
+                        <div class="text-center font-bold mb-2">计算结果</div>
+                        <div id="tdee-info" class="mb-4"></div>
+                        <div class="mb-4">
+                            <h3 class="font-bold">训练日 (高碳日) 宏量营养素</h3>
+                            <div id="high-carb-macros" class="text-sm mt-1"></div>
+                        </div>
+                        <div class="mb-4">
+                            <h3 class="font-bold">休息日 (低碳日) 宏量营养素</h3>
+                            <div id="low-carb-macros" class="text-sm mt-1"></div>
+                        </div>
+                        <div class="mt-4 text-xs text-gray-500">
+                            <p>碳水和蛋白质每克约4大卡，脂肪每克约9大卡。以上为估算值，具体需根据食物种类调整。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="bg-white rounded-lg overflow-hidden shadow mb-6">
+                    <div class="table-row table-header">
+                        <div class="table-cell">周二：上半身推日 (胸、肩、三头)</div>
+                    </div>
+                    <div>
+                        <div class="table-row">
+                            <div class="table-cell">热身</div>
+                            <div class="table-cell text-right">5-10分钟，有氧和动态拉伸</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">杠铃/哑铃卧推</div>
+                            <div class="table-cell text-right"><span id="bench-weight">4组 x 8-12次</span></div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">坐姿哑铃推肩</div>
+                            <div class="table-cell text-right"><span id="ohp-weight">4组 x 8-12次</span></div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">上斜杠铃卧推</div>
+                            <div class="table-cell text-right"><span id="incline-bench-weight">3组 x 8-12次</span></div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">哑铃侧平举</div>
+                            <div class="table-cell text-right">3组 x 12-15次</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">窄距杠铃卧推</div>
+                            <div class="table-cell text-right">2-4组 x 8-12次</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">绳索三头肌下压</div>
+                            <div class="table-cell text-right">3组 x 10-15次</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">侧身绳索三头后伸展</div>
+                            <div class="table-cell text-right">3-4组 x 8-12次</div>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="bg-white rounded-lg overflow-hidden shadow mt-6 mb-6">
+                    <div class="table-row table-header">
+                        <div class="table-cell">周四：上半身拉日 (背、二头、后肩)</div>
+                    </div>
+                    <div>
+                        <div class="table-row">
+                            <div class="table-cell">热身</div>
+                            <div class="table-cell text-right">5-10分钟，有氧和动态拉伸</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">硬拉</div>
+                            <div class="table-cell text-right"><span id="deadlift-weight">4组 x 5次</span></div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">引体向上或高位下拉</div>
+                            <div class="table-cell text-right">4组 x 8-12次</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">杠铃/哑铃划船</div>
+                            <div class="table-cell text-right">3组 x 8-12次</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">坐姿划船</div>
+                            <div class="table-cell text-right">3组 x 8-12次</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">哑铃反向飞鸟</div>
+                            <div class="table-cell text-right">3组 x 12-15次</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">牧师凳弯举</div>
+                            <div class="table-cell text-right">3-4组 x 8-12次</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">单手哑铃牧师凳弯举</div>
+                            <div class="table-cell text-right">3-4组 x 8-12次</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">辅助反手引体</div>
+                            <div class="table-cell text-right">2-4组 x 8-12次</div>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="bg-white rounded-lg overflow-hidden shadow mt-6 mb-6">
+                    <div class="table-row table-header">
+                        <div class="table-cell">周六：腿日 + 手臂训练</div>
+                    </div>
+                    <div>
+                        <div class="table-row">
+                            <div class="table-cell">热身</div>
+                            <div class="table-cell text-right">5-10分钟，有氧和动态拉伸</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">杠铃深蹲</div>
+                            <div class="table-cell text-right"><span id="squat-weight">4组 x 8-12次</span></div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">腿举</div>
+                            <div class="table-cell text-right">4组 x 10-15次</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">腿屈伸</div>
+                            <div class="table-cell text-right">3组 x 12-15次</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">EZ杆弯举</div>
+                            <div class="table-cell text-right">3-5组 x 8-12次</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">双手牧师凳弯举</div>
+                            <div class="table-cell text-right">4-5组 x 10-15次</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">双手上斜哑铃弯举</div>
+                            <div class="table-cell text-right">1-2组 x 15-20次</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">EZ杆窄颈者</div>
+                            <div class="table-cell text-right">3-5组 x 8-12次</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">绳索颈后臂屈伸</div>
+                            <div class="table-cell text-right">4-5组 x 8-12次</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">双手上斜哑铃弯举</div>
+                            <div class="table-cell text-right">1-2组 x 8-12次</div>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="bg-white rounded-lg overflow-hidden shadow mt-6">
+                    <div class="table-row table-header">
+                        <div class="table-cell">我的饮食计划</div>
+                    </div>
+                    <div>
+                        <div class="table-row table-header">
+                            <div class="table-cell">高碳日（训练日）</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">
+                                <p class="text-sm text-gray-600">利用提高的胰岛素敏感性，将能量优先填入肌肉糖原而非脂肪细胞，同时“欺骗”身体，避免长期低碳导致的新陈代谢适应性下降，并满足训练能量需求。</p>
+                                <p class="text-sm text-gray-600 mt-2"><strong>热量缺口10-20%。</strong> 建议比例：<strong>3g碳水 / 2g蛋白质 / 0.8g脂肪</strong> (每公斤体重)</p>
+                                <ul class="list-disc list-inside mt-2">
+                                    <li><strong>早餐：</strong> 全天30%的碳水 + 30g的蛋白质 + 适量的脂肪。</li>
+                                    <li><strong>午餐：</strong> 不吃碳水，只摄入蛋白质和脂肪。</li>
+                                    <li><strong>训前加餐（训练前2-3小时）：</strong> 全天20%的碳水。</li>
+                                    <li><strong>训后餐/晚餐：</strong> 全天50%的高分解速度碳水 + 30-50g蛋白质 + 20g低脂。</li>
+                                </ul>
+                            </div>
+                        </div>
+        
+                        <div class="table-row table-header mt-4">
+                            <div class="table-cell">低碳日（休息日）</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">
+                                <p class="text-sm text-gray-600">目的：让身体进入周期性营养性酮症，身体察觉没有碳水后，会进行糖异生，也就是用蛋白质转换葡萄糖。均摊碳水，稳定胰岛素水平。</p>
+                                <p class="text-sm text-gray-600 mt-2">建议比例：<strong>1.5g碳水 / 2g蛋白质 / 剩余热量由脂肪补充</strong> (每公斤体重)</p>
+                                <ul class="list-disc list-inside mt-2">
+                                    <li><strong>早餐、午餐、晚餐：</strong> 蛋白质、碳水和脂肪平均分配到三餐。</li>
+                                    <li><strong>有氧训练后：</strong> 喝两勺蛋白粉用特仑苏牛奶冲服。</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+    
     <script>
-        function togglePlan(day) {
-            const planDiv = document.getElementById(day + '-plan');
-            const icon = document.getElementById(day + '-icon');
-            if (planDiv.classList.contains('max-h-0')) {
-                planDiv.classList.remove('max-h-0');
-                planDiv.classList.add('max-h-screen');
-                icon.style.transform = 'rotate(180deg)';
-            } else {
-                planDiv.classList.remove('max-h-screen');
-                planDiv.classList.add('max-h-0');
-                icon.style.transform = 'rotate(0deg)';
-            }
-        }
+        // Old toggle functions are no longer needed
         
         window.onload = function() {
             const beijingTime = new Date().toLocaleString('en-US', { timeZone: 'Asia/Shanghai' });
