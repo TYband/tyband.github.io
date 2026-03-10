@@ -1,14 +1,124 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sulo - PoE Tools</title>
-    <script type="module" crossorigin src="/assets/index-CCAjWtK3.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-BYI30N93.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S.H.I.T. 期待戒断计算器</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap');
+        body { font-family: 'Noto Serif SC', serif; background-color: #f4f1ea; }
+        .paper-shadow { box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body class="p-4 md:p-8 flex justify-center">
+
+    <div class="max-w-2xl w-full bg-white p-8 paper-shadow border border-gray-200">
+        <div class="border-b-2 border-black pb-4 mb-8 flex justify-between items-end">
+            <div>
+                <h1 class="text-4xl font-bold tracking-tighter">S.H.I.T.</h1>
+                <p class="text-xs uppercase italic">Sciences Humanities Information Technology</p>
+            </div>
+            <p class="text-sm font-bold text-red-700">期刊预印本 / INTERNAL ONLY</p>
+        </div>
+
+        <h2 class="text-2xl font-bold text-center mb-8 text-purple-900">“希望的陷阱”量化预测工具</h2>
+
+        <div class="space-y-6">
+            <section class="bg-gray-50 p-4 rounded">
+                <h3 class="font-bold border-l-4 border-black pl-2 mb-4 italic">I. 基础状态 (Baseline)</h3>
+                <div class="space-y-4">
+                    <label class="block text-sm">
+                        当前期待值 $E(t)$: <span id="val_e" class="font-bold text-blue-600">5.0</span>
+                        <input type="range" id="e_t" min="0" max="10" step="0.1" value="5" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                    </label>
+                    <label class="block text-sm">
+                        万一呢系数 (WIC): <span id="val_wic" class="font-bold text-blue-600">5.0</span>
+                        <input type="range" id="wic" min="0" max="10" step="0.1" value="5" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                    </label>
+                </div>
+            </section>
+
+            <section class="bg-gray-50 p-4 rounded">
+                <h3 class="font-bold border-l-4 border-black pl-2 mb-4 italic">II. 今日变量 (Daily Variables)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="flex items-center justify-between p-2 border rounded">
+                        <span class="text-sm">TA点赞/回消息了？($R$)</span>
+                        <input type="checkbox" id="reinforcement" class="w-5 h-5 accent-red-500">
+                    </div>
+                    <div class="flex items-center justify-between p-2 border rounded">
+                        <span class="text-sm">看了旧照片/聊天记录？($M$)</span>
+                        <input type="number" id="memory" value="0" min="0" class="w-12 border rounded text-center">
+                    </div>
+                    <div class="flex items-center justify-between p-2 border rounded">
+                        <span class="text-sm">看到TA秀恩爱/被冷落？($F$)</span>
+                        <input type="checkbox" id="reality_test" class="w-5 h-5 accent-green-600">
+                    </div>
+                    <div class="flex items-center justify-between p-2 border rounded">
+                        <span class="text-sm">现在是凌晨三点？($\varepsilon$)</span>
+                        <input type="checkbox" id="night_emo" class="w-5 h-5 accent-purple-600">
+                    </div>
+                </div>
+            </section>
+
+            <div class="text-center py-6 border-2 border-dashed border-gray-300">
+                <p class="text-gray-500 text-sm mb-2">预测明日期待值 $E(t+1)$</p>
+                <div id="result" class="text-6xl font-bold transition-all duration-500 text-black">--</div>
+                <p id="commentary" class="mt-4 text-sm italic text-gray-600 px-4"></p>
+            </div>
+        </div>
+
+        <footer class="mt-8 text-[10px] text-gray-400 text-center leading-tight">
+            注：本工具仅供认知失调自愈参考，不代表任何医学建议。<br>
+            “真正让人走不出来的，是你带回来的间歇性希望。”
+        </footer>
+    </div>
+
+    <script>
+        const inputs = ['e_t', 'wic', 'reinforcement', 'memory', 'reality_test', 'night_emo'];
+        
+        function calculate() {
+            const Et = parseFloat(document.getElementById('e_t').value);
+            const WIC = parseFloat(document.getElementById('wic').value);
+            const R = document.getElementById('reinforcement').checked ? 1 : 0;
+            const M = parseInt(document.getElementById('memory').value) || 0;
+            const F = document.getElementById('reality_test').checked ? 1 : 0;
+            const epsilon = document.getElementById('night_emo').checked ? 0.5 : 0;
+
+            // 显示数值更新
+            document.getElementById('val_e').innerText = Et.toFixed(1);
+            document.getElementById('val_wic').innerText = WIC.toFixed(1);
+
+            // EWDM 公式实现
+            const delta = 0.05; // 自然衰减
+            const alpha = 0.15 + (WIC * 0.05); // WIC越高，记忆滤镜越重
+            const beta = 1.42; // 间歇性强化
+            const gamma = 1.2; // 现实打击
+
+            let nextE = Et * (1 - delta) + (alpha * M) + (beta * R) - (gamma * F) + epsilon;
+            
+            // 结果约束
+            nextE = Math.max(0, Math.min(10, nextE));
+            
+            const resEl = document.getElementById('result');
+            resEl.innerText = nextE.toFixed(2);
+
+            // 动态评语
+            const comment = document.getElementById('commentary');
+            if (nextE > Et) {
+                resEl.className = "text-6xl font-bold text-red-600 animate-pulse";
+                comment.innerText = "警告：你正在坠入“希望的陷阱”。今日的微小反馈已抹平昨日的戒断努力。";
+            } else if (nextE < 2) {
+                resEl.className = "text-6xl font-bold text-green-600";
+                comment.innerText = "戒断成功率极高：你正处于认知理性回归期，请继续保持物理隔离。";
+            } else {
+                resEl.className = "text-6xl font-bold text-black";
+                comment.innerText = "状态平台期：时间正在缓慢稀释情感，不要在深夜打开朋友圈。";
+            }
+        }
+
+        inputs.forEach(id => document.getElementById(id).addEventListener('input', calculate));
+        calculate();
+    </script>
+</body>
 </html>
